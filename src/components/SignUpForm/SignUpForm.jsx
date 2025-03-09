@@ -53,13 +53,8 @@ const SignUpForm = () => {
         navigate("/tracker");
       })
       .catch((error) => {
-        if (error?.response?.status === 409) {
+        if (error?.response?.data.message === "Email in use") {
           toast.error("User has already exists", {
-            duration: 2000,
-            position: "top-center",
-          });
-        } else if (error?.response?.status === 400) {
-          toast.error("Please enter a valid email", {
             duration: 2000,
             position: "top-center",
           });
