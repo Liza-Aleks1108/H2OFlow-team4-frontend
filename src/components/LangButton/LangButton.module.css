@@ -1,9 +1,12 @@
 .langSwitcher {
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 5px;
   justify-content: center;
   margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 .langBtn {
@@ -17,14 +20,4 @@
 
 .langBtn:hover {
   background-color: #87d28d;
-}
-
-@media (min-width: 1440px) {
-  .langSwitcher {
-    position: fixed;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-  }
 }
