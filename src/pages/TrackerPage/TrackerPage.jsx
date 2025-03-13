@@ -8,10 +8,10 @@ const TrackerPage = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [operationType, setOperationType] = useState("add");
 
-  // const openModal = (type) => {
-  //   setOperationType(type);
-  //   setModalOpen(true);
-  // };
+  const openModal = (type) => {
+    setOperationType(type);
+    setModalOpen(true);
+  };
 
   return (
     <div className={css.trackerPageWrapper}>
