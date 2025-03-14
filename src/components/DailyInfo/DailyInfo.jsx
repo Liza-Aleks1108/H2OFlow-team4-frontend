@@ -17,9 +17,14 @@ const formatDate = (date) => {
 
 const DailyInfo = ({ chosenDate }) => {
   const dispatch = useDispatch();
-  const todayWater = useSelector(selectDayWater);
+  // const todayWater = useSelector(selectDayWater);
+  const todayWater = [
+    { id: 1, amount: 250, time: "07:00" },
+    { id: 2, amount: 250, time: "11:00" },
+    { id: 3, amount: 250, time: "14:00" },
+  ];
   const [isCurrentDay, setIsCurrentDay] = useState("");
-  console.log(todayWater);
+
   const formattedDate = useMemo(
     () => formatDate(chosenDate || new Date()),
     [chosenDate]
