@@ -1,24 +1,19 @@
 import React from "react";
+import { BaseModal } from "../BaseModal/BaseModal.jsx";
+import WaterForm from "../WaterForm/WaterForm.jsx";
+import css from "./WaterModal.module.css";
 
-const WaterModal = ({ onClose }) => {
+const WaterModal = ({ isOpen, onClose, operationType }) => {
+  const title =
+    operationType === "add" ? "Add water" : "Edit the entered amount of water";
+
   return (
-    <div
-      style={{
-        position: "fixed",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        backgroundColor: "white",
-        padding: "20px",
-        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-        zIndex: 1000,
-      }}
-    >
-      <h2>Додати воду</h2>
-      <input type="number" placeholder="Кількість води (л)" />
-      <button onClick={onClose}>Закрити</button>
-      <button>Зберегти</button>
-    </div>
+    <BaseModal isOpen={isOpen} onClose={onClose}>
+      <div className={css.waterModal}>
+        <h2 className={css.title}>{title}</h2>
+        <WaterForm operationType={operationType} onClose={onClose} />
+      </div>
+    </BaseModal>
   );
 };
 

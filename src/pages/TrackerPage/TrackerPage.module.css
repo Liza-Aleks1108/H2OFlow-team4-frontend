@@ -3,8 +3,6 @@
   width: 100%;
   max-width: 320px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   margin: 0 auto;
   height: 100vh;
@@ -43,9 +41,9 @@
   }
 
   .trackerPageWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 32px;
+    flex-direction: row;
+    gap: 32px;
     min-height: 100vh;
     max-width: 1440px;
   }

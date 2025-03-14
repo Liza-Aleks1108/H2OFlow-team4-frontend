@@ -5,50 +5,20 @@
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    column-gap: 18px;
+    row-gap: 15px;
     gap: 18px;
     width: 100%;
     height: 100%;
-    /* max-width: 400px;
-    width: 100%; */
     margin: auto;
-    /* place-items: center; */
 }
 
-.day {
-    display: grid;
-    place-items: center;
-    border: none;
-    border-radius: 30px;
-    width: 28px;
-    height: 28px;
-    font-weight: 700;
-    font-size: 14px;
-    background: rgba(50, 63, 71, 0.2);
-    cursor: pointer;
-    /* transition: 0.3s; */
+@media (min-width: 375px) {
+    .grid {
+        grid-template-columns: repeat(7, 1fr);
+    }
 }
-
-.day.partial {
-    background: lightblue;
-}
-
-.day.full {
-    background: white;
-}
-
-.day:hover {
-    opacity: 0.8;
-}
-
-.water-percent {
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-/* @media (min-width: 375px) {
-
-} */
 
 @media (min-width: 768px) {
     .container {
@@ -57,7 +27,7 @@
 
     .grid {
         grid-template-columns: repeat(8, 1fr);
-        gap: 48px;
+        column-gap: 48px;
     }
 
     .day {
@@ -70,6 +40,6 @@
 
 @media (min-width: 1440px) {
     .grid {
-        gap: 43px;
+        column-gap: 43px;
     }
 }

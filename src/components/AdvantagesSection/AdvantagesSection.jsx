@@ -1,7 +1,5 @@
-import { useEffect } from "react";
 import styles from "./AdvantagesSection.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getUsersAmount } from "../../redux/user/operations";
+import { useSelector } from "react-redux";
 import {
   selectTotalAmount,
   selectLoading,
@@ -9,14 +7,9 @@ import {
 } from "../../redux/user/selectors";
 
 const AdvantagesSection = () => {
-  const dispatch = useDispatch();
   const totalUsers = useSelector(selectTotalAmount);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-
-  // useEffect(() => {
-  //   dispatch(getUsersAmount());
-  // }, [dispatch]);
 
   return (
     <section className={styles.advantagesSection}>

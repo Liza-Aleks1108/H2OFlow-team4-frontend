@@ -14,7 +14,7 @@ export const initialState = {
       gender: "woman",
       weight: 0,
       dailySportTime: 0,
-      dailyNorm: 0,
+      dailyNorm: 1500,
       avatarUrl: "/img/avatar.png",
     },
     totalAmount: null,

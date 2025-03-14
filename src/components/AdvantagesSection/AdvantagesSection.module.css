@@ -22,7 +22,6 @@
   height: 48px;
   position: absolute;
   bottom: 20%;
-  
   display: flex;
   align-items: center;
   gap: 4px;
@@ -33,15 +32,12 @@
 }
 
 .infoText {
-  width: 86px;
-  height: 28px;
   color: #323F47;
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.16em;
+  line-height: 1.4;
   letter-spacing: -0.01em;
-  gap: 4px;
 }
 .highlight {
   color: #9BE1A0;
@@ -54,6 +50,10 @@
 
 .loading {
   color: #ff9800;
+}
+
+.error {
+  color: #ef5050;
 }
 
 .userImages {
@@ -104,8 +104,8 @@
   font-size: 8px;
   font-style: normal;
   font-weight: 700;
-  line-height: 100%; 
-  letter-spacing: -0.08px;
+  line-height: 1; 
+  letter-spacing: -0.01em;
   transition: border 150ms ease-in, color 150ms ease-in;
 }
 
@@ -140,8 +140,8 @@
   font-size: 8px;
   font-style: normal;
   font-weight: 700;
-  line-height: 100%; 
-  letter-spacing: -0.08px;
+  line-height: 1; 
+  letter-spacing: -0.01em;
 }
 
 
@@ -173,8 +173,9 @@
   }
 
   .infoText{
-    font-size: 10px;
-    line-height: 149%;
+    font-size: 12px;
+    line-height: 1.5;
+
   }
 
   .userImages img {
@@ -192,18 +193,19 @@
   .btn {
     padding: 11px 16px;
     font-size: 12px;
-    line-height: 100%; 
-    letter-spacing: -0.01px;
+    line-height: 1; 
+    letter-spacing: -0.01em;
   }
 
   .personalRate {
     padding: 11px 16px;
     font-size: 12px;
-    line-height: 100%; 
-    letter-spacing: -0.01px;
+    line-height: 1; 
+    letter-spacing: -0.01em;
   }
 
 }
+
 @media (min-width: 1440px) {
   .advantagesSection {
     min-width: 672px;
