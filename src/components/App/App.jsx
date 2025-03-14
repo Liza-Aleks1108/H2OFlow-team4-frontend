@@ -2,17 +2,14 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import TrackerPage from "../../pages/TrackerPage/TrackerPage";
 
+import { useState } from "react";
 import "./App.module.css";
 import HomePage from "../../pages/HomePage/HomePage.jsx";
 import SignUpPage from "../../pages/SignUpPage/SignUpPage.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import SignInPage from "../../pages/SignInPage/SignInPage.jsx";
 import { selectIsLoggedIn, selectToken } from "../../redux/user/selectors.js";
-import {
-  getUsersAmount,
-  refreshUser,
-  setAuthHeader,
-} from "../../redux/user/operations.js";
+import { refreshUser, setAuthHeader } from "../../redux/user/operations.js";
 import SharedLayout from "../../../SharedLayout.jsx";
 import { Toaster } from "react-hot-toast";
 import GoogleAuthConfirm from "../GoogleAuthConfirm/GoogleAuthConfirm.jsx";
@@ -37,10 +34,6 @@ const App = () => {
       dispatch(refreshUser());
     }
   }, [dispatch, token, isLoggedIn, rehydrated]);
-
-  useEffect(() => {
-    dispatch(getUsersAmount());
-  }, [dispatch]);
 
   return (
     <Router>
