@@ -6,7 +6,6 @@ export default defineConfig({
   build: {
     sourcemap: true,
     rollupOptions: {
-      external: ["yup"],
       output: {
         globals: {
           yup: "yup",
