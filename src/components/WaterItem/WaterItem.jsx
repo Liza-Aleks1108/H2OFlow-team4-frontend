@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import WaterModal from "../WaterModal/WaterModal";
-// import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
+import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import styles from "./WaterItem.module.css";
 
-const WaterItem = ({ data }) => {
+const WaterItem = ({ key, data, onDelete, dateForCalendar }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  const formattedTime = new Date(item.drinkingTime).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const handleCloseDeleteModal = () => setIsDeleteOpen(false);
+
+  const handleOpenModel = () => setIsDeleteOpen(true);
+
+  const handleDelete = () => {
+    onDelete(key);
+  };
 
   return (
     <div className={styles.waterItem}>
@@ -16,11 +29,15 @@ const WaterItem = ({ data }) => {
       </div>
       <div className={styles.actions}>
         <button onClick={() => setIsEditOpen(true)}>✏️</button>
-        <button onClick={() => setIsDeleteOpen(true)}>🗑️</button>
+        <button onClick={handleOpenModel}>🗑️</button>
       </div>
       {isEditOpen && <WaterModal onClose={() => setIsEditOpen(false)} />}
       {isDeleteOpen && (
-        <DeleteWaterModal onClose={() => setIsDeleteOpen(false)} />
+        <DeleteWaterModal
+          handleDelete={handleDelete}
+          modalIsOpen={isDeleteOpen}
+          closeModal={handleCloseDeleteModal}
+        />
       )}
     </div>
   );

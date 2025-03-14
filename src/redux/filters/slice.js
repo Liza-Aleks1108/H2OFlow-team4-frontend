@@ -31,4 +31,4 @@ const waterSlice = createSlice({
   },
 });
 
-export const waterReducer = waterSlice.reducer;
+export default waterSlice.reducer;

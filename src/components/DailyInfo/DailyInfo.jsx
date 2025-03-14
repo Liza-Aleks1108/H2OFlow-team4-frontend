@@ -1,11 +1,12 @@
 import React from "react";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import ChooseDate from "../ChooseDate/ChooseDate";
 import AddWaterBtn from "../AddWaterBtn/AddWaterBtn";
 import WaterList from "../WaterList/WaterList";
 import styles from "./DailyInfo.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getWaterPerDay } from "../../redux/filters/operations";
+import { selectDayWater } from "../../redux/filters/selectors";
 
 const formatDate = (date) => {
   const year = date.getFullYear();
@@ -16,11 +17,21 @@ const formatDate = (date) => {
 
 const DailyInfo = ({ chosenDate }) => {
   const dispatch = useDispatch();
+  const todayWater = useSelector(selectDayWater);
   const [isCurrentDay, setIsCurrentDay] = useState("");
-
+  console.log(todayWater);
   const formattedDate = useMemo(
     () => formatDate(chosenDate || new Date()),
     [chosenDate]
+  );
+
+  const handleDeleteWater = useCallback(
+    async (id) => {
+      await dispatch(deleteWater(id));
+      dispatch(getDayWater(formattedDate));
+      dispatch(getMonthWater(formattedDate.slice(0, -3)));
+    },
+    [dispatch, formattedDate]
   );
 
   useEffect(() => {
@@ -36,8 +47,12 @@ const DailyInfo = ({ chosenDate }) => {
         <h3 className={styles.today}>Today</h3>
         <AddWaterBtn />
       </div>{" "}
-      <WaterList />
-      <ChooseDate />
+      <WaterList
+        waterData={todayWater}
+        onDelete={handleDeleteWater}
+        dateForCalendar={chosenDate}
+      />
+      <ChooseDate selectedDate={chosenDate || new Date()} />
     </section>
   );
 };
