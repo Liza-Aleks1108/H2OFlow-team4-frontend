@@ -12,13 +12,38 @@
   box-shadow: 0 4px 8px rgba(158, 27, 27, 0.1);
 }
 
-.info{
+.waterGlass {
+  width: 44px;
+  height: 45px;
+  color: #9be1a0;
+}
+
+.editIcon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: transparent;
+}
+
+.deleteIcon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: transparent;
+}
+
+.info {
   display: flex;
   flex-direction: column;
-
 }
 .amount {
   font-weight: var(--font-weight-bold);
+  padding-bottom: 10px;
 }
 
 .actions {

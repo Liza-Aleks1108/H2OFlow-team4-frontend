@@ -33,3 +33,13 @@ export const signInValidationSchema = Yup.object().shape({
     .max(40, "Your password must have at most 40 characters")
     .required("Password is required"),
 });
+
+export const resetPasswordValidationSchema = Yup.object().shape({
+  password: Yup.string()
+    .min(8, "Your password must have at least 8 characters")
+    .max(40, "Your password must have at most 40 characters")
+    .required("Password is required"),
+  repeatPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Please repeat your password"),
+});

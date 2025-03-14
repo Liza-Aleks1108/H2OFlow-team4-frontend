@@ -3,11 +3,11 @@ import WaterModal from "../WaterModal/WaterModal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import styles from "./WaterItem.module.css";
 
-const WaterItem = ({ key, data, onDelete, dateForCalendar }) => {
+const WaterItem = ({ id, data, onDelete, dateForCalendar }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  const formattedTime = new Date(item.drinkingTime).toLocaleTimeString([], {
+  const formattedTime = new Date(dateForCalendar).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
@@ -17,19 +17,31 @@ const WaterItem = ({ key, data, onDelete, dateForCalendar }) => {
   const handleOpenModel = () => setIsDeleteOpen(true);
 
   const handleDelete = () => {
-    onDelete(key);
+    onDelete(id);
   };
 
   return (
     <div className={styles.waterItem}>
-      <div className={styles.icon}>🥤</div>
+      <div className={styles.icon}>
+        <svg className={styles.waterGlass}>
+          <use href="/sprite.svg#icon-water-glass-fill"></use>
+        </svg>
+      </div>
       <div className={styles.info}>
         <p className={styles.amount}>{data.amount} ml</p>
-        <p className={styles.time}>{data.time}</p>
+        <p className={styles.time}>{formattedTime}</p>
       </div>
       <div className={styles.actions}>
-        <button onClick={() => setIsEditOpen(true)}>✏️</button>
-        <button onClick={handleOpenModel}>🗑️</button>
+        <button onClick={() => setIsEditOpen(true)}>
+          <svg className={styles.editIcon}>
+            <use href="/sprite.svg#icon-Vector-pen"></use>
+          </svg>
+        </button>
+        <button onClick={handleOpenModel}>
+          <svg className={styles.deleteIcon}>
+            <use href="/sprite.svg#icon-trash-04"></use>
+          </svg>
+        </button>
       </div>
       {isEditOpen && <WaterModal onClose={() => setIsEditOpen(false)} />}
       {isDeleteOpen && (

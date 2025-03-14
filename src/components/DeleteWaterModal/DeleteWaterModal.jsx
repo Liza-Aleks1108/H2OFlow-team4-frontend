@@ -1,10 +1,11 @@
 import css from "./DeleteWaterModal.module.css";
-// import { deleteWater, updateWaterData } from '../../redux/water/operations';
 import { BaseModal } from "../BaseModal/BaseModal";
 
-import toast from "react-hot-toast";
+// import { useDispatch } from "react-redux";
+// import toast from "react-hot-toast";
 
 const DeleteWaterModal = ({ handleDelete, modalIsOpen, closeModal }) => {
+  // const dispatch = useDispatch();
   // const onDelete = async () => {
   //   try {
   //     await dispatch(deleteWater(water._id)).unwrap();
@@ -12,38 +13,30 @@ const DeleteWaterModal = ({ handleDelete, modalIsOpen, closeModal }) => {
   //     toast.success(
   //       "The amount of water consumed has been successfully deleted."
   //     );
-  //     handleDelete();
+  //     onRequestClose();
   //   } catch (error) {
   //     toast.error(error.message || "Something went wrong. Please try again.");
   //   }
   // };
-
   return (
     <BaseModal isOpen={modalIsOpen} onClose={closeModal}>
-      //{" "}
       <div className={css.deleteModal}>
-        // <h2 className={css.modalDeleteTitle}>Delete Water Entry</h2>
-        //{" "}
+        <h2 className={css.modalDeleteTitle}>Delete Water Entry</h2>
         <p className={css.modalDeleteText}>
-          // Are you sure you want to delete this entry? //{" "}
+          Are you sure you want to delete this entry?
         </p>
-        //{" "}
         <div className={css.box}>
-          //{" "}
           <button
             type="button"
             className={css.deleteBtn}
             onClick={handleDelete}
           >
-            // Delete //{" "}
+            Delete
           </button>
-          //{" "}
           <button type="button" className={css.cancelBtn} onClick={closeModal}>
-            // Cancel //{" "}
+            Cancel
           </button>
-          //{" "}
         </div>
-        //{" "}
       </div>
     </BaseModal>
   );
