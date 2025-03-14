@@ -138,7 +138,7 @@ export const getUsersAmount = createAsyncThunk(
   "user/getUsersAmount",
   async (_, thunkAPI) => {
     try {
-      const { data } = await userAPI.get("/users/count");
+      const { data } = await axiosInstance.get("/users/count");
       return data.count;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

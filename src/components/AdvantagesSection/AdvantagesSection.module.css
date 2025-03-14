@@ -1,9 +1,8 @@
 .advantagesSection {
   margin: 0 auto;
-  padding: 16px;
-  max-width: 343px;
-  min-height: 446px;
   width: 100%;
+  max-width: 343px;
+  min-height: 353px;
   background-image: image-set(
     url("../img/main-mob.jpg") 1x,
     url("../img/main-mob@2x.jpg") 2x
@@ -22,7 +21,7 @@
   height: 48px;
   position: absolute;
   bottom: 20%;
-  
+  left: 5%; 
   display: flex;
   align-items: center;
   gap: 4px;
@@ -41,6 +40,8 @@
   font-weight: 700;
   line-height: 1.16em;
   letter-spacing: -0.01em;
+  /* display: flex;
+  align-items: center; */
   gap: 4px;
 }
 .highlight {
@@ -82,7 +83,7 @@
 
 .stats {
   position: absolute;
-  bottom: 4.5%;
+  bottom: 3%;
   left: 45%;
   display: flex;
   flex-wrap: wrap;
@@ -104,9 +105,8 @@
   font-size: 8px;
   font-style: normal;
   font-weight: 700;
-  line-height: 100%; 
+  line-height: 0.57em; 
   letter-spacing: -0.08px;
-  transition: border 150ms ease-in, color 150ms ease-in;
 }
 
 .habitDrive {
@@ -140,16 +140,30 @@
   font-size: 8px;
   font-style: normal;
   font-weight: 700;
-  line-height: 100%; 
+  line-height: 0.57em; 
   letter-spacing: -0.08px;
 }
 
+/* @media (max-width: 374px) {
+  .advantagesSection {
+    padding: 16px;
+  }
+  .infoBox {
+    width: auto;
+    height: auto;
+    padding: 10px;
+  }
+  .btn {
+    font-size: 8px;
+    padding: 6px 10px;
+  }
+} */
 
 @media (min-width: 768px) {
   .advantagesSection {
     max-width: 704px;
     min-height: 446px;
-    padding: 32px;
+    padding: 40px;
     background-image: image-set(
       url("/public/img/main-tablet.jpg") 1x,
       url("/public/img/main-tablet@2x.jpg") 2x
@@ -157,7 +171,7 @@
   }
   .stats {
     left: 50%;
-    width: 242px;
+    bottom: 32px; 
     gap: 10px;
   } 
 
@@ -174,7 +188,7 @@
 
   .infoText{
     font-size: 10px;
-    line-height: 149%;
+    line-height: 1.49em;
   }
 
   .userImages img {
