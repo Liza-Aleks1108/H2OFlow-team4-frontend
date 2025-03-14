@@ -108,11 +108,6 @@
   border-color: rgba(47, 47, 47, 0.4);
 }
 
-.formInput:disabled {
-  color: #bcbcbc;
-  border: 1px solid #bcbcbc;
-}
-
 .formulaSection {
   margin-bottom: 24px;
 }

@@ -16,7 +16,7 @@ import { PiExclamationMarkBold } from "react-icons/pi";
 const UserSettingsForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const [preview, setPreview] = useState(user.avatarUrl);
+  const [preview, setPreview] = useState(user.avatarUrl || "/img/avatar.png");
 
   const {
     register,
@@ -45,12 +45,7 @@ const UserSettingsForm = ({ onClose }) => {
         ...user,
         dailyNorm: user.dailyNorm > 0 ? user.dailyNorm / 1000 : 1.5,
       });
-      // setPreview(user.avatarUrl);
-      setPreview(
-        user.avatarUrl && user.avatarUrl !== "null"
-          ? user.avatarUrl
-          : "/img/avatar.png"
-      );
+      setPreview(user.avatarUrl);
     }
   }, [user, reset]);
 
@@ -88,7 +83,6 @@ const UserSettingsForm = ({ onClose }) => {
         dailySportTime: data.dailySportTime || 0,
         dailyNorm: data.dailyNorm * 1000 || 1500,
       };
-      console.log(userData);
 
       await dispatch(updateUserProfile(userData)).unwrap();
       toast.success("Profile updated successfully!");
@@ -116,6 +110,23 @@ const UserSettingsForm = ({ onClose }) => {
           accept="image/*"
           onChange={handleAvatarUpload}
         />
+        {/* <Controller
+          name="avatar"
+          control={control}
+          render={({ field }) => (
+            <input
+              type="file"
+              id="avatar"
+              accept="image/*"
+              onChange={(event) => {
+                field.onChange(event.target.files);
+                if (event.target.files[0]) {
+                  setPreview(URL.createObjectURL(event.target.files[0]));
+                }
+              }}
+            />
+          )}
+        /> */}
         {errors.avatar && (
           <p className={s.formError}>{errors.avatar.message}</p>
         )}
@@ -182,7 +193,6 @@ const UserSettingsForm = ({ onClose }) => {
               type="email"
               className={s.formInput}
               readOnly
-              disabled
             />
           </div>
           <section className={s.formulaSection}>

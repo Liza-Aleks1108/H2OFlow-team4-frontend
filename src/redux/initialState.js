@@ -7,7 +7,7 @@ export const initialState = {
       weight: 0,
       dailySportTime: 0,
       dailyNorm: 1500,
-      avatarUrl: "img/avatar.png",
+      avatarUrl: "/img/avatar.png",
     },
     totalAmount: null,
     isLoggedIn: false,
