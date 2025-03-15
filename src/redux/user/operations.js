@@ -191,14 +191,26 @@ export const authWithGoogle = createAsyncThunk(
 );
 export const requestForResetPassword = createAsyncThunk(
   "user/requestForResetPassword",
-  async (email, { rejectWithValue }) => {
+  async (email, thunkAPI) => {
+    const token = getToken(thunkAPI);
+    if (!token) {
+      return thunkAPI.rejectWithValue("No token found");
+    }
+
     try {
-      const response = await userAPI.post("/users/request-reset-email", {
-        email,
-      });
+      const response = await userAPI.post(
+        "/users/request-reset-email",
+        { email },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return thunkAPI.rejectWithValue(error.response?.data || error.message); // Обробка помилки
     }
   }
 );
