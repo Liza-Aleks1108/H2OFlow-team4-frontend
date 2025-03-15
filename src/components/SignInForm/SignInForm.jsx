@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import s from "./SignInForm.module.css";
 import clsx from "clsx";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/user/operations.js";
 import toast from "react-hot-toast";
 import { AuthFormContainer } from "../SignUpForm/SignUpForm.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import { signInValidationSchema } from "../../validationSchemas/authValidation.js";
+// import { signInValidationSchema } from "../../validationSchemas/authValidation.js";
 import GoogleButton from "../GoogleButton/GoogleButton.jsx";
 import { BaseModal } from "../BaseModal/BaseModal.jsx";
 import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm.jsx";
@@ -36,7 +36,7 @@ const SignInForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signInValidationSchema),
+    // resolver: yupResolver(signInValidationSchema),
     mode: "onSubmit",
     defaultValues: {
       email: "",

@@ -47,6 +47,15 @@ export const clearAuthHeder = () => {
   userAPI.defaults.headers.common["Authorization"] = "";
 };
 
+export const getToken = (thunkAPI) => {
+  const state = thunkAPI.getState();
+  const token = state.user.token;
+  if (!token) {
+    return thunkAPI.rejectWithValue("No token found");
+  }
+  return token;
+};
+
 export const register = createAsyncThunk(
   "user/register",
   async (userData, thunkAPI) => {
@@ -93,12 +102,8 @@ export const logOut = createAsyncThunk("user/logout", async (_, thunkAPI) => {
 export const refreshUser = createAsyncThunk(
   "user/refresh",
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.user.token;
-    if (!token) {
-      return thunkAPI.rejectWithValue("No token found");
-    }
     try {
+      const token = getToken(thunkAPI);
       const { data } = await userAPI.post(
         "users/refresh",
         {},
@@ -115,19 +120,42 @@ export const refreshUser = createAsyncThunk(
 );
 
 export const updateUserProfile = createAsyncThunk(
-  "user/updateUserProfile",
+  "user/updateProfile",
   async (userDataToUpdate, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.user.token;
-    if (!token) {
-      return thunkAPI.rejectWithValue("No token found");
-    }
+    const token = getToken(thunkAPI);
     try {
       const { data } = await userAPI.patch("/users", userDataToUpdate, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         withCredentials: true,
       });
       return data.user;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.response.message);
+    }
+  }
+);
+
+export const updateUserAvatar = createAsyncThunk(
+  "user/updateAvatar",
+  async (file, thunkAPI) => {
+    const token = getToken(thunkAPI);
+    if (!file) {
+      return thunkAPI.rejectWithValue("No file selected");
+    }
+    const formData = new FormData();
+    formData.append("photo", file);
+    try {
+      const { data } = await userAPI.patch("/users/avatar", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      });
+      return data.avatarUrl;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response.message);
     }

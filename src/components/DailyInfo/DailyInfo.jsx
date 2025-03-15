@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect, useMemo } from "react";
 import ChooseDate from "../ChooseDate/ChooseDate";
-import AddWaterBtn from "../AddWaterBtn/AddWaterBtn";
 import WaterList from "../WaterList/WaterList";
 import styles from "./DailyInfo.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +33,6 @@ const DailyInfo = ({ chosenDate }) => {
     <section className={styles.dailyInfo}>
       <div className={styles.wrapper}>
         <h3 className={styles.today}>Today</h3>
-        <AddWaterBtn />
       </div>{" "}
       <WaterList />
       <ChooseDate />

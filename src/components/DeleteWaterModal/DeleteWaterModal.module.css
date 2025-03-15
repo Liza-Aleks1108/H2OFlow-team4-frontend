@@ -1,40 +1,60 @@
-.modalBackdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(47, 47, 47, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
+ .modalDeleteTitle {
+    text-align: center;
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 16px;
+
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    color: var(--grey-color);
+    
   }
 
-  .deleteModal {
+  .modalDeleteText{
+    text-align: center;
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 28px;
+
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-regular);
+    color: var(--grey-color);
+
+  }
+  .box{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background: var(--main-white-color);
-    border-radius: 15px;
-    padding: 40px;
-    width: 516px;
-    box-shadow: 0 4px 50px 0 rgba(0, 0, 0, 0.1);
-    position: relative;
+    gap: 9px;
   }
 
-  .deleteModal .closeIcon {
-    position: absolute;
-    stroke: var(--main-text-color);
-    fill: none;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
+  .deleteBtn {
+    text-align: center; 
+    border-radius: 30px;
+    padding: 14px 129px;
+    line-height: 18px;
+    font-size: 14px;
+
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--accent-color);
+    
+  }
+
+  .cancelBtn{
+    text-align: center; 
+    border-radius: 30px;
+    padding: 14px 129px;
+    line-height: 18px;
+    font-size: 14px;
+
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-bold);
+    background-color: var(--background-color);
+    color: rgba(50, 63, 71, 0.3);
+
   }
 
   .modalDeleteTitle {
-    font-family: var(--font-family);
-    font-weight: 700;
     font-size: 28px;
     line-height: 114%;
     letter-spacing: -0.01em;
@@ -42,93 +62,42 @@
     color: var(--background-color);
   }
 
-  .box {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  .modalDeleteTitle:hover{
+    color: var(--grey-color)
   }
 
-  .modalDeleteText {
-    font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.01em;
-    text-align: center;
-    color: var(--background-color);
-    margin-top: 24px;
-  }
+/*   @media (min-width: 768px) */
 
-  .modalButtonContainer {
-    display: flex;
-    width: 356px;
-    height: 60px;
-    justify-content: center;
-    align-items: center;
-    align-self: center;
-    gap: 10px;
-    margin-top: 24px;
-  }
-
-  .text {
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: -0.01em;
-    text-align: center;
-    color: var(--grey-color);
-    margin-top: 16px;
-    margin-bottom: 28px;
-  }
-
-  .deleteBtn {
-  background-color: var(--accent-color);
-  color: var(--grey-color);
-  padding: 18px 40px;
-  border-radius: 30px;
-  line-height: 24px;
-  letter-spacing: -1%;
-  text-align: center;
-  border: none;
-  width: 170px;
-  height: 60px;
-
-  transition: 0.5s;
-  cursor: pointer;
-  }
-
-  .deleteBtn:hover {
-    box-shadow: inset 0 0 0 2em #87D28D;
-    /* outline: transparent; */
-  }
-  .deleteBtn:focus {
-    outline: none;
-  }
-  .deleteBtn:hover:focus {
-    outline: none;
-  }
-  .cancelBtn {
-  background-color: var( --background-color);
-  padding: 18px 40px;
-  border-radius: 30px;
-  border: none;
-  width: 176px;
-  height: 60px;
-
-  transition: 0.5s;
-  }
-
-  .cancelBtn:hover {
-    color: var(--grey-color);
-  }
-  @media (min-width: 768px) {
-    .box {
-      flex-direction: row;
-    }
-    .text {
-        font-size: 18px;
-        line-height: 18px;
-        margin-top: 24px;
+    @media (min-width: 768px) {
+      .modalDeleteTitle {
+        font-size: 28px;
+        line-height: 32px;
         margin-bottom: 24px;
+        
       }
+    
+      .modalDeleteText {
+        font-size: 18px;
+        line-height: 24px;
+
+      }
+      .box{
+        flex-direction: row;
+        gap: 10px;
+      }
+
+      .deleteBtn{
+        font-size: 16px;
+        line-height: 150%;
+        padding: 18px 57px;
+
+      }
+      .cancelBtn{
+        font-size: 16px;
+        line-height: 150%;
+        padding: 18px 57px;
+
+      }
+
     }
+    

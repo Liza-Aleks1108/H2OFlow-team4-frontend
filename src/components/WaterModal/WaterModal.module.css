@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Poppins-bold";
+  src: url("../../../fonts/Poppinsbold.woff") format("woff");
+  font-weight: bold;
+  font-style: bold;
+}
+
+.waterModal {
+  /* border-radius: 8px; */
+  padding: 20px 0;
+}
+
+.title {
+  font-family: "Poppins-bold", sans-serif;
+  font-size: 20px;
+  margin-bottom: 24px;
+}
+
+@media (min-width: 375px) {
+  .waterModal {
+    width: 303px;
+  }
+}
+
+@media (min-width: 768px) {
+  .waterModal {
+    width: 478px;
+    padding: 20px 20px;
+  }
+  .title {
+    font-size: 28px;
+  }
+}

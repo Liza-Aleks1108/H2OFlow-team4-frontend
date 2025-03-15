@@ -1,10 +1,11 @@
 import css from "./DeleteWaterModal.module.css";
-// import { deleteWater, updateWaterData } from '../../redux/water/operations';
+import { BaseModal } from "../BaseModal/BaseModal";
+
 
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 
-const DeleteWaterModal = ({ onRequestClose, water }) => {
+const DeleteWaterModal = ({ isOpen, onRequestClose, water }) => {
   const dispatch = useDispatch();
   const onDelete = async () => {
     try {
@@ -19,7 +20,7 @@ const DeleteWaterModal = ({ onRequestClose, water }) => {
     }
   };
   return (
-    <div className={css.deleteModal}>
+    <BaseModal isOpen={isOpen} onClose={onRequestClose}>
       <h2 className={css.modalDeleteTitle}>Delete Water Entry</h2>
       <p className={css.modalDeleteText}>
         Are you sure you want to delete this entry?
@@ -36,7 +37,7 @@ const DeleteWaterModal = ({ onRequestClose, water }) => {
           Cancel
         </button>
       </div>
-    </div>
+    </BaseModal>
   );
 };
 

@@ -5,8 +5,8 @@
   min-height: 446px;
   width: 100%;
   background-image: image-set(
-    url("../img/main-mob.jpg") 1x,
-    url("../img/main-mob@2x.jpg") 2x
+    url("/img/main-mob.jpg") 1x,
+    url("/img/main-mob@2x.jpg") 2x
   );
   background-size: cover;
   background-position: center;
@@ -22,7 +22,6 @@
   height: 48px;
   position: absolute;
   bottom: 20%;
-  
   display: flex;
   align-items: center;
   gap: 4px;
@@ -33,15 +32,12 @@
 }
 
 .infoText {
-  width: 86px;
-  height: 28px;
   color: #323F47;
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.16em;
+  line-height: 1.4;
   letter-spacing: -0.01em;
-  gap: 4px;
 }
 .highlight {
   color: #9BE1A0;
@@ -54,6 +50,10 @@
 
 .loading {
   color: #ff9800;
+}
+
+.error {
+  color: #ef5050;
 }
 
 .userImages {
@@ -92,11 +92,10 @@
   text-align: center;
 }
 
-.btn {
+.benefits {
   padding: 9px 12px;
   border: none;
   border-radius: 30px;
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -104,9 +103,8 @@
   font-size: 8px;
   font-style: normal;
   font-weight: 700;
-  line-height: 100%; 
-  letter-spacing: -0.08px;
-  transition: border 150ms ease-in, color 150ms ease-in;
+  line-height: 1; 
+  letter-spacing: -0.01em;
 }
 
 .habitDrive {
@@ -129,19 +127,6 @@
 .personalRate {
   background: #fff;
   color: #323f47;
-  border-radius: 30px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  padding: 9px 12px;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  text-align: center;
-  font-size: 8px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 100%; 
-  letter-spacing: -0.08px;
 }
 
 
@@ -151,12 +136,12 @@
     min-height: 446px;
     padding: 32px;
     background-image: image-set(
-      url("/public/img/main-tablet.jpg") 1x,
-      url("/public/img/main-tablet@2x.jpg") 2x
+      url("/img/main-tablet.jpg") 1x,
+      url("/img/main-tablet@2x.jpg") 2x
     );
   }
   .stats {
-    left: 50%;
+    left: 55%;
     width: 242px;
     gap: 10px;
   } 
@@ -173,8 +158,9 @@
   }
 
   .infoText{
-    font-size: 10px;
-    line-height: 149%;
+    font-size: 12px;
+    line-height: 1.5;
+
   }
 
   .userImages img {
@@ -189,28 +175,22 @@
   .userImages img:nth-child(3) {
     margin-left: -20px; 
   }
-  .btn {
+  .benefits {
     padding: 11px 16px;
     font-size: 12px;
-    line-height: 100%; 
-    letter-spacing: -0.01px;
-  }
-
-  .personalRate {
-    padding: 11px 16px;
-    font-size: 12px;
-    line-height: 100%; 
-    letter-spacing: -0.01px;
+    line-height: 1; 
+    letter-spacing: -0.01em;
   }
 
 }
+
 @media (min-width: 1440px) {
   .advantagesSection {
     min-width: 672px;
     min-height: 736px;
     background-image: image-set(
-      url("/public/img/main-desktop.jpg") 1x,
-      url("/public/img/main-desktop@2x.jpg") 2x
+      url("/img/main-desktop.jpg") 1x,
+      url("/img/main-desktop@2x.jpg") 2x
     );
   }
 }

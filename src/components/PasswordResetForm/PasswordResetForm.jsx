@@ -1,10 +1,7 @@
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { resetPasswordValidationSchema } from "../../validationSchemas/authValidation.js";
-import { AuthFormContainer, spritePath } from "../SignUpForm/SignUpForm.jsx";
-import clsx from "clsx";
-import s from "./PasswordResetForm.module.css";
+import { AuthFormContainer } from "../SignUpForm/SignUpForm.jsx";
 
 const PasswordResetForm = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);

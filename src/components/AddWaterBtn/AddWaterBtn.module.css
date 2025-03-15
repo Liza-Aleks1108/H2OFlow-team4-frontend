@@ -1,29 +1,71 @@
+@font-face {
+  font-family: "Poppins-bold";
+  src: url("../../../fonts/Poppinsbold.woff") format("woff");
+  font-weight: bold;
+  font-style: bold;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .btn {
-    padding: 10px 20px; 
+  width: fit-content;
+  height: 46px;
+  border-radius: 30px;
+  padding: 14px 20px;
+  float: right;
+  background-color: #323f47;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+.btnText {
+  font-family: "Poppins-bold", sans-serif;
+  font-size: 14px;
+  color: white;
+}
+
+.iconPlus {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+  margin-right: 8px;
+  display: block;
+}
+
+.btn:hover .btnText,
+.btn:focus .btnText {
+  color: #9be1a0;
+}
+
+.btn:hover .iconPlus,
+.btn:focus .iconPlus {
+  --color1: #9be1a0 !important;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    padding: 18px 30px;
+    height: auto;
+  }
+
+  .btnText {
     font-size: 16px;
-        font-family: Poppins;
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 24px;
-        letter-spacing: -1%;
-        text-align: center;
-        color: #323F47;    
+  }
+  .iconPlus {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
 }
 
-.wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.icon {
-   fill: #9be1a0;
-    stroke: #323f47;
-    transition: 250ms;
-}
-
-.icon:hover {
-    fill: #323f47;
-    stroke: rgb(253, 253, 253);
-    transition: 250ms;
+@media (min-width: 1440px) {
+  .btn {
+    position: absolute;
+    right: 32px;
+    bottom: 64px;
+  }
 }

@@ -7,6 +7,7 @@ import {
   logOut,
   refreshUser,
   register,
+  updateUserAvatar,
   updateUserProfile,
 } from "./operations.js";
 import { initialState } from "../initialState.js";
@@ -100,6 +101,9 @@ const userSlice = createSlice({
           ...action.payload,
         };
       })
+      .addCase(updateUserAvatar.fulfilled, (state, action) => {
+        state.userData.avatarUrl = action.payload;
+      })
       .addCase(getUsersAmount.fulfilled, (state, action) => {
         state.totalAmount = action.payload;
       })
@@ -119,7 +123,8 @@ const userSlice = createSlice({
           refreshUser.pending,
           fetchUserProfile.pending,
           updateUserProfile.pending,
-          getUsersAmount.pending
+          getUsersAmount.pending,
+          updateUserAvatar.pending
         ),
         (state) => {
           state.loading = true;
@@ -133,7 +138,8 @@ const userSlice = createSlice({
           refreshUser.rejected,
           fetchUserProfile.rejected,
           updateUserProfile.rejected,
-          getUsersAmount.rejected
+          getUsersAmount.rejected,
+          updateUserAvatar.rejected
         ),
         (state, action) => {
           state.loading = false;

@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import CalendarItem from "../CalendarItem/CalendarItem";
 import css from "./Calendar.module.css";
 
-const Calendar = ({ currentDate, waterData }) => {
+const Calendar = ({ currentDate, waterData, onDateSelect }) => {
   const [days, setDays] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
     generateCalendar(currentDate);
@@ -17,6 +19,20 @@ const Calendar = ({ currentDate, waterData }) => {
     setDays(Array.from({ length: lastDay }, (_, i) => i + 1));
   };
 
+  const handleDateClick = (day) => {
+    const clickedDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      day
+    );
+    const today = new Date();
+
+    if (clickedDate > today) return;
+
+    setSelectedDate(clickedDate);
+    // onDateSelect(clickedDate); // Передаємо вибрану дату в DailyInfo
+  };
+
   return (
     <div className={css.container}>
       <div className={css.grid}>
@@ -24,19 +40,31 @@ const Calendar = ({ currentDate, waterData }) => {
           const dateKey = `${currentDate.getFullYear()}-${String(
             currentDate.getMonth() + 1
           ).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-          //   const waterPercent = waterData[dateKey] || 0;
+          const isToday =
+            new Date().toDateString() ===
+            new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              day
+            ).toDateString();
+          const isSelected =
+            selectedDate.toDateString() ===
+            new Date(
+              currentDate.getFullYear(),
+              currentDate.getMonth(),
+              day
+            ).toDateString();
+
           return (
-            <div
+            <CalendarItem
               key={day}
-              className={css.day}
-              //   className={`calendar-day ${
-              //     waterPercent === 100 ? "full" : "partial"
-              //   }`}
-              //   onClick={() => handleDateClick(day)}
-            >
-              {day}
-              {/* <div className="water-percent">{waterPercent}%</div> */}
-            </div>
+              day={day}
+              dateKey={dateKey}
+              waterData={waterData}
+              isToday={isToday}
+              isSelected={isSelected}
+              onClick={() => handleDateClick(day)}
+            />
           );
         })}
       </div>
