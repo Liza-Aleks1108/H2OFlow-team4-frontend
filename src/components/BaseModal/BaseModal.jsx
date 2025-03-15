@@ -5,13 +5,13 @@ Modal.setAppElement("#root");
 
 export const BaseModal = ({ isOpen, onClose, children }) => {
   return (
-    <Modal 
+    <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}
-      className={css.modal} 
-      overlayClassName={css.overlay} 
+      className={css.modal}
+      overlayClassName={css.overlay}
     >
       <button type="button" className={css.close} onClick={onClose}>
         <svg className={css.svgClose} aria-label="Close modal">

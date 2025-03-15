@@ -29,7 +29,7 @@ const ForgotPasswordForm = ({ onClose }) => {
           <input
             className={s.input}
             type="email"
-            placeholder="enter email address"
+            placeholder="Enter email address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
