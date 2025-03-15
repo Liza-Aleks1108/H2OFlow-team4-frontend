@@ -174,3 +174,18 @@ export const requestForResetPassword = createAsyncThunk(
     }
   }
 );
+
+export const resetPassword = createAsyncThunk(
+  "user/resetPassword",
+  async ({ token, password }, { rejectWithValue }) => {
+    try {
+      const response = await userAPI.post("/users/reset-password", {
+        token,
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
