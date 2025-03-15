@@ -199,7 +199,7 @@ export const requestForResetPassword = createAsyncThunk(
 
     try {
       const response = await userAPI.post(
-        "/users/request-reset-email",
+        "/auth/request-reset-email",
         { email },
         {
           headers: {
@@ -210,7 +210,7 @@ export const requestForResetPassword = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.response?.data || error.message); // Обробка помилки
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
@@ -219,7 +219,7 @@ export const resetPassword = createAsyncThunk(
   "user/resetPassword",
   async ({ token, password }, { rejectWithValue }) => {
     try {
-      const response = await userAPI.post("/users/reset-password", {
+      const response = await userAPI.post("/auth/reset-password", {
         token,
         password,
       });
