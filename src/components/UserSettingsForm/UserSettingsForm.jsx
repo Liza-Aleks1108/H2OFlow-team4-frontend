@@ -7,6 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
+  fetchUserProfile,
   updateUserAvatar,
   updateUserProfile,
 } from "../../redux/user/operations.js";
@@ -91,6 +92,7 @@ const UserSettingsForm = ({ onClose }) => {
       console.log(userData);
 
       await dispatch(updateUserProfile(userData)).unwrap();
+      dispatch(fetchUserProfile());
       toast.success("Profile updated successfully!");
       onClose();
     } catch (error) {
