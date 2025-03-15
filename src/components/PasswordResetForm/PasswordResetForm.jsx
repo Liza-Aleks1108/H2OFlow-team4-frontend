@@ -22,7 +22,7 @@ const PasswordResetForm = ({ onSubmit }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(resetPasswordValidationSchema),
+    // resolver: yupResolver(resetPasswordValidationSchema),
     mode: "onChange",
     defaultValues: { password: "", repeatPassword: "" },
   });
