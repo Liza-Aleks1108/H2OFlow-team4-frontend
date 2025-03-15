@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthFormContainer } from "../SignUpForm/SignUpForm.jsx";
+import s from "./PasswordResetForm.module.css";
 
 const PasswordResetForm = ({ onSubmit }) => {
   const [showPassword, setShowPassword] = useState(false);
