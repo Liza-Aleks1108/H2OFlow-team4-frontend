@@ -24,9 +24,13 @@ const ResetPasswordPage = () => {
     }
     dispatch(resetPassword({ token, password }))
       .unwrap()
-      .then(() => {
-        toast.success("You are successfully reset password");
-        navigate("/signin");
+      .then((res) => {
+        if (res.status === 200) {
+          toast.success("You are successfully reset password");
+          navigate("/signin");
+        } else {
+          toast.error("Opps mistake, try again");
+        }
       })
       .catch(() => {
         toast.error("Reset failed, try again");
