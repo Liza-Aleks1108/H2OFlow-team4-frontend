@@ -1,14 +1,26 @@
-export const setWaterData = (data) => ({
-  type: "SET_WATER_DATA",
-  payload: data,
-});
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { requestAddWater, requestPatchWater } from "./services.js";
 
-export const setError = (error) => ({
-  type: "SET_ERROR",
-  payload: error,
-});
+export const addWater = createAsyncThunk(
+  "water/addWater",
+  async (waterEntry, thunkAPI) => {
+    try {
+      const response = await requestAddWater(waterEntry);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
-export const setLoading = (isLoading) => ({
-  type: "SET_LOADING",
-  payload: isLoading,
-});
+export const editWaterAmount = createAsyncThunk(
+  "water/editWaterAmount",
+  async ({ id, ...waterEntry }, thunkAPI) => {
+    try {
+      const response = await requestPatchWater({ id, ...waterEntry });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
