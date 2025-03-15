@@ -10,43 +10,16 @@
   justify-content: center;
   z-index: 999;
 }
-
-.modal {
-  padding: 40px 16px;
-  background-color: white;
-  border-radius: 16px;
-  text-align: center;
-  max-width: 360px;
-  width: 100%;
-  position: relative;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.closeButton {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 10;
-  padding: 8px;
-  border-radius: 50%;
-  transition: background 0.3s ease;
-}
-
-.icon {
-  width: 24px;
-  height: 24px;
-  color: #333;
-}
-
-@media (min-width: 768px) {
-  .modal {
-    padding: 32px;
-  }
-  .icon {
-    width: 30px;
-    height: 30px;
-  }
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

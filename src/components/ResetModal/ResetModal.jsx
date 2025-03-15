@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import s from "./ResetModal.module.css";
-import { FiX } from "react-icons/fi";
+// import { FiX } from "react-icons/fi";
 
 const ResetModal = ({ onClose, children }) => {
   useEffect(() => {
@@ -24,11 +24,8 @@ const ResetModal = ({ onClose, children }) => {
   };
 
   return (
-    <div className={s.backdrop} onClick={handleBackdropClick}>
-      <div className={s.modal}>
-        <button className={s.closeButton} onClick={onClose}>
-          <FiX className={s.icon} />
-        </button>
+    <div className={s.modalOverlay}>
+      <div className={s.backdrop} onClick={handleBackdropClick}>
         {children}
       </div>
     </div>
