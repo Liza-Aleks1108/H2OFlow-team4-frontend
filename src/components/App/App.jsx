@@ -17,6 +17,7 @@ import { Toaster } from "react-hot-toast";
 import GoogleAuthConfirm from "../GoogleAuthConfirm/GoogleAuthConfirm.jsx";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage.jsx";
 import SharedLayout from "../SharedLayout.jsx";
+import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage.jsx";
 
 const App = () => {
   const { rehydrated } = useSelector((state) => state._persist || {});
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="signup" element={<SignUpPage />} />
           <Route path="signin" element={<SignInPage />} />
           <Route path="/auth/confirm-oauth" element={GoogleAuthConfirm} />
+          <Route path="/auth/reset-password" element={ResetPasswordPage} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
