@@ -12,7 +12,7 @@ const UserBar = () => {
   return (
     <div className={css.userBar}>
       <button className={css.userBarButton} onClick={toogle}>
-        <p className={css.userName}>{false ? "user.name" : "User"}</p>
+        <p className={css.userName}>{user.name ? user.name : "User"}</p>
         <div className={css.userImageCont}>
           <img
             src={user.avatarUrl}
