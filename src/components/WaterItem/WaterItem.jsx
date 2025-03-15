@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import WaterModal from "../WaterModal/WaterModal";
-// import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
+import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import styles from "./WaterItem.module.css";
 
 const WaterItem = ({ data }) => {
@@ -31,10 +31,10 @@ const WaterItem = ({ data }) => {
         </button>
       </div>
       <WaterModal isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} />
-      {/* <DeleteWaterModal
+      <DeleteWaterModal
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}
-      /> */}
+      />
     </div>
   );
 };
