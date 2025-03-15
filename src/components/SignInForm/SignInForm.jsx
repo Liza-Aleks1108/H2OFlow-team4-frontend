@@ -10,8 +10,8 @@ import { AuthFormContainer } from "../SignUpForm/SignUpForm.jsx";
 import { Link, useNavigate } from "react-router-dom";
 // import { signInValidationSchema } from "../../validationSchemas/authValidation.js";
 import GoogleButton from "../GoogleButton/GoogleButton.jsx";
-import { BaseModal } from "../BaseModal/BaseModal.jsx";
 import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm.jsx";
+import ResetModal from "../ResetModal/ResetModal.jsx";
 
 const SignInForm = () => {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ const SignInForm = () => {
     setShowPassword(!showPassword);
   };
   const handleOpenModal = () => {
+    console.log("Modal open button clicked!");
     setIsModalOpen(true);
   };
 
@@ -141,9 +142,9 @@ const SignInForm = () => {
         </div>
       </div>
       {isModalOpen && (
-        <BaseModal onClose={handleCloseModal}>
+        <ResetModal isOpen={isModalOpen} onClose={handleCloseModal}>
           <ForgotPasswordForm onClose={handleCloseModal} />
-        </BaseModal>
+        </ResetModal>
       )}
     </AuthFormContainer>
   );
