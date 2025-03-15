@@ -30,10 +30,11 @@ const WaterItem = ({ data }) => {
           </svg>
         </button>
       </div>
-      {isEditOpen && <WaterModal onClose={() => setIsEditOpen(false)} />}
-      {isDeleteOpen && (
-        <DeleteWaterModal onClose={() => setIsDeleteOpen(false)} />
-      )}
+      <WaterModal isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} />
+      {/* <DeleteWaterModal
+        isOpen={isDeleteOpen}
+        onClose={() => setIsDeleteOpen(false)}
+      /> */}
     </div>
   );
 };
