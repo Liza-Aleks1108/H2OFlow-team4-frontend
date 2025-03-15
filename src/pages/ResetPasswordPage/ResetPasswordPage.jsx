@@ -1,16 +1,21 @@
 import React from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../../redux/user/operations.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Logo from "../../components/Logo/Logo.jsx";
 import PasswordResetForm from "../../components/PasswordResetForm/PasswordResetForm.jsx";
 import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection.jsx";
 import s from "./ResetPasswordPage.module.css";
+import { selectLoading } from "../../redux/user/selectors.js";
+import Loader from "../../components/Loader/Loader.jsx";
 
 const ResetPasswordPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+
   const handleResetPassword = async (data) => {
     const { password, repeatPassword } = data;
     if (password !== repeatPassword) {
@@ -27,7 +32,10 @@ const ResetPasswordPage = () => {
         toast.error("Reset failed, try again");
       });
   };
-  return (
+  const isLoading = useSelector(selectLoading);
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className={s.resetWrapper}>
       <div className={s.container}>
         <div className={s.box}>

@@ -9,7 +9,7 @@ const ForgotPasswordForm = ({ onClose }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
-    e.PreventDefault();
+    e.preventDefault();
 
     dispatch(requestForResetPassword(email))
       .unwrap()
