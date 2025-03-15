@@ -1,11 +1,5 @@
 import { userAPI } from "../user/operations.js";
 
-const token = localStorage.getItem("token"); // Отримуємо токен з localStorage
-
-if (!token) {
-  throw new Error("Токен авторизації відсутній");
-}
-
 export const requestAddWater = async (water) => {
   const { data } = await userAPI.post("/water", water, {
     headers: {
