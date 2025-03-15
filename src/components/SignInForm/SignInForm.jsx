@@ -119,18 +119,18 @@ const SignInForm = () => {
                 )}
               </button>
             </div>
+            <button
+              type="button"
+              className={s.forgotButton}
+              onClick={handleOpenModal}
+            >
+              I forgot my password
+            </button>
             <p className={s.errorMessage}>{errors.password?.message}</p>
           </label>
 
           <button type="submit" className={s.button}>
             Sign In
-          </button>
-          <button
-            type="button"
-            className={s.forgotButton}
-            onClick={handleOpenModal}
-          >
-            I forgot my password
           </button>
         </form>
         <GoogleButton />
