@@ -189,3 +189,31 @@ export const authWithGoogle = createAsyncThunk(
     }
   }
 );
+export const requestForResetPassword = createAsyncThunk(
+  "user/requestForResetPassword",
+  async (email, { rejectWithValue }) => {
+    try {
+      const response = await userAPI.post("/users/request-reset-email", {
+        email,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  "user/resetPassword",
+  async ({ token, password }, { rejectWithValue }) => {
+    try {
+      const response = await userAPI.post("/users/reset-password", {
+        token,
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

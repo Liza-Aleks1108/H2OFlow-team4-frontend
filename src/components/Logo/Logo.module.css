@@ -1,3 +1,9 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
 .logoTitle {
   font-weight: 700;
   font-size: 18px;

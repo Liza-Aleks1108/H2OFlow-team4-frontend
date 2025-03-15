@@ -46,13 +46,13 @@ const AdvantagesSection = () => {
         </div>
 
         <div className={styles.stats}>
-          <button className={`${styles.btn} ${styles.habitDrive}`}>
+          <p className={`${styles.benefits} ${styles.habitDrive}`}>
             <span className={styles.circle}></span>Habit drive
-          </button>
-          <button className={`${styles.btn} ${styles.viewStats}`}>
+          </p>
+          <p className={`${styles.benefits} ${styles.viewStats}`}>
             View statistics
-          </button>
-          <p className={styles.personalRate}>Personal rate setting</p>
+          </p>
+          <p className={`${styles.benefits} ${styles.personalRate}`}>Personal rate setting</p>
         </div>
       </div>
     </section>

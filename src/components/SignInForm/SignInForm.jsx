@@ -10,14 +10,24 @@ import { AuthFormContainer } from "../SignUpForm/SignUpForm.jsx";
 import { Link, useNavigate } from "react-router-dom";
 // import { signInValidationSchema } from "../../validationSchemas/authValidation.js";
 import GoogleButton from "../GoogleButton/GoogleButton.jsx";
+import { BaseModal } from "../BaseModal/BaseModal.jsx";
+import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm.jsx";
 
 const SignInForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const {
@@ -114,6 +124,13 @@ const SignInForm = () => {
           <button type="submit" className={s.button}>
             Sign In
           </button>
+          <button
+            type="button"
+            className={s.forgotButton}
+            onClick={handleOpenModal}
+          >
+            I forgot my password
+          </button>
         </form>
         <GoogleButton />
         <div className={s.afterSignUpBox}>
@@ -123,6 +140,11 @@ const SignInForm = () => {
           </Link>
         </div>
       </div>
+      {isModalOpen && (
+        <BaseModal onClose={handleCloseModal}>
+          <ForgotPasswordForm onClose={handleCloseModal} />
+        </BaseModal>
+      )}
     </AuthFormContainer>
   );
 };
