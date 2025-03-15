@@ -15,4 +15,9 @@ export const initialState = {
     loading: false,
     error: null,
   },
+  water: {
+    entries: [],
+    loading: false,
+    error: null,
+  },
 };
