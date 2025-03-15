@@ -8,7 +8,7 @@ import PasswordResetForm from "../../components/PasswordResetForm/PasswordResetF
 import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection.jsx";
 import { selectLoading } from "../../redux/user/selectors.js";
 import Loader from "../../components/Loader/Loader.jsx";
-import * as s from "./ResetPasswordPage.module.css";
+import s from "./ResetPasswordPage.module.css";
 
 const ResetPasswordPage = () => {
   const dispatch = useDispatch();
