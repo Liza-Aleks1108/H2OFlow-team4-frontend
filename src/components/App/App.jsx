@@ -13,10 +13,10 @@ import {
   refreshUser,
   setAuthHeader,
 } from "../../redux/user/operations.js";
-import SharedLayout from "../../../SharedLayout.jsx";
 import { Toaster } from "react-hot-toast";
 import GoogleAuthConfirm from "../GoogleAuthConfirm/GoogleAuthConfirm.jsx";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage.jsx";
+import SharedLayout from "../SharedLayout.jsx";
 
 const App = () => {
   const { rehydrated } = useSelector((state) => state._persist || {});

@@ -1,30 +1,37 @@
 .langSwitcher {
-  display: flex;
-  gap: 5px;
-  justify-content: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
 }
 
 .langBtn {
-  background-color: var(--accent-color);
-  border: none;
-  padding: 8px 16px;
-  border-radius: 5px;
+  background-color: var(--background-color);
+  border: 1px solid #ccc;
+  padding: 5px 10px;
   cursor: pointer;
-  font-size: 16px;
+  border-radius: 5px;
 }
 
-.langBtn:hover {
-  background-color: #87d28d;
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--background-color);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 120px;
 }
 
-@media (min-width: 1440px) {
-  .langSwitcher {
-    position: fixed;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-  }
+.dropdownItem {
+  padding: 8px;
+  text-align: left;
+  border: none;
+  background-color: var(--background-color);
+  cursor: pointer;
+  width: 100%;
+}
+
+.dropdownItem:hover {
+  background-color: var(--accent-color);
 }
