@@ -6,15 +6,16 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Logo from "../../components/Logo/Logo.jsx";
 import PasswordResetForm from "../../components/PasswordResetForm/PasswordResetForm.jsx";
 import AdvantagesSection from "../../components/AdvantagesSection/AdvantagesSection.jsx";
-import s from "./ResetPasswordPage.module.css";
 import { selectLoading } from "../../redux/user/selectors.js";
 import Loader from "../../components/Loader/Loader.jsx";
+import s from "./ResetPasswordPage.module.css";
 
 const ResetPasswordPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
+  console.log(token);
 
   const handleResetPassword = async (data) => {
     const { password, repeatPassword } = data;
@@ -41,7 +42,7 @@ const ResetPasswordPage = () => {
     <Loader />
   ) : (
     <div className={s.resetWrapper}>
-      <div className={s.container}>
+      <div>
         <div className={s.box}>
           <Logo />
           <PasswordResetForm onSubmit={handleResetPassword} />
