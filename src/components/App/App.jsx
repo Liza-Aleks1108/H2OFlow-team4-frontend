@@ -53,7 +53,7 @@ const App = () => {
           <Route path="signup" element={<SignUpPage />} />
           <Route path="signin" element={<SignInPage />} />
           <Route path="/auth/confirm-oauth" element={GoogleAuthConfirm} />
-          <Route path="/auth/reset-password" element={ResetPasswordPage} />
+          <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
