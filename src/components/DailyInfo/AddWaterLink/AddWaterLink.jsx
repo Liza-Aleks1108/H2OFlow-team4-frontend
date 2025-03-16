@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BaseModal } from "../../BaseModal/BaseModal.jsx";
-import WaterForm from "../../WaterForm";
+import WaterForm from "../../WaterForm/WaterForm.jsx";
 import css from "./AddWaterLink.module.css";
 
 const AddWaterLink = () => {
