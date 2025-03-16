@@ -108,6 +108,7 @@ export const refreshUser = createAsyncThunk(
       // const newAccessToken = data.accessToken;
      localStorage.setItem('accessToken', accessToken); // добавил
      localStorage.setItem('refreshToken', newRefreshToken);// добавил
+     setAuthHeader(accessToken); // добавил
      return { token: accessToken }; // добавил
       // thunkAPI.dispatch(resetToken({ token: newAccessToken }));
       // await new Promise((resolve) => setTimeout(resolve, 0));
