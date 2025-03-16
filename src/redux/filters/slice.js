@@ -1,34 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getWaterPerDay, getWaterPerMonth } from "./operations";
-
-const initialState = {
-  perDay: [],
-  perMonth: [],
-  isLoading: false,
-};
-
-const handleLoading = (state) => {
-  state.isLoading = true;
-};
+import { initialState } from "../initialState";
 
 const waterSlice = createSlice({
   name: "water",
-  initialState,
+  initialState: initialState.water,
   extraReducers: (builder) => {
     builder
-      .addCase(getWaterPerDay.pending, handleLoading)
+      .addCase(getWaterPerDay.pending)
       .addCase(getWaterPerDay.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
         state.perDay = payload.date;
       })
-      .addCase(getWaterPerDay.rejected, console.log(error))
-      .addCase(getWaterPerMonth.pending, handleLoading)
+      .addCase(getWaterPerDay.rejected)
+      .addCase(getWaterPerMonth.pending)
       .addCase(getWaterPerMonth.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
         state.perMonth = payload.date;
       })
-      .addCase(getWaterPerMonth.rejected, console.log(error));
+      .addCase(getWaterPerMonth.rejected);
   },
 });
 
-export const waterReducer = waterSlice.reducer;
+export default waterSlice.reducer;

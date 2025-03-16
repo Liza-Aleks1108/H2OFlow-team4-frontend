@@ -1,75 +1,80 @@
 .header {
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-bold);
-    color: var(--grey-color);
-    font-size: 20px;
-    line-height: 120%;
-    text-align: center;
-    margin-bottom: 16px;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  color: var(--grey-color);
+  font-size: 20px;
+  line-height: 120%;
+  text-align: center;
+  margin-bottom: 16px;
 }
 
 .logOutText {
-    color: var(--grey-color);
-    text-align: center;
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-regular);
-    font-size: 14px;
-    line-height: 130%;
-    margin-bottom: 28px;
+  color: var(--grey-color);
+  text-align: center;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  font-size: 14px;
+  line-height: 130%;
+  margin-bottom: 28px;
 }
 
 .buttonCont {
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
 
 .logOutBut,
 .closeBut {
-    border-radius: 30px;
-    padding: 14px 126px;
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-bold);
-    font-size: 14px;
-    line-height: 130%;
-    text-align: center;
+  border-radius: 30px;
+  padding: 14px 126px;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  font-size: 14px;
+  line-height: 130%;
+  text-align: center;
 }
 
 .logOutBut {
-    background-color: var(--accent-color);
+  background-color: var(--accent-color);
+}
 
+.logOutBut:hover,
+.logOutBut:focus {
+  background-color: #87d28d; /* Новий колір фону */
+  color: #323f47; /* Новий колір тексту */
 }
 
 .closeBut {
-    background-color: var(--background-color);
-    color: rgba(50, 63, 71, 0.3);
+  background-color: var(--background-color);
+  color: rgba(50, 63, 71, 0.3);
 }
 
 .closeBut:hover {
-    color: rgba(50, 63, 71, 1);
+  color: rgba(50, 63, 71, 1);
 }
 
 @media (min-width: 768px) {
-    .header {
-        font-size: 28px;
-        line-height: 110%;
-        margin-bottom: 24px;
-    }
+  .header {
+    font-size: 28px;
+    line-height: 110%;
+    margin-bottom: 24px;
+  }
 
-    .logOutText {
-        font-size: 18px;
-        line-height: 130%;
-    }
+  .logOutText {
+    font-size: 18px;
+    line-height: 130%;
+  }
 
-    .buttonCont {
-        flex-direction: row;
-        gap: 10px;
-    }
+  .buttonCont {
+    flex-direction: row;
+    gap: 10px;
+  }
 
-    .logOutBut,
-    .closeBut {
-        font-size: 16px;
-        line-height: 150%;
-        padding: 18px 57px;
-    }
+  .logOutBut,
+  .closeBut {
+    font-size: 16px;
+    line-height: 150%;
+    padding: 18px 57px;
+  }
 }
