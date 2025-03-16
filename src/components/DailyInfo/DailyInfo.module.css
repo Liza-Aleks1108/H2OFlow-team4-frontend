@@ -42,3 +42,19 @@
   line-height: 32px;
   letter-spacing: -1%;
 }
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 45.8px;
+}
+
+.waterEmpty {
+  text-align: center;
+}
+
+.waterListWrapper{
+  display: flex;
+}
+
