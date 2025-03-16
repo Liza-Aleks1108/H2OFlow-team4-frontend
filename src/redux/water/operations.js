@@ -32,7 +32,19 @@ export const getWaterMonth = createAsyncThunk(
   }
 );
 
-// GIFT FROM SANYA
+export const getWaterPerDay = createAsyncThunk(
+  "water/waterPerDay",
+  async (date, thunkAPI) => {
+    const token = thunkAPI.getState().user.token;
+    if (!token) return thunkAPI.rejectWithValue("No token found");
+    try {
+      const { oneDay } = await fetchAPI.get(`/water/day/${date}`);
+      return oneDay;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
 
 export const addWater = createAsyncThunk(
   "water/addItem",
@@ -73,28 +85,20 @@ export const editWaterAmount = createAsyncThunk(
 );
 
 export const deleteTodo = createAsyncThunk(
-  "todos/deleteTodo",
+  "water/deleteItem",
   async (id, thunkAPI) => {
+    const token = thunkAPI.getState().user.token;
+    if (!token) return thunkAPI.rejectWithValue("No token found");
     try {
-      await goitApi.delete(`/tasks/${id}`);
-      return id;
+      await fetchAPI.delete(`/water/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+      return;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-// from filters
-
-export const getWaterPerDay = createAsyncThunk(
-  "water/waterPerDay",
-  async (date, thunkAPI) => {
-    try {
-      const { data } = await fetchAPI.get(`/water/day/${date}`);
-      return data;
-    } catch (error) {
-      thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
-// SANYA SERVISES
