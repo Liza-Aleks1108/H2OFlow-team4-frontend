@@ -8,12 +8,16 @@ const handlePending = (state) => {
 
 const handleRejected = (state, action) => {
   state.isLoadingMonth = false;
-  state.error = action.payload;
+  // console.log("❌ Отримана помилка:", action.payload);
+  state.isErrorMonth =
+    typeof action.payload === "string"
+      ? action.payload
+      : "Помилка завантаження!";
 };
 
 const monthSlice = createSlice({
   name: "month",
-  initialState,
+  initialState: initialState.month,
   reducers: {
     updateActiveDate: (state, action) => {
       state.activeDate = action.payload;

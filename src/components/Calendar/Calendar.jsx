@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
+// import { useSelector } from "react-redux";
+// import { selectMonthWater } from "../../redux/month/selectors";
 import CalendarItem from "../CalendarItem/CalendarItem";
 import css from "./Calendar.module.css";
+// , onDateSelect
 
-const Calendar = ({
-  currentDate,
-  waterData,
-  onDateSelect,
-  setDateForTitle,
-}) => {
+const Calendar = ({ currentDate, waterData }) => {
   const [days, setDays] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  setDateForTitle(selectedDate);
+  // const monthWater = useSelector(selectMonthWater);
 
   useEffect(() => {
     generateCalendar(currentDate);
@@ -39,8 +37,6 @@ const Calendar = ({
     // onDateSelect(clickedDate); // Передаємо вибрану дату в DailyInfo
   };
 
-  // console.log(selectedDate);
-
   return (
     <div className={css.container}>
       <div className={css.grid}>
@@ -68,7 +64,7 @@ const Calendar = ({
               key={day}
               day={day}
               dateKey={dateKey}
-              waterData={waterData}
+              // waterData={waterData}
               isToday={isToday}
               isSelected={isSelected}
               onClick={() => handleDateClick(day)}
