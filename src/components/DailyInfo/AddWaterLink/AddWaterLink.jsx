@@ -1,8 +1,9 @@
 import { useState } from "react";
-import AddWaterLink from "./AddWaterLink";
-import WaterModal from "../../WaterModal/WaterModal";
+import { BaseModal } from "../../BaseModal/BaseModal.jsx";
+import WaterForm from "../../WaterForm";
+import css from "./AddWaterLink.module.css";
 
-const WaterTracker = () => {
+const AddWaterLink = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -15,16 +16,25 @@ const WaterTracker = () => {
 
   return (
     <div>
-      <AddWaterLink onClick={handleOpenModal} />
+      <button onClick={handleOpenModal} className={css.btn}>
+        <div className={css.wrapper}>
+          <svg width="30" height="30" className={css.icon}>
+            <use href={`#icon-plus-bl`} />
+          </svg>
+          <p>Add water</p>
+        </div>
+      </button>
+
       {isModalOpen && (
-        <WaterModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          operationType="add"
-        />
+        <BaseModal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <div className={css.waterModal}>
+            <h2 className={css.title}>Add water</h2>
+            <WaterForm onClose={handleCloseModal} operationType="add" />
+          </div>
+        </BaseModal>
       )}
     </div>
   );
 };
 
-export default WaterTracker;
+export default AddWaterLink;
