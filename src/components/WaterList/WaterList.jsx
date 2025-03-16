@@ -17,9 +17,15 @@ const WaterList = () => {
 
   return (
     <div className={styles.waterList}>
-      {waterData.map((item) => (
-        <WaterItem key={item.id} data={item} onDelete={handleDeleteItem} />
-      ))}
+      {waterData.length === 0 ? (
+        <p className={styles.noWaterMessage}>
+          You haven't drunk water yet, maybe it's time to drink?
+        </p>
+      ) : (
+        waterData.map((item) => (
+          <WaterItem key={item.id} data={item} onDelete={handleDeleteItem} />
+        ))
+      )}
     </div>
   );
 };
