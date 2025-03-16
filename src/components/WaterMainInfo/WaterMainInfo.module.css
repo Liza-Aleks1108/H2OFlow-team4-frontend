@@ -31,9 +31,10 @@
 }
 
 .logo {
-  font-family: "Poppins-bold", sans-serif;
+  /* font-family: "Poppins-bold", sans-serif;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 18px; */
+  padding: 0;
   margin-bottom: 78px;
 }
 
@@ -53,7 +54,7 @@
   }
 
   .logo {
-    font-size: 24px;
+    /* font-size: 24px; */
     margin-bottom: 101px;
   }
 }
