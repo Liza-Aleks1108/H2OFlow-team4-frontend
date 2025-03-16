@@ -40,12 +40,13 @@ export const addWater = createAsyncThunk(
     const token = thunkAPI.getState().user.token;
     if (!token) return thunkAPI.rejectWithValue("No token found");
     try {
-      const response = await fetchAPI.post(`/water`, body, {
+      const { data } = await fetchAPI.post(`/water`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        withCredentials: true,
       });
-      return response.data;
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -53,17 +54,35 @@ export const addWater = createAsyncThunk(
 );
 
 export const editWaterAmount = createAsyncThunk(
-  "water/editWaterAmount",
-  async ({ id, ...waterEntry }, thunkAPI) => {
+  "water/editItem",
+  async (body, thunkAPI) => {
+    const token = thunkAPI.getState().user.token;
+    if (!token) return thunkAPI.rejectWithValue("No token found");
     try {
-      const response = await requestPatchWater({ id, ...waterEntry }, token);
-      return response.data;
+      const { data } = await fetchAPI.patch(`/water/${body.id}`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
 
+export const deleteTodo = createAsyncThunk(
+  "todos/deleteTodo",
+  async (id, thunkAPI) => {
+    try {
+      await goitApi.delete(`/tasks/${id}`);
+      return id;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 // from filters
 
 export const getWaterPerDay = createAsyncThunk(
@@ -79,19 +98,3 @@ export const getWaterPerDay = createAsyncThunk(
 );
 
 // SANYA SERVISES
-
-export const requestPatchWater = async (water, token) => {
-  const { data } = await userAPI.patch(
-    `/water/${water.id}`,
-    {
-      amount: water.amount,
-      date: water.date,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return data;
-};
