@@ -5,8 +5,10 @@ import {
   selectLoading,
   selectError,
 } from "../../redux/user/selectors";
+import { useTranslation } from "react-i18next";
 
 const AdvantagesSection = () => {
+  const { t } = useTranslation();
   const totalUsers = useSelector(selectTotalAmount);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
@@ -34,12 +36,17 @@ const AdvantagesSection = () => {
           </div>
 
           {loading ? (
-            <p className={styles.loading}>Loading...</p>
+            <p className={styles.loading}>{t("advantages.loading")}</p>
           ) : error ? (
-            <p className={styles.error}>Error: {error}</p>
+            <p className={styles.error}>
+              {t("advantages.error")}
+              {error}
+            </p>
           ) : (
             <p className={styles.infoText}>
-              Our <span className={styles.highlight}>happy</span> customers:{" "}
+              {t("advantages.our")}{" "}
+              <span className={styles.highlight}>{t("advantages.happy")}</span>{" "}
+              {t("advantages.customers")}{" "}
               <span className={styles.userCount}>{totalUsers ?? 0}</span>
             </p>
           )}
@@ -47,12 +54,14 @@ const AdvantagesSection = () => {
 
         <div className={styles.stats}>
           <p className={`${styles.benefits} ${styles.habitDrive}`}>
-            <span className={styles.circle}></span>Habit drive
+            <span className={styles.circle}></span>{t("advantages.habitDrive")}
           </p>
           <p className={`${styles.benefits} ${styles.viewStats}`}>
-            View statistics
+            {t("advantages.viewStats")}
           </p>
-          <p className={`${styles.benefits} ${styles.personalRate}`}>Personal rate setting</p>
+          <p className={`${styles.benefits} ${styles.personalRate}`}>
+            {t("advantages.personalRate")}
+          </p>
         </div>
       </div>
     </section>
