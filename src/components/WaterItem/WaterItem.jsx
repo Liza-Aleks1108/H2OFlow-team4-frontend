@@ -22,7 +22,7 @@ const WaterItem = ({ data, onDelete }) => {
       </div>
       <div className={styles.info}>
         <p className={styles.amount}>{data.amount} ml</p>
-        <p className={styles.time}>{formattedTime}</p>
+        <p className={styles.time}>{data.time}</p>
       </div>
       <div className={styles.actions}>
         <button onClick={() => setIsEditOpen(true)}>
@@ -30,7 +30,7 @@ const WaterItem = ({ data, onDelete }) => {
             <use href="/sprite.svg#icon-Vector-pen"></use>
           </svg>
         </button>
-        <button onClick={handleOpenModel}>
+        <button onClick={() => setIsDeleteOpen(true)}>
           <svg className={styles.deleteIcon}>
             <use href="/sprite.svg#icon-trash-04"></use>
           </svg>
