@@ -15,7 +15,7 @@ const ChooseDate = ({ selectedDate }) => {
     });
 
     const day = title.slice(title.length - 2);
-    const month = title.slice(0, title.length - 3);
+    const month = title.slice(0, title.length - 2);
 
     return `${day}, ${month}`;
   };
