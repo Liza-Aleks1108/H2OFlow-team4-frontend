@@ -1,12 +1,14 @@
 import React from "react";
 import style from "./WaterProgressBar.module.css";
+import { useTranslation } from "react-i18next";
 
 const WaterProgressBar = ({ consumed, dailyNorm }) => {
+  const { t } = useTranslation(); 
   const progress = (consumed / dailyNorm) * 100;
 
   return (
     <div className={style.container}>
-      <h3 className={style.textH3}>Today</h3>
+      <h3 className={style.textH3}>{t("waterDailyNorma.textH3")}</h3>
       <div className={style.scaleContainer}>
         <div className={style.emptyScale}>
           <div
