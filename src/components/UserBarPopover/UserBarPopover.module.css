@@ -22,6 +22,8 @@
     border: none;
     background-color: transparent;
     display: flex;
+    overflow: hidden;
+
 
     font-family: var(--font-family);
     font-weight: var(--font-weight-bold);
