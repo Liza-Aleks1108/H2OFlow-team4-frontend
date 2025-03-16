@@ -77,10 +77,6 @@ export const logIn = createAsyncThunk(
       });
 
       setAuthHeader(response.data.data.accessToken);
-      console.log(
-        "Токен установлен:",
-        userAPI.defaults.headers.common["Authorization"]
-      );
 
       const userProfile = await thunkAPI.dispatch(fetchUserProfile()).unwrap();
       return { token: response.data.data.accessToken, user: userProfile };
@@ -177,9 +173,15 @@ export const authWithGoogle = createAsyncThunk(
   "user, authWithGoogle",
   async (code, thunkAPI) => {
     try {
-      const response = await userAPI.post("/auth/google/confirm-google-auth", {
-        code,
-      });
+      const response = await userAPI.post(
+        "/auth/google/confirm-google-auth",
+        {
+          code,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       const { accessToken, user } = response.data.data;
       setAuthHeader(accessToken);
       localStorage.setItem("accessToken", accessToken);
