@@ -1,9 +1,9 @@
 import css from "./DeleteWaterModal.module.css";
 import { BaseModal } from "../BaseModal/BaseModal";
 
-const DeleteWaterModal = ({ handleDelete, modalIsOpen, closeModal }) => {
+const DeleteWaterModal = ({ isOpen, onClose, handleDelete }) => {
   return (
-    <BaseModal isOpen={modalIsOpen} onClose={closeModal}>
+    <BaseModal isOpen={isOpen} onClose={onClose}>
       <div className={css.deleteModal}>
         <h2 className={css.modalDeleteTitle}>Delete Water Entry</h2>
         <p className={css.modalDeleteText}>
@@ -17,7 +17,7 @@ const DeleteWaterModal = ({ handleDelete, modalIsOpen, closeModal }) => {
           >
             Delete
           </button>
-          <button type="button" className={css.cancelBtn} onClick={closeModal}>
+          <button type="button" className={css.cancelBtn} onClick={onClose}>
             Cancel
           </button>
         </div>

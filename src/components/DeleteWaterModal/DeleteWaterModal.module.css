@@ -1,103 +1,93 @@
- .modalDeleteTitle {
-    text-align: center;
-    font-size: 20px;
-    line-height: 24px;
-    margin-bottom: 16px;
+.modalDeleteTitle {
+  text-align: center;
+  font-size: 20px;
+  line-height: 24px;
+  margin-bottom: 16px;
 
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-bold);
-    color: var(--grey-color);
-    
-  }
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  color: var(--main-text-color);
+}
 
-  .modalDeleteText{
-    text-align: center;
-    font-size: 14px;
-    line-height: 18px;
-    margin-bottom: 28px;
+.modalDeleteText {
+  text-align: center;
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 28px;
 
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-regular);
-    color: var(--grey-color);
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-regular);
+  color: var(--grey-color);
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
 
-  }
-  .box{
-    display: flex;
-    flex-direction: column;
-    gap: 9px;
-  }
+.deleteBtn {
+  text-align: center;
+  border-radius: 30px;
+  padding: 14px 129px;
+  line-height: 18px;
+  font-size: 14px;
 
-  .deleteBtn {
-    text-align: center; 
-    border-radius: 30px;
-    padding: 14px 129px;
-    line-height: 18px;
-    font-size: 14px;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  background-color: var(--accent-color);
+}
 
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-bold);
-    background-color: var(--accent-color);
-    
-  }
+.cancelBtn {
+  text-align: center;
+  border-radius: 30px;
+  padding: 14px 129px;
+  line-height: 18px;
+  font-size: 14px;
 
-  .cancelBtn{
-    text-align: center; 
-    border-radius: 30px;
-    padding: 14px 129px;
-    line-height: 18px;
-    font-size: 14px;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-bold);
+  background-color: var(--background-color);
+  color: rgba(50, 63, 71, 0.3);
+}
 
-    font-family: var(--font-family);
-    font-weight: var(--font-weight-bold);
-    background-color: var(--background-color);
-    color: rgba(50, 63, 71, 0.3);
+.modalDeleteTitle {
+  font-size: 28px;
+  line-height: 114%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--background-color);
+}
 
-  }
-
-  .modalDeleteTitle {
-    font-size: 28px;
-    line-height: 114%;
-    letter-spacing: -0.01em;
-    text-align: center;
-    color: var(--background-color);
-  }
-
-  .modalDeleteTitle:hover{
-    color: var(--grey-color)
-  }
+.modalDeleteTitle:hover {
+  color: var(--grey-color);
+}
 
 /*   @media (min-width: 768px) */
 
-    @media (min-width: 768px) {
-      .modalDeleteTitle {
-        font-size: 28px;
-        line-height: 32px;
-        margin-bottom: 24px;
-        
-      }
-    
-      .modalDeleteText {
-        font-size: 18px;
-        line-height: 24px;
+@media (min-width: 768px) {
+  .modalDeleteTitle {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 24px;
+  }
 
-      }
-      .box{
-        flex-direction: row;
-        gap: 10px;
-      }
+  .modalDeleteText {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .box {
+    flex-direction: row;
+    gap: 10px;
+  }
 
-      .deleteBtn{
-        font-size: 16px;
-        line-height: 150%;
-        padding: 18px 57px;
-
-      }
-      .cancelBtn{
-        font-size: 16px;
-        line-height: 150%;
-        padding: 18px 57px;
-
-      }
-
-    }
-    
+  .deleteBtn {
+    font-size: 16px;
+    line-height: 150%;
+    padding: 18px 57px;
+  }
+  .cancelBtn {
+    font-size: 16px;
+    line-height: 150%;
+    padding: 18px 57px;
+  }
+}

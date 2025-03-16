@@ -59,3 +59,9 @@ button {
   cursor: pointer;
   font-size: 16px;
 }
+
+.amount {
+  font-weight: var(--font-weight-bold);
+  padding-bottom: 10px;
+  white-space: nowrap; /* Забезпечує, щоб число та одиниця виміру були на одному рядку */
+}
