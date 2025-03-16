@@ -25,7 +25,6 @@ const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 
 export const store = configureStore({
   reducer: {
-    filters: waterReducer,
     user: persistedUserReducer,
     water: waterReducer,
     monthData: monthReducer,
