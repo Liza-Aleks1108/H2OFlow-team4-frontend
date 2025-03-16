@@ -1,17 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { logoutToken, resetToken } from "./slice.js";
-
-export const userAPI = axios.create({
-  baseURL: "https://h2oflow-team4-backend.onrender.com",
-  withCredentials: true,
-});
+import { fetchAPI } from "../api.js";
 
 export const fetchUserProfile = createAsyncThunk(
   "user/fetchProfile",
   async (_, thunkAPI) => {
     try {
-      const { data } = await userAPI.get("/users");
+      const { data } = await fetchAPI.get("/users");
       return data.user;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response.message);
@@ -19,7 +14,7 @@ export const fetchUserProfile = createAsyncThunk(
   }
 );
 
-userAPI.interceptors.response.use(
+fetchAPI.interceptors.response.use(
   (response) => response,
   async (error) => {
     if (error.response?.status === 401) {
@@ -32,7 +27,7 @@ userAPI.interceptors.response.use(
         setAuthHeader(newAccessToken);
         error.config.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return new Promise((resolve) => {
-          setTimeout(() => resolve(userAPI.request(error.config)), 0);
+          setTimeout(() => resolve(fetchAPI.request(error.config)), 0);
         });
       } catch (refreshError) {
         console.error("Token refresh failed, logging out");
@@ -45,17 +40,17 @@ userAPI.interceptors.response.use(
 );
 
 export const setAuthHeader = (token) => {
-  userAPI.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  fetchAPI.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
 export const clearAuthHeder = () => {
-  userAPI.defaults.headers.common["Authorization"] = "";
+  fetchAPI.defaults.headers.common["Authorization"] = "";
 };
 
 export const register = createAsyncThunk(
   "user/register",
   async (userData, thunkAPI) => {
     try {
-      const response = await userAPI.post("/users/register", userData);
+      const response = await fetchAPI.post("/users/register", userData);
       setAuthHeader(response.data.data.accessToken);
       return response.data;
     } catch (error) {
@@ -67,7 +62,7 @@ export const logIn = createAsyncThunk(
   "user/login",
   async (userData, thunkAPI) => {
     try {
-      const response = await userAPI.post("/users/login", userData, {
+      const response = await fetchAPI.post("/users/login", userData, {
         withCredentials: true,
       });
 
@@ -83,7 +78,7 @@ export const logIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk("user/logout", async (_, thunkAPI) => {
   try {
-    await userAPI.post("/users/logout", {}, { withCredentials: true });
+    await fetchAPI.post("/users/logout", {}, { withCredentials: true });
     clearAuthHeder();
     localStorage.removeItem("accessToken", accessToken);
   } catch (e) {
@@ -95,7 +90,7 @@ export const refreshUser = createAsyncThunk(
   "user/refresh",
   async (_, thunkAPI) => {
     try {
-      const { data } = await userAPI.post(
+      const { data } = await fetchAPI.post(
         "users/refresh",
         {},
         { withCredentials: true }
@@ -121,7 +116,7 @@ export const updateUserProfile = createAsyncThunk(
     const token = thunkAPI.getState().user.token;
     if (!token) return thunkAPI.rejectWithValue("No token found");
     try {
-      const { data } = await userAPI.patch("/users", userDataToUpdate, {
+      const { data } = await fetchAPI.patch("/users", userDataToUpdate, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -146,7 +141,7 @@ export const updateUserAvatar = createAsyncThunk(
     const formData = new FormData();
     formData.append("photo", file);
     try {
-      const { data } = await userAPI.patch("/users/avatar", formData, {
+      const { data } = await fetchAPI.patch("/users/avatar", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
@@ -164,7 +159,7 @@ export const getUsersAmount = createAsyncThunk(
   "user/getUsersAmount",
   async (_, thunkAPI) => {
     try {
-      const { data } = await userAPI.get("/users/count");
+      const { data } = await fetchAPI.get("/users/count");
       return data.count;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -175,7 +170,7 @@ export const authWithGoogle = createAsyncThunk(
   "user, authWithGoogle",
   async (code, thunkAPI) => {
     try {
-      const response = await userAPI.post(
+      const response = await fetchAPI.post(
         "/auth/google/confirm-google-auth",
         {
           code,
@@ -203,7 +198,7 @@ export const requestForResetPassword = createAsyncThunk(
     }
 
     try {
-      const response = await userAPI.post(
+      const response = await fetchAPI.post(
         "/auth/request-reset-email",
         { email },
         {
@@ -224,7 +219,7 @@ export const resetPassword = createAsyncThunk(
   "user/resetPassword",
   async ({ token, password }, { rejectWithValue }) => {
     try {
-      const response = await userAPI.post("/auth/reset-password", {
+      const response = await fetchAPI.post("/auth/reset-password", {
         token,
         password,
       });
