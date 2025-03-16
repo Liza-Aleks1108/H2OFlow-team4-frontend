@@ -1,8 +1,33 @@
 {
-  "welcomeSection": { 
+  "button": {
+    "delete": "Видалити",
+    "cancel": "Скасувати",
+    "addWater":"Додати воду"
+  },
+  "welcomeSection": {
     "welcomeText": "Записуйте та відстежуйте щоденне споживання води",
     "welcomeTitle": "Трекер споживання води",
     "tryTracker": "Спробуй трекер",
     "signIn": "Увійти"
+  },
+  "advantages": {
+    "loading": "Завантаження...",
+    "error": "Помилка: {{error}}",
+    "our": "Наші",
+    "happy": "щасливі",
+    "customers": "клієнти:",
+    "habitDrive": "Керуй звичкою",
+    "viewStats": "Статистика",
+    "personalRate": "Персональний рейтинг"
+   
+  },
+  "deleteWaterModal": {
+    "deleteWaterTitle": "Видалити запис води",
+    "deleteWaterText": "Ви впевнені, що хочете видалити цей запис?"
+  },
+  "waterDailyNorma":{
+    "l":"л",
+    "textDailyNorm":"Денна норма",
+    "textH3":"Сьогодні"
   }
 }

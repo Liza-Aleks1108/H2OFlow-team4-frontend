@@ -4,6 +4,7 @@ import WaterProgressBar from "../WaterProgressBar/WaterProgressBar";
 import AddWaterBtn from "../AddWaterBtn/AddWaterBtn";
 import WaterModal from "../WaterModal/WaterModal";
 import css from "./WaterMainInfo.module.css";
+import Logo from "../Logo/Logo.jsx";
 
 const WaterMainInfo = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,7 +26,8 @@ const WaterMainInfo = () => {
   return (
     <section className={css.sectionWrapper}>
       <div className={css.wrapper}>
-        <h2 className={css.logo}>AQUATRACK</h2>
+        <Logo/>
+        {/* <h2 className={css.logo}>AQUATRACK</h2> */}
         <WaterDailyNorma dailyNorm={dailyNorm} />
         <WaterProgressBar consumed={consumed} dailyNorm={dailyNorm} />
         <AddWaterBtn onClick={() => openModal("add")} />
