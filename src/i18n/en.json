@@ -1,8 +1,32 @@
 {
+  "button": {
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "addWater":"Add water"
+  },
   "welcomeSection": {
     "welcomeText": "Record daily water intake and track",
     "welcomeTitle": "Water consumption tracker",
     "tryTracker": "Try tracker",
     "signIn": "Sign In"
+  },
+  "advantages": {
+    "loading": "Loading...",
+    "error": "Error:",
+    "our": "Our",
+    "happy": "happy",
+    "customers": "customers:",
+    "habitDrive": "Habit drive",
+    "viewStats": "View statistics",
+    "personalRate": "Personal rate setting"
+  },
+  "deleteWaterModal": {
+    "deleteWaterTitle": "Delete Water Entry",
+    "deleteWaterText": "Are you sure you want to delete this entry?"
+  },
+  "waterDailyNorma":{
+    "l":"L",
+    "textDailyNorm":"My daily norma",
+    "textH3":"Today"
   }
 }

@@ -44,7 +44,7 @@ const userSlice = createSlice({
       state.error = null;
     },
     resetToken: (state, action) => {
-      state.token = action.payload;
+      state.token = action.payload.token;
     },
     logoutToken: (state) => {
       state.userData = initialState.user.userData;
@@ -96,6 +96,7 @@ const userSlice = createSlice({
       })
 
       .addCase(updateUserProfile.fulfilled, (state, action) => {
+        console.log("Updated user profile in store:", action.payload);
         state.userData = {
           ...state.userData,
           ...action.payload,

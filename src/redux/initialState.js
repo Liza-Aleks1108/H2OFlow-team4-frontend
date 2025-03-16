@@ -15,4 +15,15 @@ export const initialState = {
     loading: false,
     error: null,
   },
+  water: {
+    entries: [],
+    loading: false,
+    error: null,
+  },
+  month: {
+    monthData: [],
+    isLoadingMonth: false,
+    isErrorMonth: null,
+  },
+  activeDate: null,
 };
