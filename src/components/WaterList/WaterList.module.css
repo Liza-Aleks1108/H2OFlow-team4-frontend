@@ -1,6 +1,34 @@
 .waterList {
-  display: flex; /* Використовуємо flex для вирівнювання елементів */
-  flex-wrap: nowrap; /* Дозволяємо елементам переноситись на новий рядок, якщо потрібно */
-  gap: 20px; /* Відстань між елементами */
+  display: flex;
+  overflow-x: auto; /* Увімкнення горизонтальної прокрутки */
+  white-space: nowrap; /* Запобігає перенесенню елементів на новий рядок */
+  gap: 15px; /* Відстань між елементами */
   justify-content: flex-start; /* Вирівнюємо елементи по лівому краю */
+  padding-bottom: 10px; /* Додаємо відступ, щоб скролбар не перекривав елементи */
+  scrollbar-width: thin; /* Робимо скролбар тоншим у Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.4) transparent; /* Колір скролбара у Firefox */
+}
+
+/* Оформлення скролбара для WebKit (Chrome, Safari) */
+.waterList::-webkit-scrollbar {
+  height: 8px; /* Висота скролбара */
+}
+
+.waterList::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.4),
+    rgba(0, 0, 0, 0.6)
+  ); /* Градієнтний повзунок */
+  border-radius: 6px; /* Закруглені краї */
+}
+
+.waterList::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1); /* Фон скролбара */
+  border-radius: 6px;
+}
+
+/* Приховуємо скролбар, якщо прокрутка не потрібна */
+.waterList:has(> *:only-child) {
+  overflow-x: hidden;
 }

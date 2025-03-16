@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SignInPage from "../../pages/SignInPage/SignInPage.jsx";
 import { selectIsLoggedIn, selectToken } from "../../redux/user/selectors.js";
 import {
+  fetchUserProfile,
   getUsersAmount,
   refreshUser,
   setAuthHeader,
@@ -20,24 +21,28 @@ import SharedLayout from "../SharedLayout.jsx";
 import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage.jsx";
 
 const App = () => {
-  const { rehydrated } = useSelector((state) => state._persist || {});
+  const isRehydrated = useSelector(
+    (state) => state?._persist?.rehydrated || false
+  );
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    if (!rehydrated) return;
-    console.log("Persisted state rehydrated:", token);
+    if (!isRehydrated) return;
 
     if (token) {
       setAuthHeader(token);
+
       if (!isLoggedIn) {
         dispatch(refreshUser());
+      } else {
+        dispatch(fetchUserProfile());
       }
     } else {
       dispatch(refreshUser());
     }
-  }, [dispatch, token, isLoggedIn, rehydrated]);
+  }, [dispatch, token, isLoggedIn, isRehydrated]);
 
   useEffect(() => {
     dispatch(getUsersAmount());

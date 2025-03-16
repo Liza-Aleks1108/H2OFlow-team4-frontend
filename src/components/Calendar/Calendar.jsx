@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 // import { selectMonthWater } from "../../redux/month/selectors";
 import CalendarItem from "../CalendarItem/CalendarItem";
 import css from "./Calendar.module.css";
-
 // , onDateSelect
 
 const Calendar = ({ currentDate, waterData }) => {
@@ -37,9 +36,6 @@ const Calendar = ({ currentDate, waterData }) => {
     setSelectedDate(clickedDate);
     // onDateSelect(clickedDate); // Передаємо вибрану дату в DailyInfo
   };
-
-  // console.log("МОЯ КОМ");
-  // console.log(waterData);
 
   return (
     <div className={css.container}>

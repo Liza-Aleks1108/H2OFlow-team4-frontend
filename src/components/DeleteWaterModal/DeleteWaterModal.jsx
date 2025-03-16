@@ -1,13 +1,17 @@
 import css from "./DeleteWaterModal.module.css";
 import { BaseModal } from "../BaseModal/BaseModal";
+import { useTranslation } from "react-i18next";
 
 const DeleteWaterModal = ({ isOpen, onClose, handleDelete }) => {
+  const { t } = useTranslation();
   return (
     <BaseModal isOpen={isOpen} onClose={onClose}>
       <div className={css.deleteModal}>
-        <h2 className={css.modalDeleteTitle}>Delete Water Entry</h2>
+        <h2 className={css.modalDeleteTitle}>
+          {t("deleteWaterModal.deleteWaterTitle")}
+        </h2>
         <p className={css.modalDeleteText}>
-          Are you sure you want to delete this entry?
+          {t("deleteWaterModal.deleteWaterText")}
         </p>
         <div className={css.box}>
           <button
@@ -15,10 +19,10 @@ const DeleteWaterModal = ({ isOpen, onClose, handleDelete }) => {
             className={css.deleteBtn}
             onClick={handleDelete}
           >
-            Delete
+            {t("button.delete")}
           </button>
           <button type="button" className={css.cancelBtn} onClick={onClose}>
-            Cancel
+            {t("button.cancel")}
           </button>
         </div>
       </div>
