@@ -50,16 +50,17 @@ const WaterForm = ({ operationType, waterId, initialData, onClose }) => {
 
   const onSubmit = async (data) => {
     const waterEntry = {
-      volume: Number(data.volume),
-      day: data.date,
+      volume: String(data.amount),
+      day: new Date().toISOString().split("T")[0],
       time: data.time,
-      //   time: new Date().toISOString().split("T")[0],
     };
 
     try {
       if (operationType === "add") {
+        console.log("Дані, що відправляються на добавлення:", waterEntry);
         await dispatch(addWater(waterEntry));
       } else {
+        console.log("Дані, що відправляються на редактування:", waterEntry);
         await dispatch(
           editWaterAmount(waterEntry({ id: waterId, ...waterEntry }))
         );
