@@ -95,20 +95,25 @@ export const refreshUser = createAsyncThunk(
   "user/refresh",
   async (_, thunkAPI) => {
     try {
-      const { data } = await userAPI.post(
-        "users/refresh",
-        {},
-        { withCredentials: true }
-      );
-
+      const refreshToken = localStorage.getItem('token'); // добавил эту строку, получаем токен из локального хранилища
+      const response = await axios.post('https://h2oflow-team4-backend.onrender.com/auth/refresh', {
+      refreshToken,});
+      // const { data } = await userAPI.post(
+      //   "users/refresh", token
+      //   {},
+      //   { withCredentials: true }
+      // );
+      const {accessToken, refreshToken: newRefreshToken }=response.data //Получаем токены с бекенда
       if (!data.accessToken) throw new Error("No access token returned");
-      const newAccessToken = data.accessToken;
-
-      thunkAPI.dispatch(resetToken({ token: newAccessToken }));
-      await new Promise((resolve) => setTimeout(resolve, 0));
-      setAuthHeader(newAccessToken);
-      const userProfile = await thunkAPI.dispatch(fetchUserProfile()).unwrap();
-      return { token: newAccessToken, user: userProfile };
+      // const newAccessToken = data.accessToken;
+     localStorage.setItem('accessToken', accessToken); // добавил
+     localStorage.setItem('refreshToken', newRefreshToken);// добавил
+     return { token: accessToken }; // добавил
+      // thunkAPI.dispatch(resetToken({ token: newAccessToken }));
+      // await new Promise((resolve) => setTimeout(resolve, 0));
+      // setAuthHeader(newAccessToken);
+      // const userProfile = await thunkAPI.dispatch(fetchUserProfile()).unwrap();
+      // return { token: newAccessToken, user: userProfile };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.response.message);
     }
