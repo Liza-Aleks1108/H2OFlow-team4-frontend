@@ -15,7 +15,7 @@ const formatDate = (date) => {
   return `${year}-${month}-${day}`;
 };
 
-const DailyInfo = ({ chosenDate }) => {
+const DailyInfo = ({ chosenDate, dateForTitle }) => {
   const dispatch = useDispatch();
   // const todayWater = useSelector(selectDayWater);
   const todayWater = [
@@ -26,8 +26,8 @@ const DailyInfo = ({ chosenDate }) => {
   const [isCurrentDay, setIsCurrentDay] = useState("");
 
   const formattedDate = useMemo(
-    () => formatDate(chosenDate || new Date()),
-    [chosenDate]
+    () => formatDate(dateForTitle || new Date()),
+    [dateForTitle]
   );
 
   const handleDeleteWater = useCallback(
@@ -49,7 +49,7 @@ const DailyInfo = ({ chosenDate }) => {
   return (
     <section className={styles.dailyInfo}>
       <div className={styles.wrapper}>
-        <ChooseDate selectedDate={chosenDate || new Date()} />
+        <ChooseDate selectedDate={dateForTitle || new Date()} />
         <AddWaterLink />
       </div>{" "}
       <div className={styles.waterListWrapper}>
