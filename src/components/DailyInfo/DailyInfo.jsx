@@ -49,7 +49,6 @@ const DailyInfo = ({ chosenDate }) => {
   return (
     <section className={styles.dailyInfo}>
       <div className={styles.wrapper}>
-        <h3 className={styles.today}>Today</h3>
         <ChooseDate selectedDate={chosenDate || new Date()} />
         <AddWaterLink />
       </div>{" "}
