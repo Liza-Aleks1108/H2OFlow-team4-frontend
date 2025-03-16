@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 // import { store } from "../store";
 import { fetchAPI } from "../api.js";
 
@@ -84,7 +83,7 @@ export const editWaterAmount = createAsyncThunk(
   }
 );
 
-export const deleteTodo = createAsyncThunk(
+export const deleteWater = createAsyncThunk(
   "water/deleteItem",
   async (id, thunkAPI) => {
     const token = thunkAPI.getState().user.token;

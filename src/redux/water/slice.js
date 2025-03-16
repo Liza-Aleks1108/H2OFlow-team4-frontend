@@ -14,23 +14,30 @@ const handleRejected = (state, action) => {
       : "Помилка завантаження!";
 };
 
-const initialState = {
-  water: {
-    entries: [],
-    loading: false,
-    error: null,
+const initialState = { 
+  waterDate: {
+    _id: "",
+    volume: "",
+    day: "",
+    time: "",
   },
-  month: {
-    monthData: [],
-    isLoadingMonth: false,
-    isErrorMonth: null,
-  },
+    day: [],
+    month: [],
   activeDate: null,
-};
+    totalVolume: 0,
+    loading: false,
+  error: false,
+  },
+
+
+getWaterPerDay;
+addWater;
+editWaterAmount;
+deleteWater;
 
 const waterSlice = createSlice({
   name: "water",
-  initialState: initialState.month,
+  initialState,
   reducers: {
     updateActiveDate: (state, action) => {
       state.activeDate = action.payload;
@@ -47,35 +54,33 @@ const waterSlice = createSlice({
         state.isLoadingMonth = false;
         state.isErrorMonth = null;
         state.monthData = payload;
-      });
+      }).addMatcher(
+        isAnyOf(
+          .pending,
+        ),
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      ).addMatcher(
+        isAnyOf(
+          .rejected,
+        ),
+        (state) => {
+          state.loading = false;
+          state.error = action.payload;
+        }
+      )
   },
 });
 
 export default monthSlice.reducer;
 
 // GIFT FROM SANYA
-import { createSlice } from "@reduxjs/toolkit";
-import { initialState } from "../initialState";
-import { addWater, editWaterAmount } from "./operations";
 
-const handlePending = (state) => {
-  state.loading = true;
-  state.error = null;
-};
 
-const handleRejected = (state, action) => {
-  state.loading = false;
-  state.error = null;
-};
 
-const waterSlice = createSlice({
-  name: "water",
-  initialState: initialState.water,
-  reducers: {
-    setDate(state, action) {
-      state.selectedDate = action.payload;
-    },
-  },
+
   extraReducers: (builder) =>
     builder
       .addCase(addWater.pending, handlePending)
