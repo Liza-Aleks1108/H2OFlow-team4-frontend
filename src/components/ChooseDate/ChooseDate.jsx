@@ -7,7 +7,7 @@ const ChooseDate = ({ selectedDate }) => {
   const formatDate = (date) => {
     const today = new Date();
     if (date.toDateString() === today.toDateString()) {
-      return t("chooseDate.today");
+      return t("Today");
     }
     return date.toLocaleDateString(i18n.language, {
       day: "numeric",
