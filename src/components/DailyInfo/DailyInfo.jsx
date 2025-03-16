@@ -62,7 +62,9 @@ const DailyInfo = ({ chosenDate }) => {
           />
         ) : (
           <div className={styles.text}>
-            <p className={styles.waterEmpty}>No water consumption!</p>
+            <p className={styles.waterEmpty}>
+              You haven't drunk water yet, maybe it's time to drink?
+            </p>
           </div>
         )}
       </div>
