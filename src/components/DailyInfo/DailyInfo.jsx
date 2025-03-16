@@ -6,7 +6,7 @@ import styles from "./DailyInfo.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getWaterPerDay } from "../../redux/filters/operations";
 import { selectDayWater } from "../../redux/filters/selectors";
-// import AddWaterLink from "./AddWaterLink/AddWaterLink";
+import AddWaterLink from "./AddWaterLink/AddWaterLink";
 
 const formatDate = (date) => {
   const year = date.getFullYear();
@@ -51,7 +51,7 @@ const DailyInfo = ({ chosenDate }) => {
       <div className={styles.wrapper}>
         <h3 className={styles.today}>Today</h3>
         <ChooseDate selectedDate={chosenDate || new Date()} />
-        {/* <AddWaterLink /> */}
+        <AddWaterLink />
       </div>{" "}
       <div className={styles.waterListWrapper}>
         {todayWater.length > 0 ? (
