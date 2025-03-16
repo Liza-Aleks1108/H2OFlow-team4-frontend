@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { logoutToken, resetToken } from "./slice.js";
+import { persistor } from "../store.js";
 
 export const userAPI = axios.create({
   baseURL: "https://h2oflow-team4-backend.onrender.com",
@@ -25,11 +26,15 @@ userAPI.interceptors.response.use(
     if (error.response?.status === 401) {
       console.warn("401 detected, attempting to refresh token");
       try {
-        const { token } = await store.dispatch(refreshUser()).unwrap();
-        if (!token) throw new Error("Token refresh failed");
-        setAuthHeader(token);
-        error.config.headers["Authorization"] = `Bearer ${token}`;
-        return userAPI.request(error.config);
+        const { token: newAccessToken } = await store
+          .dispatch(refreshUser())
+          .unwrap();
+        if (!newAccessToken) throw new Error("Token refresh failed");
+        setAuthHeader(newAccessToken);
+        error.config.headers["Authorization"] = `Bearer ${newAccessToken}`;
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(userAPI.request(error.config)), 0);
+        });
       } catch (refreshError) {
         console.error("Token refresh failed, logging out");
         store.dispatch(logoutToken());
@@ -45,15 +50,6 @@ export const setAuthHeader = (token) => {
 };
 export const clearAuthHeder = () => {
   userAPI.defaults.headers.common["Authorization"] = "";
-};
-
-export const getToken = (thunkAPI) => {
-  const state = thunkAPI.getState();
-  const token = state.user.token;
-  if (!token) {
-    return thunkAPI.rejectWithValue("No token found");
-  }
-  return token;
 };
 
 export const register = createAsyncThunk(
@@ -92,8 +88,9 @@ export const logIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk("user/logout", async (_, thunkAPI) => {
   try {
-    await userAPI.post("users/logout");
+    await userAPI.post("users/logout", { withCredentials: true });
     clearAuthHeder();
+    persistor.purge();
   } catch (e) {
     return thunkAPI.rejectWithValue(e.response.status);
   }
@@ -103,14 +100,18 @@ export const refreshUser = createAsyncThunk(
   "user/refresh",
   async (_, thunkAPI) => {
     try {
-      const token = getToken(thunkAPI);
       const { data } = await userAPI.post(
         "users/refresh",
         {},
         { withCredentials: true }
       );
+
+      if (!data.accessToken) throw new Error("No access token returned");
       const newAccessToken = data.accessToken;
-      thunkAPI.dispatch(resetToken(newAccessToken));
+
+      thunkAPI.dispatch(resetToken({ token: newAccessToken }));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      setAuthHeader(newAccessToken);
       const userProfile = await thunkAPI.dispatch(fetchUserProfile()).unwrap();
       return { token: newAccessToken, user: userProfile };
     } catch (e) {
@@ -122,7 +123,8 @@ export const refreshUser = createAsyncThunk(
 export const updateUserProfile = createAsyncThunk(
   "user/updateProfile",
   async (userDataToUpdate, thunkAPI) => {
-    const token = getToken(thunkAPI);
+    const token = thunkAPI.getState().user.token;
+    if (!token) return thunkAPI.rejectWithValue("No token found");
     try {
       const { data } = await userAPI.patch("/users", userDataToUpdate, {
         headers: {
@@ -141,7 +143,8 @@ export const updateUserProfile = createAsyncThunk(
 export const updateUserAvatar = createAsyncThunk(
   "user/updateAvatar",
   async (file, thunkAPI) => {
-    const token = getToken(thunkAPI);
+    const token = thunkAPI.getState().user.token;
+    if (!token) return thunkAPI.rejectWithValue("No token found");
     if (!file) {
       return thunkAPI.rejectWithValue("No file selected");
     }
