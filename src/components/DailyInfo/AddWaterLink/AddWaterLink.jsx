@@ -1,22 +1,30 @@
-import css from "./AddWaterLink.module.css";
-import sprite from "../../../../public/sprite.svg";
+import { useState } from "react";
+import AddWaterLink from "./AddWaterLink";
+import WaterModal from "../../WaterModal/WaterModal";
 
-const AddWaterLink = ({ onClick }) => {
-  const handleAddWaterClick = () => {
-    if (onClick) {
-      onClick();
-    }
+const WaterTracker = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
   };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <button onClick={onClick} className={css.btn}>
-      <div className={css.wrapper}>
-        <svg width="30" height="30" className={css.icon}>
-          <use href={`${sprite}#icon-plus-bl`} />
-        </svg>
-        <p> Add water</p>
-      </div>
-    </button>
+    <div>
+      <AddWaterLink onClick={handleOpenModal} />
+      {isModalOpen && (
+        <WaterModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          operationType="add"
+        />
+      )}
+    </div>
   );
 };
 
-export default AddWaterLink;
+export default WaterTracker;
