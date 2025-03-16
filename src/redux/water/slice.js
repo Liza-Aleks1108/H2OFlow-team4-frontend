@@ -14,7 +14,7 @@ const handleRejected = (state, action) => {
 
 const waterSlice = createSlice({
   name: "water",
-  initialState: initialState,
+  initialState: initialState.water,
   reducers: {
     setDate(state, action) {
       state.selectedDate = action.payload;
@@ -26,7 +26,7 @@ const waterSlice = createSlice({
       .addCase(addWater.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
-        state.waterDay = [...state.waterDay];
+        state.entries = [...state.entries];
       })
       .addCase(addWater.rejected, handleRejected)
       .addCase(editWaterAmount.pending, handlePending)
