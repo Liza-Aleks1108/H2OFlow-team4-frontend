@@ -1,7 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { logoutToken, resetToken } from "./slice.js";
-import { persistor } from "../store.js";
 
 export const userAPI = axios.create({
   baseURL: "https://h2oflow-team4-backend.onrender.com",
@@ -88,9 +87,9 @@ export const logIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk("user/logout", async (_, thunkAPI) => {
   try {
-    await userAPI.post("users/logout", { withCredentials: true });
+    await userAPI.post("/users/logout", {}, { withCredentials: true });
     clearAuthHeder();
-    persistor.purge();
+    localStorage.removeItem("accessToken", accessToken);
   } catch (e) {
     return thunkAPI.rejectWithValue(e.response.status);
   }
@@ -180,12 +179,17 @@ export const authWithGoogle = createAsyncThunk(
   "user, authWithGoogle",
   async (code, thunkAPI) => {
     try {
-      const response = await userAPI.post("/auth/google/confirm-google-auth", {
-        code,
-      });
+      const response = await userAPI.post(
+        "/auth/google/confirm-google-auth",
+        {
+          code,
+        },
+        { withCredentials: true }
+      );
       const { accessToken, user } = response.data.data;
       setAuthHeader(accessToken);
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userData", JSON.stringify(user));
       return { accessToken, user };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

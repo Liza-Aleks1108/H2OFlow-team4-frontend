@@ -20,4 +20,7 @@ export const initialState = {
     loading: false,
     error: null,
   },
+  monthData: [],
+  isLoadingMonth: false,
+  isErrorMonth: null,
 };

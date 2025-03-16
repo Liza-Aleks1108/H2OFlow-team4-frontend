@@ -1,7 +1,7 @@
 .dailyInfo {
   background: var(--background-color);
   margin-top: 49px;
-   
+
   width: 100%;
   height: 174px;
 }
@@ -35,11 +35,26 @@
   border-radius: 50%;
 }
 
-.today{
+.today {
   font-family: Poppins;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 32px;
-    letter-spacing: -1%;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: -1%;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 45.8px;
+}
+
+.waterEmpty {
+  text-align: center;
+}
+
+.waterListWrapper{
+  display: flex;
 }
 
