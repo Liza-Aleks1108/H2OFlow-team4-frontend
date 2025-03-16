@@ -1,11 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 // import { store } from "../store";
-
-export const waterAPI = axios.create({
-  baseURL: "https://h2oflow-team4-backend.onrender.com",
-  withCredentials: true,
-});
+import { fetchAPI } from "../api.js";
 
 export const getWaterMonth = createAsyncThunk(
   "water/getWaterMonth",
@@ -22,7 +18,7 @@ export const getWaterMonth = createAsyncThunk(
         return thunkAPI.rejectWithValue("Користувач не авторизований");
       }
 
-      const { data } = await waterAPI.get(`/water/month?month=${yearMonth}`, {
+      const { data } = await fetchAPI.get(`/water/month?month=${yearMonth}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -101,20 +97,9 @@ export const getWaterPerDay = createAsyncThunk(
   }
 );
 
-export const getWaterPerMonth = createAsyncThunk(
-  "water/waterPerMonth",
-  async (yearMonth, thunkAPI) => {
-    try {
-      const { data } = await waterAPI.get(`/water/month/${yearMonth}`);
-      return data;
-    } catch (error) {
-      thunkAPI.rejectWithValue(error);
-    }
-  }
-);
-
 // SANYA SERVISES
 import { userAPI } from "../user/operations.js";
+import { fetchAPI } from "../api.js";
 
 export const requestAddWater = async (water, token) => {
   try {

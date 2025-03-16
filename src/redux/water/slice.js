@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialState } from "../initialState";
 import { getWaterMonth } from "./operations";
 
 const handlePending = (state) => {
@@ -15,8 +14,22 @@ const handleRejected = (state, action) => {
       : "Помилка завантаження!";
 };
 
-const monthSlice = createSlice({
-  name: "month",
+const initialState = {
+  water: {
+    entries: [],
+    loading: false,
+    error: null,
+  },
+  month: {
+    monthData: [],
+    isLoadingMonth: false,
+    isErrorMonth: null,
+  },
+  activeDate: null,
+};
+
+const waterSlice = createSlice({
+  name: "water",
   initialState: initialState.month,
   reducers: {
     updateActiveDate: (state, action) => {
