@@ -11,7 +11,7 @@ import CalendarPagination from "../CalendarPagination/CalendarPagination";
 
 // import css from "./MonthInfo.module.css";
 
-const MonthInfo = () => {
+const MonthInfo = ({ setDateForTitle }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const dispatch = useDispatch();
   const monthWater = useSelector(selectMonthWater);
@@ -38,6 +38,7 @@ const MonthInfo = () => {
       {error && <p style={{ color: "red" }}>{error}</p>}
       console.log(perMonth);
       <Calendar
+        setDateForTitle={setDateForTitle}
         currentDate={currentDate}
         waterData={monthWater}
         // onClick={onDayChange}

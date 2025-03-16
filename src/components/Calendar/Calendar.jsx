@@ -2,9 +2,15 @@ import { useState, useEffect } from "react";
 import CalendarItem from "../CalendarItem/CalendarItem";
 import css from "./Calendar.module.css";
 
-const Calendar = ({ currentDate, waterData, onDateSelect }) => {
+const Calendar = ({
+  currentDate,
+  waterData,
+  onDateSelect,
+  setDateForTitle,
+}) => {
   const [days, setDays] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  setDateForTitle(selectedDate);
 
   useEffect(() => {
     generateCalendar(currentDate);
@@ -32,6 +38,8 @@ const Calendar = ({ currentDate, waterData, onDateSelect }) => {
     setSelectedDate(clickedDate);
     // onDateSelect(clickedDate); // Передаємо вибрану дату в DailyInfo
   };
+
+  // console.log(selectedDate);
 
   return (
     <div className={css.container}>
