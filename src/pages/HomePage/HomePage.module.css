@@ -1,15 +1,21 @@
 .homePage {
   display: flex;
   flex-direction: column;
+  padding: 16px;
   gap: 16px;
   margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .homePage{
+    padding: 32px;
+  }
 }
 
 @media only screen and (min-width: 1440px) {
   .homePage {
     flex-direction: row;
     gap: 32px;
-    padding: 32px;
     display: flex;
     justify-content: center;
     align-items: stretch;

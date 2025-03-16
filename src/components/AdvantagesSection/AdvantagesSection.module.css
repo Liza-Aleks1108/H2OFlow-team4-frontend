@@ -1,12 +1,11 @@
 .advantagesSection {
   margin: 0 auto;
-  padding: 16px;
   max-width: 343px;
   min-height: 446px;
   width: 100%;
   background-image: image-set(
-    url("../img/main-mob.jpg") 1x,
-    url("../img/main-mob@2x.jpg") 2x
+    url("/img/main-mob.jpg") 1x,
+    url("/img/main-mob@2x.jpg") 2x
   );
   background-size: cover;
   background-position: center;
@@ -21,7 +20,8 @@
   width: 160px;
   height: 48px;
   position: absolute;
-  bottom: 20%;
+  left: 16px;
+  bottom: 96px;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -82,21 +82,20 @@
 
 .stats {
   position: absolute;
-  bottom: 4.5%;
-  left: 45%;
+  right: 16px;
+  bottom: 32px;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
-  flex-wrap: wrap;
   color: #323F47;
   text-align: center;
+  width: 168px;  
 }
 
-.btn {
+.benefits {
   padding: 9px 12px;
   border: none;
   border-radius: 30px;
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -106,7 +105,6 @@
   font-weight: 700;
   line-height: 1; 
   letter-spacing: -0.01em;
-  transition: border 150ms ease-in, color 150ms ease-in;
 }
 
 .habitDrive {
@@ -129,35 +127,21 @@
 .personalRate {
   background: #fff;
   color: #323f47;
-  border-radius: 30px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  padding: 9px 12px;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  text-align: center;
-  font-size: 8px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1; 
-  letter-spacing: -0.01em;
 }
 
 
 @media (min-width: 768px) {
   .advantagesSection {
     max-width: 704px;
-    min-height: 446px;
     padding: 32px;
     background-image: image-set(
-      url("/public/img/main-tablet.jpg") 1x,
-      url("/public/img/main-tablet@2x.jpg") 2x
+      url("/img/main-tablet.jpg") 1x,
+      url("/img/main-tablet@2x.jpg") 2x
     );
   }
   .stats {
-    left: 50%;
     width: 242px;
+    right: 32px;
     gap: 10px;
   } 
 
@@ -190,14 +174,7 @@
   .userImages img:nth-child(3) {
     margin-left: -20px; 
   }
-  .btn {
-    padding: 11px 16px;
-    font-size: 12px;
-    line-height: 1; 
-    letter-spacing: -0.01em;
-  }
-
-  .personalRate {
+  .benefits {
     padding: 11px 16px;
     font-size: 12px;
     line-height: 1; 
@@ -211,8 +188,16 @@
     min-width: 672px;
     min-height: 736px;
     background-image: image-set(
-      url("/public/img/main-desktop.jpg") 1x,
-      url("/public/img/main-desktop@2x.jpg") 2x
+      url("/img/main-desktop.jpg") 1x,
+      url("/img/main-desktop@2x.jpg") 2x
     );
+  }
+
+  .infoBox{
+    bottom: 132px;
+  }
+
+  .stats{
+    bottom: 64px;
   }
 }

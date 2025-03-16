@@ -1,37 +1,41 @@
 import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
+// import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setWaterData,
-  setError,
-  setLoading,
-} from "../../redux/water/operations.js";
+import { addWater, editWaterAmount } from "../../redux/water/operations.js";
+// import {
+//   setWaterData,
+//   setError,
+//   setLoading,
+// } from "../../redux/water/operations.js";
 import css from "./WaterForm.module.css";
+import { selectLoading } from "../../redux/water/selectors.js";
 
-const schema = yup.object().shape({
-  amount: yup
-    .number()
-    .required("Кількість води обовʼязкова")
-    .min(1, "Мінімум 1 мл"),
-  time: yup
-    .string()
-    .required("Час обовʼязковий")
-    .matches(/^\d{2}:\d{2}$/, "Формат час y: hh:mm"),
-});
+// const schema = yup.object().shape({
+//   amount: yup
+//     .number()
+//     .required("Кількість води обовʼязкова")
+//     .min(1, "Мінімум 1 мл"),
+//   time: yup
+//     .string()
+//     .required("Час обовʼязковий")
+//     .matches(/^\d{2}:\d{2}$/, "Формат час y: hh:mm"),
+// });
 
-const WaterForm = ({ operationType, onClose }) => {
+const WaterForm = ({ operationType, waterId, initialData, onClose }) => {
   const dispatch = useDispatch();
-  const { waterData, error, isLoading } = useSelector(
-    (state) => state.user.userData
-  );
+  //   const { waterData, error, isLoading } = useSelector(
+  //     (state) => state.user.userData
+  //   );
+  const isLoading = useSelector(selectLoading);
+
   const { control, handleSubmit, setValue, watch } = useForm({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
     defaultValues: {
-      amount: waterData?.amount || 50,
+      amount: initialData?.amount || 50,
       time:
-        waterData?.time ||
+        initialData?.time ||
         new Date().toLocaleTimeString([], {
           hour: "2-digit",
           minute: "2-digit",
@@ -45,19 +49,24 @@ const WaterForm = ({ operationType, onClose }) => {
   const handleDecrement = () => setValue("amount", Math.max(amount - 50, 0));
 
   const onSubmit = async (data) => {
-    dispatch(setLoading(true));
+    const waterEntry = {
+      volume: Number(data.volume),
+      day: data.date,
+      time: data.time,
+      //   time: new Date().toISOString().split("T")[0],
+    };
+
     try {
-      const response = await fetch("/api/water", {
-        method: operationType === "add" ? "POST" : "PATCH",
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) throw new Error("Помилка при збереженні даних");
-      dispatch(setWaterData(data));
+      if (operationType === "add") {
+        await dispatch(addWater(waterEntry));
+      } else {
+        await dispatch(
+          editWaterAmount(waterEntry({ id: waterId, ...waterEntry }))
+        );
+      }
       onClose();
     } catch (err) {
-      dispatch(setError(err.message));
-    } finally {
-      dispatch(setLoading(false));
+      console.error("Помилка при збереженні данних", err.message);
     }
   };
 
@@ -130,7 +139,7 @@ const WaterForm = ({ operationType, onClose }) => {
           )}
         />
       </div>
-      {error && <p className={css.error}>{error}</p>}
+      {/* {error && <p className={css.error}>{error}</p>} */}
       <button type="submit" disabled={isLoading} className={css.submitButton}>
         {isLoading ? "Saving..." : "Save"}
       </button>

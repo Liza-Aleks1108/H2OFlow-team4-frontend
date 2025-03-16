@@ -92,8 +92,10 @@ export const logIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk("user/logout", async (_, thunkAPI) => {
   try {
-    await userAPI.post("users/logout");
+    // await userAPI.post("users/logout");
+    await userAPI.post("/users/logout", {}, { withCredentials: true });
     clearAuthHeder();
+    localStorage.removeItem("accessToken", accessToken);
   } catch (e) {
     return thunkAPI.rejectWithValue(e.response.status);
   }
@@ -177,15 +179,60 @@ export const authWithGoogle = createAsyncThunk(
   "user, authWithGoogle",
   async (code, thunkAPI) => {
     try {
-      const response = await userAPI.post("/auth/google/confirm-google-auth", {
-        code,
-      });
+      const response = await userAPI.post(
+        "/auth/google/confirm-google-auth",
+        {
+          code,
+        },
+        { withCredentials: true }
+      );
       const { accessToken, user } = response.data.data;
       setAuthHeader(accessToken);
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userData", JSON.stringify(user));
       return { accessToken, user };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+export const requestForResetPassword = createAsyncThunk(
+  "user/requestForResetPassword",
+  async (email, thunkAPI) => {
+    const token = getToken(thunkAPI);
+    if (!token) {
+      return thunkAPI.rejectWithValue("No token found");
+    }
+
+    try {
+      const response = await userAPI.post(
+        "/auth/request-reset-email",
+        { email },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
+
+export const resetPassword = createAsyncThunk(
+  "user/resetPassword",
+  async ({ token, password }, { rejectWithValue }) => {
+    try {
+      const response = await userAPI.post("/auth/reset-password", {
+        token,
+        password,
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );

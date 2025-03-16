@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import s from "./SignUpForm.module.css";
 import clsx from "clsx";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { register as authUser } from "../../redux/user/operations.js";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { signUpValidationSchema } from "../../validationSchemas/authValidation.js";
+// import { signUpValidationSchema } from "../../validationSchemas/authValidation.js";
 import GoogleButton from "../GoogleButton/GoogleButton.jsx";
 
 export const AuthFormContainer = ({ children, className }) => {
@@ -35,7 +35,7 @@ const SignUpForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signUpValidationSchema),
+    // resolver: yupResolver(signUpValidationSchema),
     mode: "onChange",
   });
 

@@ -2,22 +2,33 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import s from "./SignInForm.module.css";
 import clsx from "clsx";
-import { yupResolver } from "@hookform/resolvers/yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/user/operations.js";
 import toast from "react-hot-toast";
 import { AuthFormContainer } from "../SignUpForm/SignUpForm.jsx";
 import { Link, useNavigate } from "react-router-dom";
-import { signInValidationSchema } from "../../validationSchemas/authValidation.js";
+// import { signInValidationSchema } from "../../validationSchemas/authValidation.js";
 import GoogleButton from "../GoogleButton/GoogleButton.jsx";
+import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm.jsx";
+import ResetModal from "../ResetModal/ResetModal.jsx";
 
 const SignInForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+  const handleOpenModal = () => {
+    console.log("Modal open button clicked!");
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   const {
@@ -26,7 +37,7 @@ const SignInForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(signInValidationSchema),
+    // resolver: yupResolver(signInValidationSchema),
     mode: "onSubmit",
     defaultValues: {
       email: "",
@@ -108,6 +119,13 @@ const SignInForm = () => {
                 )}
               </button>
             </div>
+            <button
+              type="button"
+              className={s.forgotButton}
+              onClick={handleOpenModal}
+            >
+              I forgot my password
+            </button>
             <p className={s.errorMessage}>{errors.password?.message}</p>
           </label>
 
@@ -123,6 +141,11 @@ const SignInForm = () => {
           </Link>
         </div>
       </div>
+      {isModalOpen && (
+        <ResetModal isOpen={isModalOpen} onClose={handleCloseModal}>
+          <ForgotPasswordForm onClose={handleCloseModal} />
+        </ResetModal>
+      )}
     </AuthFormContainer>
   );
 };

@@ -10,7 +10,8 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import waterReducer from "./filters/slice.js";
+import { waterReducer } from "./water/slice.js";
+
 import userReducer from "./user/slice.js";
 
 const userPersistConfig = {
@@ -25,6 +26,7 @@ export const store = configureStore({
   reducer: {
     filters: waterReducer,
     user: persistedUserReducer,
+    water: waterReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

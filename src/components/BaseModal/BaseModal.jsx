@@ -6,11 +6,11 @@ Modal.setAppElement("#root");
 export const BaseModal = ({ isOpen, onClose, children }) => {
   return (
     <Modal
-      className={css.modal}
       isOpen={isOpen}
       onRequestClose={onClose}
       shouldCloseOnOverlayClick={true}
       shouldCloseOnEsc={true}
+      className={css.modal}
       overlayClassName={css.overlay}
     >
       <button type="button" className={css.close} onClick={onClose}>

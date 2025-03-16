@@ -3,21 +3,14 @@ import WaterModal from "../WaterModal/WaterModal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import styles from "./WaterItem.module.css";
 
-const WaterItem = ({ id, data, onDelete, dateForCalendar }) => {
+const WaterItem = ({ data, onDelete }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  const formattedTime = new Date(dateForCalendar).toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-
-  const handleCloseDeleteModal = () => setIsDeleteOpen(false);
-
-  const handleOpenModel = () => setIsDeleteOpen(true);
-
   const handleDelete = () => {
-    onDelete(id);
+    console.log(`Видаляємо запис води з id: ${data.id}`);
+    onDelete(data.id); // Видаляємо елемент без анімації "зникнення"
+    setIsDeleteOpen(false); // Закриваємо модалку після видалення
   };
 
   return (
@@ -43,14 +36,12 @@ const WaterItem = ({ id, data, onDelete, dateForCalendar }) => {
           </svg>
         </button>
       </div>
-      {isEditOpen && <WaterModal onClose={() => setIsEditOpen(false)} />}
-      {isDeleteOpen && (
-        <DeleteWaterModal
-          handleDelete={handleDelete}
-          modalIsOpen={isDeleteOpen}
-          closeModal={handleCloseDeleteModal}
-        />
-      )}
+      <WaterModal isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} />
+      <DeleteWaterModal
+        isOpen={isDeleteOpen}
+        onClose={() => setIsDeleteOpen(false)}
+        handleDelete={handleDelete}
+      />
     </div>
   );
 };
