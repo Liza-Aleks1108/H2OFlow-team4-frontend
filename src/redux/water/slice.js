@@ -1,18 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { editWaterAmount, getWaterMonth } from "./operations";
-
-const handlePending = (state) => {
-  state.isLoadingMonth = true;
-};
-
-const handleRejected = (state, action) => {
-  state.isLoadingMonth = false;
-  // console.log("❌ Отримана помилка:", action.payload);
-  state.isErrorMonth =
-    typeof action.payload === "string"
-      ? action.payload
-      : "Помилка завантаження!";
-};
+import {
+  addWater,
+  deleteWater,
+  editWaterAmount,
+  getWaterMonth,
+  getWaterPerDay,
+} from "./operations";
 
 const initialState = {
   waterDate: {
@@ -29,8 +22,6 @@ const initialState = {
   error: false,
 };
 
-// deleteWater;
-
 const waterSlice = createSlice({
   name: "water",
   initialState,
@@ -44,12 +35,11 @@ const waterSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getWaterMonth.pending, handlePending)
-      .addCase(getWaterMonth.rejected, handleRejected)
       .addCase(getWaterMonth.fulfilled, (state, { payload }) => {
-        state.isLoadingMonth = false;
-        state.isErrorMonth = null;
-        state.monthData = payload;
+        state.month = payload;
+      })
+      .addCase(getWaterPerDay.fulfilled, (state, action) => {
+        state.day = action.payload;
       })
       .addCase(addWater.fulfilled, (state, action) => {
         state.waterDate = action.payload;
@@ -57,12 +47,12 @@ const waterSlice = createSlice({
       .addCase(editWaterAmount.fulfilled, (state, action) => {
         state.waterDate = { ...state.waterDate, ...action.payload };
       })
-      .addCase(getWaterPerDay.fulfilled, (state, action) => {
-        state.day = action.payload;
+      .addCase(deleteWater.fulfilled, (state, action) => {
+        state.day = state.day.filter((item) => item.id !== action.payload);
       })
-
       .addMatcher(
         isAnyOf(
+          getWaterMonth.pending,
           addWater.pending,
           editWaterAmount.pending,
           getWaterPerDay.pending,
@@ -75,6 +65,7 @@ const waterSlice = createSlice({
       )
       .addMatcher(
         isAnyOf(
+          getWaterMonth.fulfilled,
           addWater.fulfilled,
           editWaterAmount.fulfilled,
           getWaterPerDay.fulfilled,
@@ -87,6 +78,7 @@ const waterSlice = createSlice({
       )
       .addMatcher(
         isAnyOf(
+          getWaterMonth.rejected,
           addWater.rejected,
           editWaterAmount.rejected,
           getWaterPerDay.rejected,

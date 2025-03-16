@@ -27,7 +27,6 @@ export const store = configureStore({
   reducer: {
     user: persistedUserReducer,
     water: waterReducer,
-    monthData: monthReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

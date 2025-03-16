@@ -17,13 +17,17 @@ export const getWaterMonth = createAsyncThunk(
         return thunkAPI.rejectWithValue("Користувач не авторизований");
       }
 
-      const { data } = await fetchAPI.get(`/water/month?month=${yearMonth}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { oneMonth } = await fetchAPI.get(
+        `/water/month?month=${yearMonth}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          withCredentials: true,
+        }
+      );
 
-      return data;
+      return oneMonth;
     } catch (error) {
       // console.error("❌ Помилка запиту getWaterMonth:", error);
       return thunkAPI.rejectWithValue("Помилка отримання води за місяць");
@@ -37,10 +41,15 @@ export const getWaterPerDay = createAsyncThunk(
     const token = thunkAPI.getState().user.token;
     if (!token) return thunkAPI.rejectWithValue("No token found");
     try {
-      const { oneDay } = await fetchAPI.get(`/water/day/${date}`);
+      const { oneDay } = await fetchAPI.get(`/water/day/?day=${date}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
       return oneDay;
     } catch (error) {
-      thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

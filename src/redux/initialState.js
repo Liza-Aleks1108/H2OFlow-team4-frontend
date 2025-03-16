@@ -1,7 +1,6 @@
 export const initialState = {
   user: {
     userData: {
-      _id: "",
       name: "User",
       email: null,
       gender: "woman",
