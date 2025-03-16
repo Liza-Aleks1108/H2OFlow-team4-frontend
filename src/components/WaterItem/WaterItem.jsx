@@ -3,9 +3,15 @@ import WaterModal from "../WaterModal/WaterModal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import styles from "./WaterItem.module.css";
 
-const WaterItem = ({ data }) => {
+const WaterItem = ({ data, onDelete }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+
+  const handleDelete = () => {
+    console.log(`Видаляємо запис води з id: ${data.id}`);
+    onDelete(data.id); // Видаляємо елемент без анімації "зникнення"
+    setIsDeleteOpen(false); // Закриваємо модалку після видалення
+  };
 
   return (
     <div className={styles.waterItem}>
@@ -34,6 +40,7 @@ const WaterItem = ({ data }) => {
       <DeleteWaterModal
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}
+        handleDelete={handleDelete}
       />
     </div>
   );

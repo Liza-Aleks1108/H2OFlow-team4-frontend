@@ -1,9 +1,6 @@
 .waterList {
-  display: flex;
-  margin-bottom: 24px;
-  justify-content: space-between;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-  white-space: nowrap;
+  display: flex; /* Використовуємо flex для вирівнювання елементів */
+  flex-wrap: nowrap; /* Дозволяємо елементам переноситись на новий рядок, якщо потрібно */
+  gap: 20px; /* Відстань між елементами */
+  justify-content: flex-start; /* Вирівнюємо елементи по лівому краю */
 }
