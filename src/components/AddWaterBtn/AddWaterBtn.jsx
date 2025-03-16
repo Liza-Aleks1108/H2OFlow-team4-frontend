@@ -3,8 +3,8 @@ import style from "./AddWaterBtn.module.css";
 import { useTranslation } from "react-i18next";
 
 const AddWaterBtn = ({ onClick }) => {
-    const { t } = useTranslation(); 
-  
+  const { t } = useTranslation();
+
   return (
     <div className={style.container}>
       <button onClick={onClick} className={style.btn}>
