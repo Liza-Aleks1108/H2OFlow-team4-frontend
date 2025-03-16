@@ -11,7 +11,7 @@ export const getWaterMonth = createAsyncThunk(
   "water/getWaterMonth",
   async (yearMonth, thunkAPI) => {
     try {
-      console.log("Виклик getWaterMonth:", yearMonth);
+      // console.log("Виклик getWaterMonth:", yearMonth);
 
       // Отримуємо актуальний токен з Redux або localStorage
       const { getState } = thunkAPI;
@@ -30,7 +30,7 @@ export const getWaterMonth = createAsyncThunk(
 
       return data;
     } catch (error) {
-      console.error("❌ Помилка запиту getWaterMonth:", error);
+      // console.error("❌ Помилка запиту getWaterMonth:", error);
       return thunkAPI.rejectWithValue("Помилка отримання води за місяць");
     }
   }

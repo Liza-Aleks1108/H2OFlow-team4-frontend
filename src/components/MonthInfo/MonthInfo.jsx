@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState, useMemo } from "react";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { getWaterMonth } from "../../redux/month/operations";
 import {
   selectMonthWater,
@@ -9,39 +9,67 @@ import {
 import Calendar from "../Calendar/Calendar";
 import CalendarPagination from "../CalendarPagination/CalendarPagination";
 
-// import css from "./MonthInfo.module.css";
-
 const MonthInfo = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const dispatch = useDispatch();
-  const monthWater = useSelector(selectMonthWater);
   const loading = useSelector(selectIsLoadingMonth);
   const error = useSelector(selectError);
 
+  // Використовуємо shallowEqual, щоб запобігти зайвим ререндерам
+  const monthWater = useSelector(selectMonthWater, shallowEqual);
+
+  const totalWater = 1500; // ✅ Отримуємо норму води (можна з Redux)
+
+  // ✅ Розраховуємо відсотки ТІЛЬКИ коли оновлюється monthWater
+  // const percentArray = useMemo(() => {
+  //   console.log("📊 Перераховуємо percentArray...");
+  //   return calculateWaterPercentage(monthWater, totalWater);
+  // }, [monthWater, totalWater]);
+
+  // 🛑 Перевіряємо, коли monthWater реально змінюється
+  useEffect(() => {
+    console.log("📦 Дані Redux змінилися:", monthWater);
+  }, [monthWater]);
+
+  // ✅ Фіксуємо, щоб setCurrentDate() не викликав зайві ререндери
+  const handleMonthChange = (newDate) => {
+    setCurrentDate((prevDate) => {
+      const prevYearMonth = `${prevDate.getFullYear()}-${String(
+        prevDate.getMonth() + 1
+      ).padStart(2, "0")}`;
+      const newYearMonth = `${newDate.getFullYear()}-${String(
+        newDate.getMonth() + 1
+      ).padStart(2, "0")}`;
+
+      // 🔥 Перевіряємо, чи змінилась дата, щоб не робити зайвий запит
+      if (prevYearMonth !== newYearMonth) {
+        console.log("📅 Оновлюємо currentDate:", newYearMonth);
+        return newDate;
+      }
+      return prevDate;
+    });
+  };
+
+  // ✅ Запит лише при зміні місяця (без зайвих викликів)
   useEffect(() => {
     const yearMonth = `${currentDate.getFullYear()}-${String(
       currentDate.getMonth() + 1
     ).padStart(2, "0")}`;
-    dispatch(getWaterMonth(yearMonth));
-    console.log(yearMonth);
 
-    console.log(monthWater);
+    console.log("📅 Викликаємо getWaterMonth:", yearMonth);
+    dispatch(getWaterMonth(yearMonth));
   }, [dispatch, currentDate]);
+  // waterData = { percentArray };
 
   return (
     <div>
       <CalendarPagination
         currentDate={currentDate}
-        onChangeMonth={setCurrentDate}
+        onChangeMonth={handleMonthChange} // ✅ Використовуємо захищену функцію
       />
-      {loading && <p>Завантаження...</p>}
+      {loading && <p>⏳ Завантаження...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      console.log(perMonth);
-      <Calendar
-        currentDate={currentDate}
-        waterData={monthWater}
-        // onClick={onDayChange}
-      />
+      <Calendar currentDate={currentDate} />
     </div>
   );
 };
