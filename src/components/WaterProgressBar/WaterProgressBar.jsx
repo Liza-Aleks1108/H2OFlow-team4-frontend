@@ -2,13 +2,36 @@ import React from "react";
 import style from "./WaterProgressBar.module.css";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { selectDay } from "../../redux/water/selectors.js";
+import { selectActiveDate, selectDay } from "../../redux/water/selectors.js";
 import { selectUser } from "../../redux/user/selectors.js";
 
 const WaterProgressBar = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const currentMoment = useSelector(selectDay);
   const dailyAmount = useSelector(selectUser);
+  const selectedDay = useSelector(selectActiveDate);
+
+  const isToday = (someDay) => {
+    const today = new Date();
+    return (
+      someDay.getDate() === today.getDate() &&
+      someDay.getMonth() === today.getMonth() &&
+      someDay.getFullYear() === today.getFullYear()
+    );
+  };
+
+  const formatDate = (date) => {
+    const dateObject = new Date(date);
+    if (isToday(dateObject)) {
+      return t("waterDailyNorma.textH3");
+    } else {
+      const day = dateObject.getDate();
+      const month = dateObject
+        .toLocaleString(i18n.language, { month: "long" })
+        .toLowerCase();
+      return `${day}, ${month}`;
+    }
+  };
 
   const amountPerDay = currentMoment.reduce(
     (sum, item) => sum + Number(item.volume),
@@ -20,7 +43,7 @@ const WaterProgressBar = () => {
 
   return (
     <div className={style.container}>
-      <h3 className={style.textH3}>{t("waterDailyNorma.textH3")}</h3>
+      <h3 className={style.textH3}>{formatDate(selectedDay)}</h3>
       <div className={style.scaleContainer}>
         <div className={style.emptyScale}>
           <div
