@@ -5,7 +5,7 @@ import css from "./WaterModal.module.css";
 import { useSelector } from "react-redux";
 import { selectWaterDate } from "../../redux/water/selectors.js";
 
-const WaterModal = ({ isOpen, onClose, operationType }) => {
+const WaterModal = ({ isOpen, onClose, operationType, initialData }) => {
   const title =
     operationType === "add" ? "Add water" : "Edit the entered amount of water";
 
@@ -13,7 +13,11 @@ const WaterModal = ({ isOpen, onClose, operationType }) => {
     <BaseModal isOpen={isOpen} onClose={onClose}>
       <div className={css.waterModal}>
         <h2 className={css.title}>{title}</h2>
-        <WaterForm operationType={operationType} onClose={onClose} />
+        <WaterForm
+          operationType={operationType}
+          onClose={onClose}
+          initialData={initialData}
+        />
       </div>
     </BaseModal>
   );

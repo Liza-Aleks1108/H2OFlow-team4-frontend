@@ -76,11 +76,11 @@ export const addWater = createAsyncThunk(
 
 export const editWaterAmount = createAsyncThunk(
   "water/editItem",
-  async (body, thunkAPI) => {
+  async ({ _id, ...body }, thunkAPI) => {
     const token = thunkAPI.getState().user.token;
     if (!token) return thunkAPI.rejectWithValue("No token found");
     try {
-      const { data } = await fetchAPI.patch(`/water/${body.id}`, body, {
+      const { data } = await fetchAPI.patch(`/water/${_id}`, body, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

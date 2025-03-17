@@ -43,7 +43,11 @@ const WaterItem = ({ data, formattedDate }) => {
           </svg>
         </button>
       </div>
-      <WaterModal isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} />
+      <WaterModal
+        isOpen={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
+        initialData={data}
+      />
       <DeleteWaterModal
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}

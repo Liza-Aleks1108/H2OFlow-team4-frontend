@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 // import { yupResolver } from "@hookform/resolvers/yup";
 // import * as yup from "yup";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 //   setLoading,
 // } from "../../redux/water/operations.js";
 import css from "./WaterForm.module.css";
-import { selectLoading } from "../../redux/water/selectors.js";
+import { selectLoading, selectWaterDate } from "../../redux/water/selectors.js";
 import { addWater, editWaterAmount } from "../../redux/water/operations.js";
 
 // const schema = yup.object().shape({
@@ -29,11 +29,12 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
   //     (state) => state.user.userData
   //   );
   const isLoading = useSelector(selectLoading);
+  const waterDate = useSelector(selectWaterDate);
 
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: yupResolver(schema),
     defaultValues: {
-      amount: initialData?.amount || 50,
+      amount: initialData?.volume || 50,
       time:
         initialData?.time ||
         new Date().toLocaleTimeString([], {
@@ -45,23 +46,38 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
 
   const amount = watch("amount");
 
+  useEffect(() => {
+    if (initialData) {
+      setValue("amount", initialData.volume || 50);
+      setValue(
+        "time",
+        initialData.time ||
+          new Date().toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+      );
+    }
+  }, [initialData, setValue]);
+
   const handleIncrement = () => setValue("amount", Number(amount) + 50);
   const handleDecrement = () => setValue("amount", Math.max(amount - 50, 0));
 
   const onSubmit = async (data) => {
     const waterEntry = {
+      _id: initialData?._id,
       volume: String(data.amount),
-      day: new Date().toISOString().split("T")[0],
-      time: data.time,
+      day: initialData?.day || new Date().toISOString().split("T")[0],
+      time: initialData?.time || data.time,
     };
 
     try {
       if (operationType === "add") {
         console.log("Дані, що відправляються на добавлення:", waterEntry);
-        await dispatch(addWater(waterEntry));
+        await dispatch(addWater(waterEntry)).unwrap();
       } else {
         console.log("Дані, що відправляються на редактування:", waterEntry);
-        await dispatch(editWaterAmount(waterEntry({ ...waterEntry })));
+        await dispatch(editWaterAmount(waterEntry)).unwrap();
       }
       onClose();
     } catch (err) {
