@@ -1,8 +1,19 @@
 import { useTranslation } from "react-i18next";
 import css from "./ChooseDate.module.css";
+import { useSelector } from "react-redux";
+import { selectActiveDate } from "../../redux/water/selectors.js";
 
 const ChooseDate = ({ selectedDate }) => {
   const { t, i18n } = useTranslation();
+
+  const dateState = useSelector(selectActiveDate);
+  let convertDate;
+  if (!dateState) {
+    convertDate = new Date();
+  } else {
+    convertDate = new Date(dateState);
+  }
+  // console.log(convertDate);
 
   const formatDate = (date) => {
     const today = new Date();
@@ -27,7 +38,7 @@ const ChooseDate = ({ selectedDate }) => {
 
   return (
     <div>
-      <h3 className={css.daily_info}>{formatDate(selectedDate)}</h3>
+      <h3 className={css.daily_info}>{formatDate(convertDate)}</h3>
     </div>
   );
 };
