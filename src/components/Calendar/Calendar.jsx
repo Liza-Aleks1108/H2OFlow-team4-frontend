@@ -8,14 +8,24 @@ import css from "./Calendar.module.css";
 // import { selectMonth } from "../../redux/water/selectors.js";
 // , onDateSelect
 
-const Calendar = ({ currentDate, waterData }) => {
+const Calendar = ({ currentDate, waterData, dailyNorm }) => {
   const dispatch = useDispatch();
   const [days, setDays] = useState([]);
   const selectDay = useSelector(selectActiveDate);
   const [selectedDate, setSelectedDate] = useState(
     selectDay ? selectDay : new Date()
   );
-  // const monthWater = useSelector(selectMonth);
+  // console.log(waterData);
+  // console.log(dailyNorm);
+
+  const arrPercent = waterData.map((item) => ({
+    ...item,
+    percent: dailyNorm
+      ? ((item.volume / 1000 / dailyNorm) * 100).toFixed(2)
+      : 0,
+  }));
+
+  // console.log(arrPercent);
 
   useEffect(() => {
     generateCalendar(currentDate);
@@ -50,6 +60,12 @@ const Calendar = ({ currentDate, waterData }) => {
     setSelectedDate(clickedDate);
   };
 
+  const getPercent = (day) => {
+    const dayPrcent = arrPercent.find((item) => item.day === day);
+    // console.log(dayPrcent ? dayPrcent.percent : 0);
+    return dayPrcent ? dayPrcent.percent : 0;
+  };
+
   return (
     <div className={css.container}>
       <div className={css.grid}>
@@ -71,13 +87,14 @@ const Calendar = ({ currentDate, waterData }) => {
               currentDate.getMonth(),
               day
             ).toDateString();
+          const percent = getPercent(dateKey);
 
           return (
             <CalendarItem
               key={day}
               day={day}
               dateKey={dateKey}
-              // waterData={waterData}
+              waterPercent={percent}
               isToday={isToday}
               isSelected={isSelected}
               onClick={() => handleDateClick(day)}

@@ -1,5 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Calendar from "../Calendar/Calendar";
 import CalendarPagination from "../CalendarPagination/CalendarPagination";
 import {
@@ -7,31 +7,30 @@ import {
   selectLoading,
   selectMonth,
 } from "../../redux/water/selectors.js";
+import { selectUser } from "../../redux/user/selectors.js";
 import { getWaterMonth } from "../../redux/water/operations.js";
 
 const MonthInfo = (dailyNorma) => {
-  // import css from "./MonthInfo.module.css";
   const [currentDate, setCurrentDate] = useState(new Date());
   const waterMonth = useSelector(selectMonth);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const dailyNorm = user?.dailyNorm / 1000 || 1.5;
 
-  console.log(waterMonth);
+  // console.log(waterMonth);
 
-  const formatMonth = useMemo(() => {
-    console.log("WWW");
+  const groupedData = Array.from(
+    waterMonth.reduce((map, { day, volume }) => {
+      const numericVolume = Number(volume) || 0;
+      map.set(day, (map.get(day) || 0) + numericVolume);
+      return map;
+    }, new Map()),
+    ([day, volume]) => ({ day, volume })
+  );
 
-    return waterMonth.map((day) => {
-      return {
-        id: day.id,
-        date: day.day.split("-")[2],
-        value: Math.floor(Number(day.totalAmount) * 1000),
-      };
-    });
-  }, [waterMonth]);
-
-  console.log(formatMonth);
+  // console.log(groupedData);
 
   const handleMonthChange = (newDate) => {
     setCurrentDate((prevDate) => {
@@ -42,7 +41,6 @@ const MonthInfo = (dailyNorma) => {
         newDate.getMonth() + 1
       ).padStart(2, "0")}`;
 
-      // 🔥 Перевіряємо, чи змінилась дата, щоб не робити зайвий запит
       if (prevYearMonth !== newYearMonth) {
         return newDate;
       }
@@ -65,7 +63,11 @@ const MonthInfo = (dailyNorma) => {
       />
       {loading && <p>⏳ Завантаження...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <Calendar currentDate={currentDate} waterData={waterMonth} />
+      <Calendar
+        currentDate={currentDate}
+        waterData={groupedData}
+        dailyNorm={dailyNorm}
+      />
     </div>
   );
 };
