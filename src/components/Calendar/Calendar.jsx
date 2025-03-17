@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
-// import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+// import { updateActiveDate } from "../../redux/water/slice.js";
+import { selectActiveDate } from "../../redux/water/selectors.js";
 
 import CalendarItem from "../CalendarItem/CalendarItem";
 import css from "./Calendar.module.css";
-import { selectMonth } from "../../redux/water/selectors.js";
+// import { selectMonth } from "../../redux/water/selectors.js";
 // , onDateSelect
 
 const Calendar = ({ currentDate, waterData }) => {
+  const dispatch = useDispatch();
   const [days, setDays] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const selectDay = useSelector(selectActiveDate);
+  const [selectedDate, setSelectedDate] = useState(
+    selectDay ? selectDay : new Date()
+  );
   // const monthWater = useSelector(selectMonth);
 
   useEffect(() => {
@@ -34,8 +40,14 @@ const Calendar = ({ currentDate, waterData }) => {
 
     if (clickedDate > today) return;
 
+    const formattedDate = clickedDate.toISOString(); // Преобразуем в строку. Храниться в особом формате, онтосительно нашего часового пояса
+    dispatch({ type: "water/updateActiveDate", payload: formattedDate }); // записуємо вибрану дату в Store для DailyInfo
+
+    //для чтения обратно из сторе
+    // const storedDate = state.activeDate; // Дата из Redux
+    // const activeDate = new Date(storedDate); // Преобразуем обратно
+
     setSelectedDate(clickedDate);
-    // onDateSelect(clickedDate); // Передаємо вибрану дату в DailyInfo
   };
 
   return (

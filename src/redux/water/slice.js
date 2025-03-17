@@ -94,4 +94,5 @@ const waterSlice = createSlice({
   },
 });
 
+export const { updateActiveDate } = waterSlice.actions;
 export default waterSlice.reducer;

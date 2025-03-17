@@ -16,18 +16,15 @@ export const getWaterMonth = createAsyncThunk(
         console.error("❌ Немає токена, користувач не авторизований");
         return thunkAPI.rejectWithValue("Користувач не авторизований");
       }
+      // const { oneMonth }
+      const response = await fetchAPI.get(`/water/month?month=${yearMonth}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        withCredentials: true,
+      });
 
-      const { oneMonth } = await fetchAPI.get(
-        `/water/month?month=${yearMonth}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        }
-      );
-
-      return oneMonth;
+      return response.data.oneMonth || [];
     } catch (error) {
       // console.error("❌ Помилка запиту getWaterMonth:", error);
       return thunkAPI.rejectWithValue("Помилка отримання води за місяць");

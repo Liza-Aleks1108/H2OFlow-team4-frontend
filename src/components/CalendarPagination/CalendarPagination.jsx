@@ -3,7 +3,7 @@ import css from "./CalendarPagination.module.css";
 import { useTranslation } from "react-i18next";
 
 const CalendarPagination = ({ currentDate, onChangeMonth }) => {
-  const { t, i18n } = useTranslation(); 
+  const { t, i18n } = useTranslation();
   const handlePrevMonth = () => {
     const prevMonth = new Date(
       currentDate.getFullYear(),
