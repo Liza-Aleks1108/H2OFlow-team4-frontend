@@ -27,7 +27,7 @@ const DailyInfo = ({ dateForTitle }) => {
 
   useEffect(() => {
     dispatch(getWaterPerDay(formattedDate));
-  }, [dispatch, formattedDate]);
+  }, [dispatch, formattedDate, todayWater.length]);
 
   return (
     <section className={styles.dailyInfo}>

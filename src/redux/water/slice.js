@@ -50,7 +50,7 @@ const waterSlice = createSlice({
         state.waterDate = { ...state.waterDate, ...action.payload };
       })
       .addCase(deleteWater.fulfilled, (state, action) => {
-        state.day = state.day.filter((item) => item._id !== action.payload);
+        state.day = state.day.filter((item) => item._id !== action.payload.id);
       })
       .addMatcher(
         isAnyOf(

@@ -105,7 +105,7 @@ export const deleteWater = createAsyncThunk(
         },
         withCredentials: true,
       });
-      return;
+      return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

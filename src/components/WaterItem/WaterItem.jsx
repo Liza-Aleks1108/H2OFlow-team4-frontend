@@ -3,18 +3,21 @@ import WaterModal from "../WaterModal/WaterModal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import styles from "./WaterItem.module.css";
 import { useDispatch } from "react-redux";
-import { deleteWater } from "../../redux/water/operations.js";
+import { deleteWater, getWaterPerDay } from "../../redux/water/operations.js";
 
 const WaterItem = ({ data, formattedDate }) => {
   const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  // Функция для удаления
   const handleDelete = async (id) => {
-    await dispatch(deleteWater(id)); // Удаляем запись
-    dispatch(getWaterPerDay(formattedDate)); // Загружаем обновлённый список
-    setIsDeleteOpen(false); // Закрываем модалку удаления
+    try {
+      await dispatch(deleteWater(id)).unwrap();
+      dispatch(getWaterPerDay(formattedDate));
+      setIsDeleteOpen(false);
+    } catch (error) {
+      console.error("Ошибка удаления:", error);
+    }
   };
 
   return (
