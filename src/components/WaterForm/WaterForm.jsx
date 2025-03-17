@@ -3,7 +3,6 @@ import { useForm, Controller } from "react-hook-form";
 // import { yupResolver } from "@hookform/resolvers/yup";
 // import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { addWater, editWaterAmount } from "../../redux/water/operations.js";
 // import {
 //   setWaterData,
 //   setError,
@@ -11,6 +10,7 @@ import { addWater, editWaterAmount } from "../../redux/water/operations.js";
 // } from "../../redux/water/operations.js";
 import css from "./WaterForm.module.css";
 import { selectLoading } from "../../redux/water/selectors.js";
+import { addWater, editWaterAmount } from "../../redux/water/operations.js";
 
 // const schema = yup.object().shape({
 //   amount: yup

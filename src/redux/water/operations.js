@@ -41,13 +41,14 @@ export const getWaterPerDay = createAsyncThunk(
     const token = thunkAPI.getState().user.token;
     if (!token) return thunkAPI.rejectWithValue("No token found");
     try {
-      const { oneDay } = await fetchAPI.get(`/water/day/?day=${date}`, {
+      const response = await fetchAPI.get(`/water/day/?day=${date}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
         withCredentials: true,
       });
-      return oneDay;
+      console.log("API Response:", response.data);
+      return response.data.oneDay || [];
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }

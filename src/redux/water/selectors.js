@@ -1,7 +1,7 @@
-export const selectWaterDate = (state) => state.waterDate;
-export const selectDay = (state) => state.day;
-export const selectMonth = (state) => state.month;
-export const selectActiveDate = (state) => state.activeDate;
-export const selectTotalVolume = (state) => state.totalVolume;
-export const selectLoading = (state) => state.loading;
-export const selectError = (state) => state.error;
+export const selectWaterDate = (state) => state.water.waterDate;
+export const selectDay = (state) => state.water.day;
+export const selectMonth = (state) => state.water.month;
+export const selectActiveDate = (state) => state.water.activeDate;
+export const selectTotalVolume = (state) => state.water.totalVolume;
+export const selectLoading = (state) => state.water.loading;
+export const selectError = (state) => state.water.error;

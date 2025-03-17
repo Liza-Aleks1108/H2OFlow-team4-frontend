@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 // import { useSelector } from "react-redux";
-// import { selectMonthWater } from "../../redux/month/selectors";
+
 import CalendarItem from "../CalendarItem/CalendarItem";
 import css from "./Calendar.module.css";
+import { selectMonth } from "../../redux/water/selectors.js";
 // , onDateSelect
 
 const Calendar = ({ currentDate, waterData }) => {
   const [days, setDays] = useState([]);
   const [selectedDate, setSelectedDate] = useState(new Date());
-  // const monthWater = useSelector(selectMonthWater);
+  // const monthWater = useSelector(selectMonth);
 
   useEffect(() => {
     generateCalendar(currentDate);

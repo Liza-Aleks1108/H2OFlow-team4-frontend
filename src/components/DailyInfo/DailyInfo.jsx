@@ -4,9 +4,9 @@ import ChooseDate from "../ChooseDate/ChooseDate";
 import WaterList from "../WaterList/WaterList";
 import styles from "./DailyInfo.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getWaterPerDay } from "../../redux/filters/operations";
-import { selectDayWater } from "../../redux/filters/selectors";
 import AddWaterLink from "./AddWaterLink/AddWaterLink";
+import { getWaterPerDay } from "../../redux/water/operations.js";
+import { selectDay } from "../../redux/water/selectors.js";
 
 const formatDate = (date) => {
   const year = date.getFullYear();
@@ -17,12 +17,9 @@ const formatDate = (date) => {
 
 const DailyInfo = ({ chosenDate, dateForTitle }) => {
   const dispatch = useDispatch();
-  // const todayWater = useSelector(selectDayWater);
-  const todayWater = [
-    { id: 1, amount: 250, time: "07:00" },
-    { id: 2, amount: 250, time: "11:00" },
-    { id: 3, amount: 250, time: "14:00" },
-  ];
+  const todayWater = useSelector(selectDay);
+  console.log("todayWater", todayWater);
+
   const [isCurrentDay, setIsCurrentDay] = useState("");
 
   const formattedDate = useMemo(
@@ -30,35 +27,28 @@ const DailyInfo = ({ chosenDate, dateForTitle }) => {
     [dateForTitle]
   );
 
-  const handleDeleteWater = useCallback(
-    async (id) => {
-      await dispatch(deleteWater(id));
-      dispatch(getDayWater(formattedDate));
-      dispatch(getMonthWater(formattedDate.slice(0, -3)));
-    },
-    [dispatch, formattedDate]
-  );
+  // const handleDeleteWater = useCallback(
+  //   async (id) => {
+  //     await dispatch(deleteWater(id));
+  //     dispatch(getDayWater(formattedDate));
+  //     dispatch(getMonthWater(formattedDate.slice(0, -3)));
+  //   },
+  //   [dispatch, formattedDate]
+  // );
 
   useEffect(() => {
-    if (formattedDate !== isCurrentDay) {
-      setIsCurrentDay(formattedDate);
-      dispatch(getWaterPerDay(formattedDate));
-    }
-  }, [dispatch, formattedDate, isCurrentDay]);
+    dispatch(getWaterPerDay(formattedDate));
+  }, [dispatch, formattedDate]);
 
   return (
     <section className={styles.dailyInfo}>
       <div className={styles.wrapper}>
         <ChooseDate selectedDate={dateForTitle || new Date()} />
         <AddWaterLink />
-      </div>{" "}
+      </div>
       <div className={styles.waterListWrapper}>
         {todayWater.length > 0 ? (
-          <WaterList
-            waterData={todayWater}
-            onDelete={handleDeleteWater}
-            dateForCalendar={chosenDate}
-          />
+          <WaterList waterData={todayWater} />
         ) : (
           <div className={styles.text}>
             <p className={styles.waterEmpty}>

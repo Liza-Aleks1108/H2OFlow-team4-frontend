@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addWater,
   deleteWater,
@@ -40,15 +40,17 @@ const waterSlice = createSlice({
       })
       .addCase(getWaterPerDay.fulfilled, (state, action) => {
         state.day = action.payload;
+        // state.day = [...state.day, action.payload];
       })
       .addCase(addWater.fulfilled, (state, action) => {
         state.waterDate = action.payload;
+        state.day = [...state.day, action.payload];
       })
       .addCase(editWaterAmount.fulfilled, (state, action) => {
         state.waterDate = { ...state.waterDate, ...action.payload };
       })
       .addCase(deleteWater.fulfilled, (state, action) => {
-        state.day = state.day.filter((item) => item.id !== action.payload);
+        state.day = state.day.filter((item) => item._id !== action.payload);
       })
       .addMatcher(
         isAnyOf(
