@@ -80,7 +80,7 @@ export const logOut = createAsyncThunk("user/logout", async (_, thunkAPI) => {
   try {
     await fetchAPI.post("/users/logout", {}, { withCredentials: true });
     clearAuthHeder();
-    localStorage.removeItem("accessToken", accessToken);
+    localStorage.removeItem("accessToken"); // убрал значение ключа accessToken из локального хранилища, это должно очищать localStorage, нужно проверить
   } catch (e) {
     return thunkAPI.rejectWithValue(e.response.status);
   }
