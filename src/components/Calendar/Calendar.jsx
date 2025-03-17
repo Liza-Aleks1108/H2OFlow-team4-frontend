@@ -8,13 +8,14 @@ import css from "./Calendar.module.css";
 // import { selectMonth } from "../../redux/water/selectors.js";
 // , onDateSelect
 
-const Calendar = ({ currentDate, waterData }) => {
+const Calendar = ({ currentDate, waterData, setDateForTitle }) => {
   const dispatch = useDispatch();
   const [days, setDays] = useState([]);
   const selectDay = useSelector(selectActiveDate);
   const [selectedDate, setSelectedDate] = useState(
     selectDay ? selectDay : new Date()
   );
+  setDateForTitle(selectedDate);
   // const monthWater = useSelector(selectMonth);
 
   useEffect(() => {

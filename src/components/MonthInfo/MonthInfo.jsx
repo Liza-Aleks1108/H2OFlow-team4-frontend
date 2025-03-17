@@ -9,15 +9,13 @@ import {
 } from "../../redux/water/selectors.js";
 import { getWaterMonth } from "../../redux/water/operations.js";
 
-const MonthInfo = (dailyNorma) => {
+const MonthInfo = ({ dailyNorma, setDateForTitle }) => {
   // import css from "./MonthInfo.module.css";
   const [currentDate, setCurrentDate] = useState(new Date());
   const waterMonth = useSelector(selectMonth);
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-
-  console.log(waterMonth);
 
   const formatMonth = useMemo(() => {
     console.log("WWW");
@@ -65,7 +63,11 @@ const MonthInfo = (dailyNorma) => {
       />
       {loading && <p>⏳ Завантаження...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <Calendar currentDate={currentDate} waterData={waterMonth} />
+      <Calendar
+        currentDate={currentDate}
+        waterData={waterMonth}
+        setDateForTitle={setDateForTitle}
+      />
     </div>
   );
 };
