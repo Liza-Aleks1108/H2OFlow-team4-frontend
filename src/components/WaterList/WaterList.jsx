@@ -3,8 +3,8 @@ import styles from "./WaterList.module.css";
 
 const WaterList = ({ waterData, formattedDate }) => {
   return (
-    <div className={styles.waterList}>
-      <ul>
+    <div>
+      <ul className={styles.waterList}>
         {waterData.map((data) => (
           <WaterItem key={data._id} data={data} formattedDate={formattedDate} />
         ))}
