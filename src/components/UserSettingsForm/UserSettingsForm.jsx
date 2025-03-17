@@ -13,8 +13,10 @@ import {
 } from "../../redux/user/operations.js";
 import { useEffect, useState } from "react";
 import { PiExclamationMarkBold } from "react-icons/pi";
+import { useTranslation } from "react-i18next";
 
 const UserSettingsForm = ({ onClose }) => {
+  const { t } = useTranslation(); 
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
   const [preview, setPreview] = useState(user.avatarUrl);
@@ -60,10 +62,10 @@ const UserSettingsForm = ({ onClose }) => {
   const dailySportTime = watch("dailySportTime");
 
   const countDailyNorma = () => {
-    if (weight === 0 && dailySportTime === 0) return "1.5 L";
+    if (weight === 0 && dailySportTime === 0) return `1.5 ${t("waterDailyNorma.l")}`;
     return gender === "woman"
-      ? (weight * 0.03 + dailySportTime * 0.4).toFixed(1) + " L"
-      : (weight * 0.04 + dailySportTime * 0.6).toFixed(1) + " L";
+      ? (weight * 0.03 + dailySportTime * 0.4).toFixed(1) + `${t("waterDailyNorma.l")}`
+      : (weight * 0.04 + dailySportTime * 0.6).toFixed(1) + `${t("waterDailyNorma.l")}`;
   };
 
   const handleAvatarUpload = async (event) => {
@@ -73,9 +75,9 @@ const UserSettingsForm = ({ onClose }) => {
     setPreview(URL.createObjectURL(file));
     try {
       await dispatch(updateUserAvatar(file)).unwrap();
-      toast.success("Avatar updated successfully!");
+      toast.success(t("userSettings.avatarUpdatedSuccess"));
     } catch (error) {
-      toast.error(error.message || "Failed to update avatar");
+      toast.error(error.message || t("userSettings.avatarUpdateError"));
     }
   };
 
@@ -93,10 +95,10 @@ const UserSettingsForm = ({ onClose }) => {
 
       await dispatch(updateUserProfile(userData)).unwrap();
       dispatch(fetchUserProfile());
-      toast.success("Profile updated successfully!");
+      toast.success(t("userSettings.profileUpdatedSuccess"));
       onClose();
     } catch (error) {
-      toast.error(error.message || "Failed to update profile");
+      toast.error(error.message || t("userSettings.profileUpdateError"));
     }
   };
 
@@ -109,7 +111,7 @@ const UserSettingsForm = ({ onClose }) => {
             <svg className={s.uploadIcon} width="18" height="18">
               <use href="/sprite.svg#icon-upload" />
             </svg>
-            <p>Upload a photo</p>
+            <p>{t("userSettings.uploadPhoto")}</p>
           </div>
         </label>
         <input
@@ -125,7 +127,7 @@ const UserSettingsForm = ({ onClose }) => {
       <div className={s.wrapForDesktopOne}>
         <div className={s.partOne}>
           <fieldset>
-            <legend className={s.inputName}>Your gender identity</legend>
+            <legend className={s.inputName}>{t("userSettings.yourGenderIdentity")}</legend>
 
             <Controller
               name="gender"
@@ -140,7 +142,7 @@ const UserSettingsForm = ({ onClose }) => {
                       checked={field.value === "woman"}
                     />
                     <span className={s.customRadio}></span>
-                    Woman
+                    {t("userSettings.woman")}
                   </label>
                   <label className={s.genderLabel}>
                     <input
@@ -150,7 +152,7 @@ const UserSettingsForm = ({ onClose }) => {
                       checked={field.value === "man"}
                     />
                     <span className={s.customRadio}></span>
-                    Man
+                    {t("userSettings.man")}
                   </label>
                 </div>
               )}
@@ -162,7 +164,7 @@ const UserSettingsForm = ({ onClose }) => {
 
           <div className={s.wrapCredentials}>
             <label htmlFor="name" className={s.inputName}>
-              Your name
+            {t("userSettings.yourName")}
             </label>
             <input
               id="name"
@@ -176,7 +178,7 @@ const UserSettingsForm = ({ onClose }) => {
             )}
             <label htmlFor="email" className={s.inputName}>
               {" "}
-              Email
+              {t("userSettings.email")}
             </label>
             <input
               id="email"
@@ -188,37 +190,34 @@ const UserSettingsForm = ({ onClose }) => {
             />
           </div>
           <section className={s.formulaSection}>
-            <h3 className={s.inputName}>My daily norma</h3>
+            <h3 className={s.inputName}> {t("userSettings.myDailyNorma")}</h3>
 
             <div className={s.genderFormula}>
               <div className={s.genderFormulaPart}>
-                <p>For woman:</p>
+                <p>{t("userSettings.forWoman")}</p>
                 <span>V = (M * 0.03) + (T * 0.4)</span>
               </div>
               <div className={s.genderFormulaPart}>
-                <p>For man:</p>
+                <p>{t("userSettings.forMan")}</p>
                 <span>V = (M * 0.04) + (T * 0.6)</span>
               </div>
             </div>
 
             <div className={s.wrapRule}>
               <p>
-                <span>*</span> V is the volume of the water norm in liters per
-                day, M is your body weight, T is the time of active sports, or
-                another type of activity commensurate in terms of loads (in the
-                absence of these, you must set 0).
+                <span>*</span>{t("userSettings.formulaExplanation")}
               </p>
             </div>
             <div className={s.wrapExclamation}>
               <PiExclamationMarkBold className={s.exclamation} />
-              <p>Active time in hours</p>
+              <p>{t("userSettings.activeTimeInHours")}</p>
             </div>
           </section>
         </div>
         <div className={s.partTwo}>
           <div className={s.infoForFormula}>
             <div>
-              <label htmlFor="weight">Your weight in kilograms:</label>
+              <label htmlFor="weight">{t("userSettings.yourWeight")}</label>
               <input
                 id="weight"
                 {...register("weight")}
@@ -231,7 +230,7 @@ const UserSettingsForm = ({ onClose }) => {
             </div>
             <div>
               <label htmlFor="dailySportTime">
-                The time of active participation in sports:
+              {t("userSettings.activeSportTime")}
               </label>
 
               <input
@@ -247,11 +246,11 @@ const UserSettingsForm = ({ onClose }) => {
           </div>
 
           <div className={s.wrapRecommend}>
-            <p>The required amount of water in liters per day:</p>
+            <p>{t("userSettings.requiredWaterAmount")}</p>
             <span>{countDailyNorma()}</span>
           </div>
           <label htmlFor="dailyNorm" className={s.inputName}>
-            Write down how much water you will drink:
+          {t("userSettings.writeWaterAmount")}
           </label>
           <input
             id="dailyNorm"
@@ -266,7 +265,7 @@ const UserSettingsForm = ({ onClose }) => {
         </div>
       </div>
       <button type="submit" className={s.formBtn}>
-        Save
+      {t("userSettings.save")}
       </button>
     </form>
   );

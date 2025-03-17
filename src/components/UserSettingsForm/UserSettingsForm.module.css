@@ -178,6 +178,8 @@
   padding: 14px 40px;
   width: 116px;
   height: 46px;
+  display: flex;
+  justify-content: center;
   background-color: var(--accent-color);
   color: var(--grey-color);
   font-weight: var(--font-weight-bold);

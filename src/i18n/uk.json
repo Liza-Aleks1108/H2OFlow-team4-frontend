@@ -9,7 +9,7 @@
   "welcomeSection": {
     "welcomeText": "Записуйте та відстежуйте щоденне споживання води",
     "welcomeTitle": "Трекер споживання води",
-    "tryTracker": "Спробуй трекер"
+    "tryTracker": "Спробуйте трекер"
   },
   "advantages": {
     "loading": "Завантаження...",
@@ -17,9 +17,9 @@
     "our": "Наші",
     "happy": "щасливі",
     "customers": "клієнти:",
-    "habitDrive": "Керуй звичкою",
-    "viewStats": "Статистика",
-    "personalRate": "Персональний рейтинг"
+    "habitDrive": "Формуйте звичку",
+    "viewStats": "Переглянути статистику",
+    "personalRate": "Персональна норма"
   },
   "deleteWaterModal": {
     "deleteWaterTitle": "Видалити запис",
@@ -27,7 +27,7 @@
   },
   "waterDailyNorma": {
     "l": "л",
-    "textDailyNorm": "Денна норма",
+    "textDailyNorm": "Моя денна норма",
     "textH3": "Сьогодні"
   },
   "calendar": {
@@ -39,14 +39,13 @@
     "emailPlaceholder": "Введіть вашу електронну пошту",
     "passwordPlaceholder": "Введіть ваш пароль",
     "forgotPassword": "Забули пароль?",
-    "googleButton": "Увійти за допомогою Google",
     "noAccount": "Немає акаунту?",
     "success": "Ви успішно увійшли!",
     "unauthorized": "Неавторизований користувач",
     "error": "Вибачте, вхід не вдався. Спробуйте ще раз."
   },
   "userBarPopover": {
-    "setting": "Опції",
+    "setting": "Налаштування",
     "logOut": "Вийти"
   },
   "signup": {
@@ -61,17 +60,56 @@
     "signIn": "Увійти"
   },
   "dailyInfo": {
-    "noWater": "Ви сьогодні ще не пили воду, може прийшов час випити?"
+    "noWater": "Ви ще не пили воду сьогодні. Може, час випити?"
   },
   "forgotPassword": {
-    "success": "Посилання успішно надіслано. ПЕРЕВІРТЕ СВОЮ ПОШТУ",
+    "success": "Посилання для скидання успішно надіслано. ПЕРЕВІРТЕ СВОЮ ПОШТУ",
     "error": "Ой... сталася помилка, спробуйте ще раз",
     "title": "Скинути пароль",
     "placeholder": "Введіть вашу електронну адресу",
-    "btnToReset": "Відправити"
+    "btnToReset": "Надіслати посилання"
   },
   "userPanel": {
     "hello": "Привіт",
-    "user": "друже"
+    "user": "Користувач"
+  },
+  "google": {
+    "googleAuth": "Авторизація через Google...",
+    "googleButton": "Увійти через Google",
+    "googleError": "Вибачте, URL-адреса Google OAuth відсутня"
+  },
+  "logoutModal": {
+    "text": "Ви справді хочете вийти?",
+    "cancelButton": "Скасувати"
+  },
+  "passwordReset": {
+    "title": "Скидання пароля",
+    "newPassword": "Новий пароль",
+    "passwordPlaceholder": "Введіть новий пароль",
+    "repeatNewPassword": "Повторіть новий пароль",
+    "repeatPasswordPlaceholder": "Повторіть пароль",
+    "button": "Скинути пароль"
+  },
+  "userSettings": {
+    "uploadPhoto": "Завантажити фото",
+    "yourGenderIdentity": "Ваша стать",
+    "woman": "Жінка",
+    "man": "Чоловік",
+    "yourName": "Ваше ім'я",
+    "email": "Електронна пошта",
+    "myDailyNorma": "Моя денна норма",
+    "forWoman": "Для жінок",
+    "forMan": "Для чоловіків",
+    "formulaExplanation": "V — це об'єм води (л), який потрібно випити на день, M — ваша вага (кг), T — час активних занять спортом (год). Якщо активність відсутня, встановіть 0.",
+    "activeTimeInHours": "Час активності (години)",
+    "yourWeight": "Ваша вага (кг):",
+    "activeSportTime": "Час занять спортом:",
+    "requiredWaterAmount": "Необхідна кількість води (л/день):",
+    "writeWaterAmount": "Вкажіть, скільки води ви вип'єте:",
+    "save": "Зберегти",
+    "avatarUpdatedSuccess": "Аватар успішно оновлено!",
+    "avatarUpdateError": "Не вдалося оновити аватар",
+    "profileUpdatedSuccess": "Профіль успішно оновлено!",
+    "profileUpdateError": "Не вдалося оновити профіль"
   }
 }
