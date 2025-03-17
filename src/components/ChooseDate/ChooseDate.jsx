@@ -4,8 +4,6 @@ import css from "./ChooseDate.module.css";
 const ChooseDate = ({ selectedDate }) => {
   const { t, i18n } = useTranslation();
 
-  console.log(i18n.language);
-
   const formatDate = (date) => {
     const today = new Date();
     if (date.toDateString() === today.toDateString()) {

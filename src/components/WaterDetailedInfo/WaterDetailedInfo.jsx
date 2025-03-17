@@ -7,7 +7,7 @@ import DailyInfo from "../DailyInfo/DailyInfo.jsx";
 
 const WaterDetailedInfo = () => {
   const [dateForTitle, setDateForTitle] = useState();
-  console.log(dateForTitle);
+
   return (
     <section className={css.sectionWrapper}>
       <div className={css.wrapper}>
