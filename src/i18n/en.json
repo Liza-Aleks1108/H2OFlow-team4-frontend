@@ -28,5 +28,9 @@
     "l":"L",
     "textDailyNorm":"My daily norma",
     "textH3":"Today"
+  },
+  "userBarPopover": {
+    "setting": "Setting",
+    "logOut": "Log out"
   }
 }

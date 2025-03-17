@@ -28,5 +28,9 @@
     "l": "л",
     "textDailyNorm": "Денна норма",
     "textH3": "Сьогодні"
+  },
+  "userBarPopover": {
+    "setting": "Опції",
+    "logOut": "Вийти"
   }
 }
