@@ -38,8 +38,8 @@
     "password": "Пароль",
     "emailPlaceholder": "Введіть вашу електронну пошту",
     "passwordPlaceholder": "Введіть ваш пароль",
-    "forgotPassword": "Я забув пароль",
-    "googleButton": "Увійти через Google",
+    "forgotPassword": "Забули пароль?",
+    "googleButton": "Увійти за допомогою Google",
     "noAccount": "Немає акаунту?",
     "success": "Ви успішно увійшли!",
     "unauthorized": "Неавторизований користувач",
@@ -48,5 +48,30 @@
   "userBarPopover": {
     "setting": "Опції",
     "logOut": "Вийти"
+  },
+  "signup": {
+    "title": "Реєстрація",
+    "repeatPassword": "Повторіть пароль",
+    "repeatPasswordPlaceholder": "Повторіть ваш пароль",
+    "submit": "Зареєструватися",
+    "success": "Реєстрація пройшла успішно.",
+    "emailInUse": "Користувач вже існує",
+    "failed": "Вибачте, реєстрація не вдалася",
+    "alreadyHaveAccount": "Вже маєте акаунт?",
+    "signIn": "Увійти"
+  },
+  "dailyInfo": {
+    "noWater": "Ви сьогодні ще не пили воду, може прийшов час випити?"
+  },
+  "forgotPassword": {
+    "success": "Посилання успішно надіслано. ПЕРЕВІРТЕ СВОЮ ПОШТУ",
+    "error": "Ой... сталася помилка, спробуйте ще раз",
+    "title": "Скинути пароль",
+    "placeholder": "Введіть вашу електронну адресу",
+    "btnToReset": "Відправити"
+  },
+  "userPanel": {
+    "hello": "Привіт",
+    "user":"друже"
   }
 }

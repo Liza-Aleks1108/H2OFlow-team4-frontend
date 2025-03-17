@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 // import { signUpValidationSchema } from "../../validationSchemas/authValidation.js";
 import GoogleButton from "../GoogleButton/GoogleButton.jsx";
+import { useTranslation } from "react-i18next";
 
 export const AuthFormContainer = ({ children, className }) => {
   return <div className={clsx(s.container, className)}>{children}</div>;
@@ -16,6 +17,7 @@ export const AuthFormContainer = ({ children, className }) => {
 export const spritePath = "/sprite.svg";
 
 const SignUpForm = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
@@ -46,7 +48,7 @@ const SignUpForm = () => {
       .unwrap()
       .then(() => {
         reset();
-        toast.success("Registration was successful.", {
+        toast.success(t("signup.success"), {
           duration: 2000,
           position: "top-center",
           icon: "👏",
@@ -55,12 +57,12 @@ const SignUpForm = () => {
       })
       .catch((error) => {
         if (error?.response?.data.message === "Email in use") {
-          toast.error("User has already exists", {
+          toast.error(t("signup.emailInUse"), {
             duration: 2000,
             position: "top-center",
           });
         } else {
-          toast.error("Sorry, registration failed", {
+          toast.error(t("signup.failed"), {
             duration: 2000,
             position: "top-center",
           });
@@ -71,13 +73,13 @@ const SignUpForm = () => {
   return (
     <AuthFormContainer className={s.container}>
       <div className={s.signUpBox}>
-        <h2 className={s.signUpTitle}>Sign Up</h2>
+        <h2 className={s.signUpTitle}>{t("signup.title")}</h2>
         <form className={s.signUpForm} onSubmit={handleSubmit(onSubmit)}>
           <label className={s.signUpLabel}>
-            <span className={s.signUpLabelText}>Email</span>
+            <span className={s.signUpLabelText}>{t("login.email")}</span>
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder={t("login.emailPlaceholder")}
               className={clsx(s.input, { [s.inputError]: errors.email })}
               {...register("email", {
                 required: true,
@@ -87,11 +89,11 @@ const SignUpForm = () => {
           </label>
 
           <label className={s.signUpLabel}>
-            <span className={s.signUpLabelText}>Password</span>
+            <span className={s.signUpLabelText}>{t("login.password")}</span>
             <div className={s.inputField}>
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
+                placeholder={t("login.passwordPlaceholder")}
                 className={clsx(s.input, {
                   [s.inputError]: errors.password,
                 })}
@@ -117,14 +119,14 @@ const SignUpForm = () => {
           </label>
 
           <label className={s.signUpLabel}>
-            <span className={s.signUpLabelText}>Repeat password</span>
+            <span className={s.signUpLabelText}>{t("signup.repeatPassword")}</span>
             <div className={s.inputField}>
               <input
                 className={clsx(s.input, {
                   [s.inputError]: errors.repeatPassword,
                 })}
                 type={showRepeatPassword ? "text" : "password"}
-                placeholder="Repeat your password"
+                placeholder={t("signup.repeatPasswordPlaceholder")} 
                 {...register("repeatPassword", { required: true })}
               />
               <button
@@ -146,15 +148,14 @@ const SignUpForm = () => {
             <p className={s.errorMessage}>{errors.repeatPassword?.message}</p>
           </label>
 
-          <button type="submit" className={s.button}>
-            Sign Up
+          <button type="submit" className={s.button}>{t("button.signUp")}
           </button>
         </form>
         <GoogleButton />
         <div className={s.afterSignUpBox}>
-          <p className={s.afterSignUpText}> Already have an account?</p>
+          <p className={s.afterSignUpText}>{t("signup.alreadyHaveAccount")}</p>
           <Link className={s.link} to="/signin">
-            Sign In
+            {t("button.signIn")}
           </Link>
         </div>
       </div>

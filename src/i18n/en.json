@@ -48,5 +48,30 @@
   "userBarPopover": {
     "setting": "Setting",
     "logOut": "Log out"
+  },
+  "signup": {
+    "title": "Sign Up",
+    "repeatPassword": "Repeat password",
+    "repeatPasswordPlaceholder": "Repeat your password",
+    "submit": "Sign Up",
+    "success": "Registration was successful.",
+    "emailInUse": "User already exists",
+    "failed": "Sorry, registration failed",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign In"
+  },
+  "dailyInfo": {
+    "noWater": "You haven't drunk water yet, maybe it's time to drink?"
+  },
+  "forgotPassword": {
+    "success": "Reset link was successfully sent. CHECK YOUR EMAIL",
+    "error": "Oops... troubles, try again",
+    "title": "Reset your password",
+    "placeholder": "Enter your email address",
+    "btnToReset": "Send reset link"
+  },
+  "userPanel": {
+    "hello": "Hello",
+    "user":"User"
   }
 }
