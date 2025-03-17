@@ -22,7 +22,7 @@
     "personalRate": "Personal rate setting"
   },
   "deleteWaterModal": {
-    "deleteWaterTitle": "Delete Water Entry",
+    "deleteWaterTitle": "Delete Entry",
     "deleteWaterText": "Are you sure you want to delete this entry?"
   },
   "waterDailyNorma": {
@@ -72,6 +72,6 @@
   },
   "userPanel": {
     "hello": "Hello",
-    "user":"User"
+    "user": "User"
   }
 }

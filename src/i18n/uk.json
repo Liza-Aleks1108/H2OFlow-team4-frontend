@@ -22,7 +22,7 @@
     "personalRate": "Персональний рейтинг"
   },
   "deleteWaterModal": {
-    "deleteWaterTitle": "Видалити запис води",
+    "deleteWaterTitle": "Видалити запис",
     "deleteWaterText": "Ви впевнені, що хочете видалити цей запис?"
   },
   "waterDailyNorma": {
@@ -72,6 +72,6 @@
   },
   "userPanel": {
     "hello": "Привіт",
-    "user":"друже"
+    "user": "друже"
   }
 }
