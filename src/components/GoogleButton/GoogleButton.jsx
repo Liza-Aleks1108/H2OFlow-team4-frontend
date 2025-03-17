@@ -15,13 +15,13 @@ const GoogleButton = () => {
       window.location.href = response.data.data.url;
     } catch (error) {
       console.error("Error to get Google OAuth URL", error);
-      toast.error("Sorry, Google OAuth URL is missing");
+      toast.error(t("google.googleError"));
     }
   };
   return (
     <div>
       <GoogleButtonForAuth className={s.button} onClick={handleGoogleLogin}>
-      {t("login.googleButton")}
+      {t("google.googleButton")}
         <FcGoogle className={s.icon} />
       </GoogleButtonForAuth>
     </div>

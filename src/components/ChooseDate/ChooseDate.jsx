@@ -18,7 +18,7 @@ const ChooseDate = ({ selectedDate }) => {
   const formatDate = (date) => {
     const today = new Date();
     if (date.toDateString() === today.toDateString()) {
-      return t("Today");
+      return t("waterDailyNorma.textH3");
     }
     const title = date.toLocaleDateString(i18n.language, {
       month: "long",

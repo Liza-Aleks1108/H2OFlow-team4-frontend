@@ -39,7 +39,6 @@
     "emailPlaceholder": "Введіть вашу електронну пошту",
     "passwordPlaceholder": "Введіть ваш пароль",
     "forgotPassword": "Забули пароль?",
-    "googleButton": "Увійти за допомогою Google",
     "noAccount": "Немає акаунту?",
     "success": "Ви успішно увійшли!",
     "unauthorized": "Неавторизований користувач",
@@ -72,6 +71,45 @@
   },
   "userPanel": {
     "hello": "Привіт",
-    "user":"друже"
+    "user": "друже"
+  },
+  "google": {
+    "googleAuth": "Авторизація з Google...",
+    "googleButton": "Увійти за допомогою Google",
+    "googleError": "Вибачте, Google OAuth URL відсутній"
+  },
+  "logoutModal": {
+    "text": "Ви справді хочете вийти?",
+    "cancelButton": "Скасувати"
+  },
+  "passwordReset": {
+    "title": "Скидання пароля",
+    "newPassword": "Новий пароль",
+    "passwordPlaceholder": "Введіть свій пароль",
+    "repeatNewPassword": "Повторіть новий пароль",
+    "repeatPasswordPlaceholder": "Повторіть свій пароль",
+    "button": "Скинути пароль"
+  },
+  "userSettings": {
+    "uploadPhoto": "Завантажте фото",
+    "yourGenderIdentity": "Ваша стать",
+    "woman": "Жінка",
+    "man": "Чоловік",
+    "yourName": "Ваше ім'я",
+    "email": "Електронна пошта",
+    "myDailyNorma": "Моя денна норма",
+    "forWoman": "Для жінки",
+    "forMan": "Для чоловіка",
+    "formulaExplanation": "V — це об'єм води, що потрібно випити на день, M — це ваша вага, T — це час активних занять спортом або інший тип діяльності, еквівалентний навантаженню (за їх відсутності - встановіть 0).",
+    "activeTimeInHours": "Час активності в годинах",
+    "yourWeight": "Ваша вага в кілограмах:",
+    "activeSportTime": "Час активних занять спортом:",
+    "requiredWaterAmount": "Необхідна кількість води в літрах на день:",
+    "writeWaterAmount": "Напишіть, скільки води ви будете пити:",
+    "save": "Зберегти",
+    "avatarUpdatedSuccess": "Аватар успішно оновлено!",
+    "avatarUpdateError": "Не вдалося оновити аватар",
+    "profileUpdatedSuccess": "Профіль успішно оновлено!",
+    "profileUpdateError": "Не вдалося оновити профіль"
   }
 }

@@ -39,7 +39,7 @@
     "emailPlaceholder": "Enter your email",
     "passwordPlaceholder": "Enter your password",
     "forgotPassword": "I forgot my password",
-    "googleButton": "Sign in with Google",
+
     "noAccount": "Don't have an account?",
     "success": "You are successfully logged in!",
     "unauthorized": "Unauthorized user",
@@ -72,6 +72,45 @@
   },
   "userPanel": {
     "hello": "Hello",
-    "user":"User"
+    "user": "User"
+  },
+  "google": {
+    "googleAuth": "Authenticating with Google...",
+    "googleButton": "Sign Up with Google",
+    "googleError": "Sorry, Google OAuth URL is missing"
+  },
+  "logoutModal": {
+    "text": "Do you really want to leave?",
+    "cancelButton": "Cancel"
+  },
+  "passwordReset": {
+    "title": "Reset Password",
+    "newPassword": "New Password",
+    "passwordPlaceholder": "Enter your password",
+    "repeatNewPassword": "Repeat New Password",
+    "repeatPasswordPlaceholder": "Repeat your password",
+    "button": "Reset password"
+  },
+  "userSettings": {
+    "uploadPhoto": "Upload a photo",
+    "yourGenderIdentity": "Your gender identity",
+    "woman": "Woman",
+    "man": "Man",
+    "yourName": "Your name",
+    "email": "Email",
+    "myDailyNorma": "My daily norma",
+    "forWoman": "For woman",
+    "forMan": "For man",
+    "formulaExplanation": "V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0).",
+    "activeTimeInHours": "Active time in hours",
+    "yourWeight": "Your weight in kilograms:",
+    "activeSportTime": "The time of active participation in sports:",
+    "requiredWaterAmount": "The required amount of water in liters per day:",
+    "writeWaterAmount": "Write down how much water you will drink:",
+    "save": "Save",
+    "avatarUpdatedSuccess": "Avatar updated successfully!",
+    "avatarUpdateError": "Failed to update avatar",
+    "profileUpdatedSuccess": "Profile updated successfully!",
+    "profileUpdateError": "Failed to update profile"
   }
 }
