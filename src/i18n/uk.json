@@ -9,7 +9,7 @@
   "welcomeSection": {
     "welcomeText": "Записуйте та відстежуйте щоденне споживання води",
     "welcomeTitle": "Трекер споживання води",
-    "tryTracker": "Спробуйте трекер"
+    "tryTracker": "Спробуй трекер"
   },
   "advantages": {
     "loading": "Завантаження...",
@@ -17,9 +17,9 @@
     "our": "Наші",
     "happy": "щасливі",
     "customers": "клієнти:",
-    "habitDrive": "Формуйте звичку",
-    "viewStats": "Переглянути статистику",
-    "personalRate": "Персональна норма"
+    "habitDrive": "Керуй звичкою",
+    "viewStats": "Статистика",
+    "personalRate": "Персональний рейтинг"
   },
   "deleteWaterModal": {
     "deleteWaterTitle": "Видалити запис",
@@ -27,7 +27,7 @@
   },
   "waterDailyNorma": {
     "l": "л",
-    "textDailyNorm": "Моя денна норма",
+    "textDailyNorm": "Денна норма",
     "textH3": "Сьогодні"
   },
   "calendar": {
@@ -45,7 +45,7 @@
     "error": "Вибачте, вхід не вдався. Спробуйте ще раз."
   },
   "userBarPopover": {
-    "setting": "Налаштування",
+    "setting": "Опції",
     "logOut": "Вийти"
   },
   "signup": {
@@ -60,23 +60,23 @@
     "signIn": "Увійти"
   },
   "dailyInfo": {
-    "noWater": "Ви ще не пили воду сьогодні. Може, час випити?"
+    "noWater": "Ви сьогодні ще не пили воду, може прийшов час випити?"
   },
   "forgotPassword": {
-    "success": "Посилання для скидання успішно надіслано. ПЕРЕВІРТЕ СВОЮ ПОШТУ",
+    "success": "Посилання успішно надіслано. ПЕРЕВІРТЕ СВОЮ ПОШТУ",
     "error": "Ой... сталася помилка, спробуйте ще раз",
     "title": "Скинути пароль",
     "placeholder": "Введіть вашу електронну адресу",
-    "btnToReset": "Надіслати посилання"
+    "btnToReset": "Відправити"
   },
   "userPanel": {
     "hello": "Привіт",
-    "user": "Користувач"
+    "user": "друже"
   },
   "google": {
-    "googleAuth": "Авторизація через Google...",
-    "googleButton": "Увійти через Google",
-    "googleError": "Вибачте, URL-адреса Google OAuth відсутня"
+    "googleAuth": "Авторизація з Google...",
+    "googleButton": "Увійти за допомогою Google",
+    "googleError": "Вибачте, Google OAuth URL відсутній"
   },
   "logoutModal": {
     "text": "Ви справді хочете вийти?",
@@ -85,27 +85,27 @@
   "passwordReset": {
     "title": "Скидання пароля",
     "newPassword": "Новий пароль",
-    "passwordPlaceholder": "Введіть новий пароль",
+    "passwordPlaceholder": "Введіть свій пароль",
     "repeatNewPassword": "Повторіть новий пароль",
-    "repeatPasswordPlaceholder": "Повторіть пароль",
+    "repeatPasswordPlaceholder": "Повторіть свій пароль",
     "button": "Скинути пароль"
   },
   "userSettings": {
-    "uploadPhoto": "Завантажити фото",
+    "uploadPhoto": "Завантажте фото",
     "yourGenderIdentity": "Ваша стать",
     "woman": "Жінка",
     "man": "Чоловік",
     "yourName": "Ваше ім'я",
     "email": "Електронна пошта",
     "myDailyNorma": "Моя денна норма",
-    "forWoman": "Для жінок",
-    "forMan": "Для чоловіків",
-    "formulaExplanation": "V — це об'єм води (л), який потрібно випити на день, M — ваша вага (кг), T — час активних занять спортом (год). Якщо активність відсутня, встановіть 0.",
-    "activeTimeInHours": "Час активності (години)",
-    "yourWeight": "Ваша вага (кг):",
-    "activeSportTime": "Час занять спортом:",
-    "requiredWaterAmount": "Необхідна кількість води (л/день):",
-    "writeWaterAmount": "Вкажіть, скільки води ви вип'єте:",
+    "forWoman": "Для жінки",
+    "forMan": "Для чоловіка",
+    "formulaExplanation": "V — це об'єм води, що потрібно випити на день, M — це ваша вага, T — це час активних занять спортом або інший тип діяльності, еквівалентний навантаженню (за їх відсутності - встановіть 0).",
+    "activeTimeInHours": "Час активності в годинах",
+    "yourWeight": "Ваша вага в кілограмах:",
+    "activeSportTime": "Час активних занять спортом:",
+    "requiredWaterAmount": "Необхідна кількість води в літрах на день:",
+    "writeWaterAmount": "Напишіть, скільки води ви будете пити:",
     "save": "Зберегти",
     "avatarUpdatedSuccess": "Аватар успішно оновлено!",
     "avatarUpdateError": "Не вдалося оновити аватар",
