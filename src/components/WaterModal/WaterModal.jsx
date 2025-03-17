@@ -2,6 +2,8 @@ import React from "react";
 import { BaseModal } from "../BaseModal/BaseModal.jsx";
 import WaterForm from "../WaterForm/WaterForm.jsx";
 import css from "./WaterModal.module.css";
+import { useSelector } from "react-redux";
+import { selectWaterDate } from "../../redux/water/selectors.js";
 
 const WaterModal = ({ isOpen, onClose, operationType }) => {
   const title =

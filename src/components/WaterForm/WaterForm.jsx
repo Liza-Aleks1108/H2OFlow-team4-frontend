@@ -23,7 +23,7 @@ import { addWater, editWaterAmount } from "../../redux/water/operations.js";
 //     .matches(/^\d{2}:\d{2}$/, "Формат час y: hh:mm"),
 // });
 
-const WaterForm = ({ operationType, waterId, initialData, onClose }) => {
+const WaterForm = ({ operationType, initialData, onClose }) => {
   const dispatch = useDispatch();
   //   const { waterData, error, isLoading } = useSelector(
   //     (state) => state.user.userData
@@ -61,9 +61,7 @@ const WaterForm = ({ operationType, waterId, initialData, onClose }) => {
         await dispatch(addWater(waterEntry));
       } else {
         console.log("Дані, що відправляються на редактування:", waterEntry);
-        await dispatch(
-          editWaterAmount(waterEntry({ id: waterId, ...waterEntry }))
-        );
+        await dispatch(editWaterAmount(waterEntry({ ...waterEntry })));
       }
       onClose();
     } catch (err) {
