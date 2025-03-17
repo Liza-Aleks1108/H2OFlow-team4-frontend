@@ -9,7 +9,7 @@
   "welcomeSection": {
     "welcomeText": "Записуйте та відстежуйте щоденне споживання води",
     "welcomeTitle": "Трекер споживання води",
-    "tryTracker": "Спробуй трекер"
+    "tryTracker": "Спробуйте трекер"
   },
   "advantages": {
     "loading": "Завантаження...",
@@ -17,17 +17,17 @@
     "our": "Наші",
     "happy": "щасливі",
     "customers": "клієнти:",
-    "habitDrive": "Керуй звичкою",
-    "viewStats": "Статистика",
-    "personalRate": "Персональний рейтинг"
+    "habitDrive": "Формуйте звичку",
+    "viewStats": "Переглянути статистику",
+    "personalRate": "Персональна норма"
   },
   "deleteWaterModal": {
-    "deleteWaterTitle": "Видалити запис води",
+    "deleteWaterTitle": "Видалити запис",
     "deleteWaterText": "Ви впевнені, що хочете видалити цей запис?"
   },
   "waterDailyNorma": {
     "l": "л",
-    "textDailyNorm": "Денна норма",
+    "textDailyNorm": "Моя денна норма",
     "textH3": "Сьогодні"
   },
   "calendar": {
@@ -45,7 +45,7 @@
     "error": "Вибачте, вхід не вдався. Спробуйте ще раз."
   },
   "userBarPopover": {
-    "setting": "Опції",
+    "setting": "Налаштування",
     "logOut": "Вийти"
   },
   "signup": {
@@ -60,23 +60,23 @@
     "signIn": "Увійти"
   },
   "dailyInfo": {
-    "noWater": "Ви сьогодні ще не пили воду, може прийшов час випити?"
+    "noWater": "Ви ще не пили воду сьогодні. Може, час випити?"
   },
   "forgotPassword": {
-    "success": "Посилання успішно надіслано. ПЕРЕВІРТЕ СВОЮ ПОШТУ",
+    "success": "Посилання для скидання успішно надіслано. ПЕРЕВІРТЕ СВОЮ ПОШТУ",
     "error": "Ой... сталася помилка, спробуйте ще раз",
     "title": "Скинути пароль",
     "placeholder": "Введіть вашу електронну адресу",
-    "btnToReset": "Відправити"
+    "btnToReset": "Надіслати посилання"
   },
   "userPanel": {
     "hello": "Привіт",
-    "user": "друже"
+    "user": "Користувач"
   },
   "google": {
-    "googleAuth": "Авторизація з Google...",
-    "googleButton": "Увійти за допомогою Google",
-    "googleError": "Вибачте, Google OAuth URL відсутній"
+    "googleAuth": "Авторизація через Google...",
+    "googleButton": "Увійти через Google",
+    "googleError": "Вибачте, URL-адреса Google OAuth відсутня"
   },
   "logoutModal": {
     "text": "Ви справді хочете вийти?",
@@ -85,27 +85,27 @@
   "passwordReset": {
     "title": "Скидання пароля",
     "newPassword": "Новий пароль",
-    "passwordPlaceholder": "Введіть свій пароль",
+    "passwordPlaceholder": "Введіть новий пароль",
     "repeatNewPassword": "Повторіть новий пароль",
-    "repeatPasswordPlaceholder": "Повторіть свій пароль",
+    "repeatPasswordPlaceholder": "Повторіть пароль",
     "button": "Скинути пароль"
   },
   "userSettings": {
-    "uploadPhoto": "Завантажте фото",
+    "uploadPhoto": "Завантажити фото",
     "yourGenderIdentity": "Ваша стать",
     "woman": "Жінка",
     "man": "Чоловік",
     "yourName": "Ваше ім'я",
     "email": "Електронна пошта",
     "myDailyNorma": "Моя денна норма",
-    "forWoman": "Для жінки",
-    "forMan": "Для чоловіка",
-    "formulaExplanation": "V — це об'єм води, що потрібно випити на день, M — це ваша вага, T — це час активних занять спортом або інший тип діяльності, еквівалентний навантаженню (за їх відсутності - встановіть 0).",
-    "activeTimeInHours": "Час активності в годинах",
-    "yourWeight": "Ваша вага в кілограмах:",
-    "activeSportTime": "Час активних занять спортом:",
-    "requiredWaterAmount": "Необхідна кількість води в літрах на день:",
-    "writeWaterAmount": "Напишіть, скільки води ви будете пити:",
+    "forWoman": "Для жінок",
+    "forMan": "Для чоловіків",
+    "formulaExplanation": "V — це об'єм води (л), який потрібно випити на день, M — ваша вага (кг), T — час активних занять спортом (год). Якщо активність відсутня, встановіть 0.",
+    "activeTimeInHours": "Час активності (години)",
+    "yourWeight": "Ваша вага (кг):",
+    "activeSportTime": "Час занять спортом:",
+    "requiredWaterAmount": "Необхідна кількість води (л/день):",
+    "writeWaterAmount": "Вкажіть, скільки води ви вип'єте:",
     "save": "Зберегти",
     "avatarUpdatedSuccess": "Аватар успішно оновлено!",
     "avatarUpdateError": "Не вдалося оновити аватар",

@@ -1,12 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import TrackerPage from "../../pages/TrackerPage/TrackerPage";
-
-import "./App.module.css";
-import HomePage from "../../pages/HomePage/HomePage.jsx";
-import SignUpPage from "../../pages/SignUpPage/SignUpPage.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import SignInPage from "../../pages/SignInPage/SignInPage.jsx";
 import { selectIsLoggedIn, selectToken } from "../../redux/user/selectors.js";
 import {
   fetchUserProfile,
@@ -15,11 +9,22 @@ import {
   setAuthHeader,
 } from "../../redux/user/operations.js";
 import { Toaster } from "react-hot-toast";
-import GoogleAuthConfirm from "../GoogleAuthConfirm/GoogleAuthConfirm.jsx";
-import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage.jsx";
 import SharedLayout from "../SharedLayout.jsx";
-import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage.jsx";
-import { getWaterPerDay } from "../../redux/water/operations.js";
+
+// Використовуємо lazy load для сторінок
+const HomePage = lazy(() => import("../../pages/HomePage/HomePage.jsx"));
+const TrackerPage = lazy(() => import("../../pages/TrackerPage/TrackerPage"));
+const SignUpPage = lazy(() => import("../../pages/SignUpPage/SignUpPage.jsx"));
+const SignInPage = lazy(() => import("../../pages/SignInPage/SignInPage.jsx"));
+const GoogleAuthConfirm = lazy(() =>
+  import("../GoogleAuthConfirm/GoogleAuthConfirm.jsx")
+);
+const ResetPasswordPage = lazy(() =>
+  import("../../pages/ResetPasswordPage/ResetPasswordPage.jsx")
+);
+const NotFoundPage = lazy(() =>
+  import("../../pages/NotFoundPage/NotFoundPage.jsx")
+);
 
 const App = () => {
   const isRehydrated = useSelector(
@@ -52,17 +57,22 @@ const App = () => {
   return (
     <Router>
       <Toaster position={"top-center"} />
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="tracker" element={<TrackerPage />} />
-          <Route path="signup" element={<SignUpPage />} />
-          <Route path="signin" element={<SignInPage />} />
-          <Route path="/auth/confirm-oauth" element={GoogleAuthConfirm} />
-          <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="tracker" element={<TrackerPage />} />
+            <Route path="signup" element={<SignUpPage />} />
+            <Route path="signin" element={<SignInPage />} />
+            <Route path="/auth/confirm-oauth" element={<GoogleAuthConfirm />} />
+            <Route
+              path="/auth/reset-password"
+              element={<ResetPasswordPage />}
+            />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 };
