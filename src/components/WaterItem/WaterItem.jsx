@@ -5,28 +5,17 @@ import styles from "./WaterItem.module.css";
 import { useDispatch } from "react-redux";
 import { deleteWater } from "../../redux/water/operations.js";
 
-const WaterItem = ({ data }) => {
+const WaterItem = ({ data, formattedDate }) => {
   const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  // const handleDelete = () => {
-  //   console.log(`Видаляємо запис води з id: ${data._id}`);
-  //   onDelete(data._id); // Видаляємо елемент без анімації "зникнення"
-  //   setIsDeleteOpen(false); // Закриваємо модалку після видалення
-  // };
-
-  // const Item = ({ completed, text, id }) => {
-  // return (
-  //   <li className={s.item}>
-  //     <input type='checkbox' checked={completed} onChange={() => dispatch(toggleTodo({ id, text, completed: !completed }))} />
-  //     <p>{text}</p>
-  //     <div>
-  //       <button onClick={() => dispatch(editTodo({ id, text: prompt('Enter new value: ') ?? text }))}>Edit</button>
-  //       <button onClick={() => dispatch(deleteTodo(id))}>Delete</button>
-  //     </div>
-  //   </li>
-  // );
+  // Функция для удаления
+  const handleDelete = async (id) => {
+    await dispatch(deleteWater(id)); // Удаляем запись
+    dispatch(getWaterPerDay(formattedDate)); // Загружаем обновлённый список
+    setIsDeleteOpen(false); // Закрываем модалку удаления
+  };
 
   return (
     <div className={styles.waterItem}>
@@ -36,7 +25,7 @@ const WaterItem = ({ data }) => {
         </svg>
       </div>
       <div className={styles.info}>
-        <p className={styles.amount}>{data.amount} ml</p>
+        <p className={styles.amount}>{data.volume} ml</p>
         <p className={styles.time}>{data.time}</p>
       </div>
       <div className={styles.actions}>
@@ -55,8 +44,7 @@ const WaterItem = ({ data }) => {
       <DeleteWaterModal
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}
-        // handleDelete={handleDelete}
-        onClick={() => dispatch(deleteWater(data._id))}
+        onClick={() => handleDelete(data._id)} // Используем handleDelete здесь
       />
     </div>
   );

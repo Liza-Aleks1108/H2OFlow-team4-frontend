@@ -15,26 +15,15 @@ const formatDate = (date) => {
   return `${year}-${month}-${day}`;
 };
 
-const DailyInfo = ({ chosenDate, dateForTitle }) => {
+const DailyInfo = ({ dateForTitle }) => {
   const dispatch = useDispatch();
   const todayWater = useSelector(selectDay);
   console.log("todayWater", todayWater);
-
-  const [isCurrentDay, setIsCurrentDay] = useState("");
 
   const formattedDate = useMemo(
     () => formatDate(dateForTitle || new Date()),
     [dateForTitle]
   );
-
-  // const handleDeleteWater = useCallback(
-  //   async (id) => {
-  //     await dispatch(deleteWater(id));
-  //     dispatch(getDayWater(formattedDate));
-  //     dispatch(getMonthWater(formattedDate.slice(0, -3)));
-  //   },
-  //   [dispatch, formattedDate]
-  // );
 
   useEffect(() => {
     dispatch(getWaterPerDay(formattedDate));
@@ -48,7 +37,7 @@ const DailyInfo = ({ chosenDate, dateForTitle }) => {
       </div>
       <div className={styles.waterListWrapper}>
         {todayWater.length > 0 ? (
-          <WaterList waterData={todayWater} />
+          <WaterList waterData={todayWater} formattedDate={formattedDate} />
         ) : (
           <div className={styles.text}>
             <p className={styles.waterEmpty}>

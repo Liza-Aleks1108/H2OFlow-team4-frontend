@@ -1,7 +1,7 @@
 import WaterItem from "../WaterItem/WaterItem";
 import styles from "./WaterList.module.css";
 
-const WaterList = ({ waterData }) => {
+const WaterList = ({ waterData, formattedDate }) => {
   // const [waterData, setWaterData] = useState(initialWaterData);
   // const dispatch = useDispatch();
   // const waterCard = useSelector(selectDay);
@@ -15,7 +15,7 @@ const WaterList = ({ waterData }) => {
     <div className={styles.waterList}>
       <ul>
         {waterData.map((data) => (
-          <WaterItem key={data._id} data={data} />
+          <WaterItem key={data._id} data={data} formattedDate={formattedDate} />
         ))}
       </ul>
     </div>
