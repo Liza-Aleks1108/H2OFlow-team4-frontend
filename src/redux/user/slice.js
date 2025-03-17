@@ -10,7 +10,6 @@ import {
   updateUserAvatar,
   updateUserProfile,
 } from "./operations.js";
-import { initialState } from "../initialState.js";
 const handleAuthState = (state, status, action = null) => {
   switch (status) {
     case "pending":
@@ -36,9 +35,26 @@ const handleAuthState = (state, status, action = null) => {
   }
 };
 
+export const initialState = {
+  userData: {
+    name: "User",
+    email: null,
+    gender: "woman",
+    weight: 0,
+    dailySportTime: 0,
+    dailyNorm: 1500,
+    avatarUrl: "img/avatar.png",
+  },
+  totalAmount: null,
+  isLoggedIn: false,
+  token: null,
+  loading: false,
+  error: null,
+};
+
 const userSlice = createSlice({
   name: "user",
-  initialState: initialState.user,
+  initialState,
   reducers: {
     clearError: (state) => {
       state.error = null;
@@ -62,9 +78,6 @@ const userSlice = createSlice({
         handleAuthState(state, "rejected", action)
       )
       .addCase(logIn.pending, (state) => handleAuthState(state, "pending"))
-      // .addCase(logIn.fulfilled, (state, action) =>
-      //   handleAuthState(state, "fulfilled", action)
-      // )
       .addCase(logIn.fulfilled, (state, action) => {
         state.token = action.payload.token;
         state.userData = action.payload.user;

@@ -19,6 +19,7 @@ import GoogleAuthConfirm from "../GoogleAuthConfirm/GoogleAuthConfirm.jsx";
 import NotFoundPage from "../../pages/NotFoundPage/NotFoundPage.jsx";
 import SharedLayout from "../SharedLayout.jsx";
 import ResetPasswordPage from "../../pages/ResetPasswordPage/ResetPasswordPage.jsx";
+import { getWaterPerDay } from "../../redux/water/operations.js";
 
 const App = () => {
   const isRehydrated = useSelector(
