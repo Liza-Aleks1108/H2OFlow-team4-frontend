@@ -19,27 +19,43 @@ const MonthInfo = ({ dailyNorma, setDateForTitle }) => {
   const error = useSelector(selectError);
   const dailyNorm = user?.dailyNorm / 1000 || 1.5;
 
-  // Преобразование данных для месяца (с использованием useMemo)
-  const formattedMonthData = useMemo(() => {
-    return waterMonth.map((day) => {
-      return {
-        id: day.id,
-        date: day.day.split("-")[2],  // Дата дня (день месяца)
-        value: Math.floor(Number(day.totalAmount) * 1000), // Преобразование в литры (если данные в мл)
-      };
-    });
-  }, [waterMonth]);
+  // console.log(dailyNorm);
+  // console.log(waterMonth);
 
-  // Группировка данных по дням
-  const groupedData = useMemo(() => {
-    return Array.from(
-      formattedMonthData.reduce((map, { date, value }) => {
-        map.set(date, (map.get(date) || 0) + value); // Суммируем объемы для каждого дня
-        return map;
-      }, new Map()),
-      ([date, value]) => ({ day: date, volume: value })
-    );
-  }, [formattedMonthData]);
+  // // Преобразование данных для месяца (с использованием useMemo)
+  // const formattedMonthData = useMemo(() => {
+  //   return waterMonth.map((day) => {
+  //     return {
+  //       id: day.id,
+  //       date: day.day.split("-")[2], // Дата дня (день месяца)
+  //       value: Math.floor(Number(day.totalAmount) * 1000), // Преобразование в литры (если данные в мл)
+  //     };
+  //   });
+  // }, [waterMonth]);
+
+  // // Группировка данных по дням
+  // const groupedData = useMemo(() => {
+  //   return Array.from(
+  //     formattedMonthData.reduce((map, { date, value }) => {
+  //       map.set(date, (map.get(date) || 0) + value); // Суммируем объемы для каждого дня
+  //       return map;
+  //     }, new Map()),
+  //     ([date, value]) => ({ day: date, volume: value })
+  //   );
+  // }, [formattedMonthData]);
+  const groupedData = useMemo(
+    () =>
+      Array.from(
+        waterMonth.reduce((map, { day, volume }) => {
+          const numericVolume = Number(volume) || 0;
+          map.set(day, (map.get(day) || 0) + numericVolume);
+          return map;
+        }, new Map()),
+        ([day, volume]) => ({ day, volume })
+      ),
+    [waterMonth] // Виконуватиметься тільки якщо waterMonth зміниться
+  );
+  console.log(groupedData);
 
   const handleMonthChange = (newDate) => {
     setCurrentDate((prevDate) => {
@@ -70,11 +86,12 @@ const MonthInfo = ({ dailyNorma, setDateForTitle }) => {
         currentDate={currentDate}
         onChangeMonth={handleMonthChange}
       />
-      {loading && <p>⏳ Завантаження...</p>}
+      {loading && <p></p>}
+      {/* ⏳ Завантаження... */}
       {error && <p style={{ color: "red" }}>{error}</p>}
       <Calendar
         currentDate={currentDate}
-        waterData={groupedData}  // Используем сгруппированные данные
+        waterData={groupedData} // Используем сгруппированные данные
         dailyNorm={dailyNorm}
         setDateForTitle={setDateForTitle}
       />
