@@ -2,24 +2,24 @@
   "button": {
     "delete": "Delete",
     "cancel": "Cancel",
-    "addWater": "Add Water",
+    "addWater": "Add water",
     "signIn": "Sign In",
     "signUp": "Sign Up"
   },
   "welcomeSection": {
-    "welcomeText": "Record your daily water intake and track your progress.",
-    "welcomeTitle": "Water Consumption Tracker",
-    "tryTracker": "Try the Tracker"
+    "welcomeText": "Record daily water intake and track",
+    "welcomeTitle": "Water consumption tracker",
+    "tryTracker": "Try tracker"
   },
   "advantages": {
     "loading": "Loading...",
     "error": "Error:",
     "our": "Our",
-    "happy": "Happy",
-    "customers": "Customers:",
-    "habitDrive": "Habit Formation",
-    "viewStats": "View Statistics",
-    "personalRate": "Personal Rate Settings"
+    "happy": "happy",
+    "customers": "customers:",
+    "habitDrive": "Habit drive",
+    "viewStats": "View statistics",
+    "personalRate": "Personal rate setting"
   },
   "deleteWaterModal": {
     "deleteWaterTitle": "Delete Entry",
@@ -27,7 +27,7 @@
   },
   "waterDailyNorma": {
     "l": "L",
-    "textDailyNorm": "My Daily Norm",
+    "textDailyNorm": "My daily norma",
     "textH3": "Today"
   },
   "calendar": {
@@ -38,36 +38,37 @@
     "password": "Password",
     "emailPlaceholder": "Enter your email",
     "passwordPlaceholder": "Enter your password",
-    "forgotPassword": "Forgot your password?",
+    "forgotPassword": "I forgot my password",
+
     "noAccount": "Don't have an account?",
-    "success": "You have successfully logged in!",
+    "success": "You are successfully logged in!",
     "unauthorized": "Unauthorized user",
     "error": "Sorry, login failed. Please try again."
   },
   "userBarPopover": {
-    "setting": "Settings",
-    "logOut": "Log Out"
+    "setting": "Setting",
+    "logOut": "Log out"
   },
   "signup": {
     "title": "Sign Up",
-    "repeatPassword": "Repeat Password",
+    "repeatPassword": "Repeat password",
     "repeatPasswordPlaceholder": "Repeat your password",
     "submit": "Sign Up",
     "success": "Registration was successful.",
     "emailInUse": "User already exists",
-    "failed": "Sorry, registration failed.",
+    "failed": "Sorry, registration failed",
     "alreadyHaveAccount": "Already have an account?",
     "signIn": "Sign In"
   },
   "dailyInfo": {
-    "noWater": "You haven't drunk any water yet. Maybe it's time to hydrate?"
+    "noWater": "You haven't drunk water yet, maybe it's time to drink?"
   },
   "forgotPassword": {
-    "success": "A reset link has been successfully sent. CHECK YOUR EMAIL",
-    "error": "Oops... something went wrong. Please try again.",
-    "title": "Reset Your Password",
+    "success": "Reset link was successfully sent. CHECK YOUR EMAIL",
+    "error": "Oops... troubles, try again",
+    "title": "Reset your password",
     "placeholder": "Enter your email address",
-    "btnToReset": "Send Reset Link"
+    "btnToReset": "Send reset link"
   },
   "userPanel": {
     "hello": "Hello",
@@ -76,40 +77,40 @@
   "google": {
     "googleAuth": "Authenticating with Google...",
     "googleButton": "Sign Up with Google",
-    "googleError": "Sorry, Google OAuth URL is missing."
+    "googleError": "Sorry, Google OAuth URL is missing"
   },
   "logoutModal": {
-    "text": "Do you really want to log out?",
+    "text": "Do you really want to leave?",
     "cancelButton": "Cancel"
   },
   "passwordReset": {
     "title": "Reset Password",
     "newPassword": "New Password",
-    "passwordPlaceholder": "Enter your new password",
+    "passwordPlaceholder": "Enter your password",
     "repeatNewPassword": "Repeat New Password",
-    "repeatPasswordPlaceholder": "Repeat your new password",
-    "button": "Reset Password"
+    "repeatPasswordPlaceholder": "Repeat your password",
+    "button": "Reset password"
   },
   "userSettings": {
-    "uploadPhoto": "Upload a Photo",
-    "yourGenderIdentity": "Your Gender Identity",
+    "uploadPhoto": "Upload a photo",
+    "yourGenderIdentity": "Your gender identity",
     "woman": "Woman",
     "man": "Man",
-    "yourName": "Your Name",
+    "yourName": "Your name",
     "email": "Email",
-    "myDailyNorma": "My Daily Norm",
-    "forWoman": "For Women",
-    "forMan": "For Men",
-    "formulaExplanation": "V is the volume of water required per day (in liters), M is your body weight, and T is the time spent in active sports or similar activities (set to 0 if not applicable).",
-    "activeTimeInHours": "Active Time (hours)",
-    "yourWeight": "Your Weight (kg):",
-    "activeSportTime": "Time spent in active sports:",
-    "requiredWaterAmount": "Required Water Intake (L/day):",
-    "writeWaterAmount": "Record how much water you plan to drink:",
+    "myDailyNorma": "My daily norma",
+    "forWoman": "For woman",
+    "forMan": "For man",
+    "formulaExplanation": "V is the volume of the water norm in liters per day, M is your body weight, T is the time of active sports, or another type of activity commensurate in terms of loads (in the absence of these, you must set 0).",
+    "activeTimeInHours": "Active time in hours",
+    "yourWeight": "Your weight in kilograms:",
+    "activeSportTime": "The time of active participation in sports:",
+    "requiredWaterAmount": "The required amount of water in liters per day:",
+    "writeWaterAmount": "Write down how much water you will drink:",
     "save": "Save",
     "avatarUpdatedSuccess": "Avatar updated successfully!",
-    "avatarUpdateError": "Failed to update avatar.",
+    "avatarUpdateError": "Failed to update avatar",
     "profileUpdatedSuccess": "Profile updated successfully!",
-    "profileUpdateError": "Failed to update profile."
+    "profileUpdateError": "Failed to update profile"
   }
 }

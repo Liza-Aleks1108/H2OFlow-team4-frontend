@@ -1,6 +1,7 @@
 .welcomeSection {
+  box-sizing: border-box;
   max-width: 343px;
-  width: 100%; 
+  /* width: 100%;  */
   margin: 0 auto;
   padding: 24px 16px 67px;
   border-radius: 30px;
@@ -9,7 +10,13 @@
 @media (min-width: 768px) {
   .welcomeSection {
     max-width: 704px;
+    width: 100%;
     padding:32px 64px 50px;
+  }
+}
+@media (min-width: 1440px) {
+  .welcomeSection {
+    max-width: 672px;
   }
 }
 
