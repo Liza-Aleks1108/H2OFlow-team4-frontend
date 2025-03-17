@@ -3,14 +3,15 @@ import css from "./CalendarItem.module.css";
 const CalendarItem = ({
   day,
   dateKey,
-  waterData,
+  waterPercent,
   isToday,
   isSelected,
   onClick,
 }) => {
-  const waterPercent = waterData?.[dateKey] || 0;
   let dayClass = css.day;
   const today = new Date();
+
+  const formattedDateKey = new Date(dateKey + "T00:00:00");
 
   if (isSelected) {
     dayClass = `${css.day} ${css.selected}`;
@@ -20,7 +21,7 @@ const CalendarItem = ({
 
   dayClass = `${dayClass} 
           ${waterPercent >= 100 ? css.fullWater : css.partialWater}
-          ${onClick > today ? css.forbidden : ""}`;
+          ${formattedDateKey > today ? css.forbidden : ""}`;
 
   return (
     <div>

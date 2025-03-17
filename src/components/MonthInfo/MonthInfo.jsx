@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Calendar from "../Calendar/Calendar";
 import CalendarPagination from "../CalendarPagination/CalendarPagination";
 import {
@@ -7,29 +7,39 @@ import {
   selectLoading,
   selectMonth,
 } from "../../redux/water/selectors.js";
+import { selectUser } from "../../redux/user/selectors.js";
 import { getWaterMonth } from "../../redux/water/operations.js";
 
 const MonthInfo = ({ dailyNorma, setDateForTitle }) => {
-  // import css from "./MonthInfo.module.css";
   const [currentDate, setCurrentDate] = useState(new Date());
   const waterMonth = useSelector(selectMonth);
+  const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+  const dailyNorm = user?.dailyNorm / 1000 || 1.5;
 
-  const formatMonth = useMemo(() => {
-    console.log("WWW");
-
+  // Преобразование данных для месяца (с использованием useMemo)
+  const formattedMonthData = useMemo(() => {
     return waterMonth.map((day) => {
       return {
         id: day.id,
-        date: day.day.split("-")[2],
-        value: Math.floor(Number(day.totalAmount) * 1000),
+        date: day.day.split("-")[2],  // Дата дня (день месяца)
+        value: Math.floor(Number(day.totalAmount) * 1000), // Преобразование в литры (если данные в мл)
       };
     });
   }, [waterMonth]);
 
-  console.log(formatMonth);
+  // Группировка данных по дням
+  const groupedData = useMemo(() => {
+    return Array.from(
+      formattedMonthData.reduce((map, { date, value }) => {
+        map.set(date, (map.get(date) || 0) + value); // Суммируем объемы для каждого дня
+        return map;
+      }, new Map()),
+      ([date, value]) => ({ day: date, volume: value })
+    );
+  }, [formattedMonthData]);
 
   const handleMonthChange = (newDate) => {
     setCurrentDate((prevDate) => {
@@ -40,7 +50,6 @@ const MonthInfo = ({ dailyNorma, setDateForTitle }) => {
         newDate.getMonth() + 1
       ).padStart(2, "0")}`;
 
-      // 🔥 Перевіряємо, чи змінилась дата, щоб не робити зайвий запит
       if (prevYearMonth !== newYearMonth) {
         return newDate;
       }
@@ -65,7 +74,8 @@ const MonthInfo = ({ dailyNorma, setDateForTitle }) => {
       {error && <p style={{ color: "red" }}>{error}</p>}
       <Calendar
         currentDate={currentDate}
-        waterData={waterMonth}
+        waterData={groupedData}  // Используем сгруппированные данные
+        dailyNorm={dailyNorm}
         setDateForTitle={setDateForTitle}
       />
     </div>

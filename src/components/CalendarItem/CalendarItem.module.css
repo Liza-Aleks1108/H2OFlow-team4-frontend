@@ -13,21 +13,18 @@
     cursor: pointer;
 }
 
-.forbidden {
-    cursor: none;
-}
-
 .day:hover {
     opacity: 0.8;
 }
 
 .fullWater {
-    background-color: #bdbdbd;
+    background: white;
 }
 
-.partialWater {
-    background-color: rgba(50, 63, 71, 0.2);
-}
+/* .partialWater {
+    background-color: #bdbdbd;
+    border-radius: 10px;
+} */
 
 .selected {
     background-color: #323F47;
@@ -41,12 +38,18 @@
     border: 4px solid rgb(43, 226, 89);
 }
 
+.forbidden {
+    cursor: none;
+    background: #ebebe4;
+    color: rgb(151, 172, 169);
+}
+
 .waterPercent {
     margin-top: 4px;
     font-weight: 400;
     font-size: 12px;
     line-height: 187%;
-    color: rgba(47, 47, 47, 0.6);
+    /* color: rgba(47, 47, 47, 0.6); */
 }
 
 @media (min-width: 768px) {
