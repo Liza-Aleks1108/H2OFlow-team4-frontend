@@ -8,9 +8,6 @@ import DailyInfo from "../DailyInfo/DailyInfo.jsx";
 const WaterDetailedInfo = () => {
   const [dateForTitle, setDateForTitle] = useState();
   console.log(dateForTitle);
-  // антону:
-  // в цьому компоненті я так розумію потрібнно пов'язати дейлі інфо і календар. потрібно реалізувати логіку вибору дати
-  // і передавати її у обидва компоненти. Я поки передаю поточний день
   return (
     <section className={css.sectionWrapper}>
       <div className={css.wrapper}>
