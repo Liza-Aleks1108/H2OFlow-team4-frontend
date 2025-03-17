@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateActiveDate } from "../../redux/water/slice"; // Подключаем экшен из слайса
-import { selectActiveDate } from "../../redux/water/selectors";
+// import { updateActiveDate } from "../../redux/water/slice.js";
+import { selectActiveDate } from "../../redux/water/selectors.js";
+
 import CalendarItem from "../CalendarItem/CalendarItem";
 import css from "./Calendar.module.css";
+// import { selectMonth } from "../../redux/water/selectors.js";
+// , onDateSelect
 
 const Calendar = ({ currentDate, waterData }) => {
   const dispatch = useDispatch();
   const [days, setDays] = useState([]);
-  const activeDate = useSelector(selectActiveDate); // Изменяем на правильный селектор
+  const selectDay = useSelector(selectActiveDate);
   const [selectedDate, setSelectedDate] = useState(
-    activeDate ? new Date(activeDate) : new Date()
+    selectDay ? selectDay : new Date()
   );
+  // const monthWater = useSelector(selectMonth);
 
   useEffect(() => {
     generateCalendar(currentDate);
@@ -34,12 +38,16 @@ const Calendar = ({ currentDate, waterData }) => {
     );
     const today = new Date();
 
-    if (clickedDate > today) return; // Не даём выбрать будущую дату
+    if (clickedDate > today) return;
 
-    const formattedDate = clickedDate.toISOString().split("T")[0]; // Преобразуем дату в строку без времени
-    dispatch(updateActiveDate(formattedDate)); // Отправляем обновлённую дату в Redux
+    const formattedDate = clickedDate.toISOString(); // Преобразуем в строку. Храниться в особом формате, онтосительно нашего часового пояса
+    dispatch({ type: "water/updateActiveDate", payload: formattedDate }); // записуємо вибрану дату в Store для DailyInfo
 
-    setSelectedDate(clickedDate); // Обновляем локальное состояние
+    //для чтения обратно из сторе
+    // const storedDate = state.activeDate; // Дата из Redux
+    // const activeDate = new Date(storedDate); // Преобразуем обратно
+
+    setSelectedDate(clickedDate);
   };
 
   return (
@@ -69,6 +77,7 @@ const Calendar = ({ currentDate, waterData }) => {
               key={day}
               day={day}
               dateKey={dateKey}
+              // waterData={waterData}
               isToday={isToday}
               isSelected={isSelected}
               onClick={() => handleDateClick(day)}
