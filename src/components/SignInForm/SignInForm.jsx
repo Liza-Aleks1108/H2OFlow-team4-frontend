@@ -12,8 +12,10 @@ import { Link, useNavigate } from "react-router-dom";
 import GoogleButton from "../GoogleButton/GoogleButton.jsx";
 import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm.jsx";
 import ResetModal from "../ResetModal/ResetModal.jsx";
+import { useTranslation } from "react-i18next";
 
 const SignInForm = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
@@ -52,7 +54,7 @@ const SignInForm = () => {
       .unwrap()
       .then(() => {
         reset();
-        toast.success("You are successfully logged in!", {
+        toast.success(t("login.success"), {
           duration: 2000,
           position: "top-center",
           icon: "👏",
@@ -61,12 +63,12 @@ const SignInForm = () => {
       })
       .catch((error) => {
         if (error?.response?.data.message === "User not found") {
-          toast.error("Unauthorized user", {
+          toast.error(t("login.unauthorized"), {
             duration: 2000,
             position: "top-center",
           });
         } else {
-          toast.error("Sorry, login failed. Please try again.", {
+          toast.error(t("login.failed"), {
             duration: 2000,
             position: "top-center",
           });
@@ -77,13 +79,13 @@ const SignInForm = () => {
   return (
     <AuthFormContainer className={s.container}>
       <div className={s.signUpBox}>
-        <h2 className={s.signUpTitle}>Sign In</h2>
+        <h2 className={s.signUpTitle}>{t("button.signIn")}</h2>
         <form className={s.signUpForm} onSubmit={handleSubmit(onSubmit)}>
           <label className={s.signUpLabel}>
-            <span className={s.signUpLabelText}>Email</span>
+            <span className={s.signUpLabelText}>{t("login.email")}</span>
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder={t("login.emailPlaceholder")}
               className={clsx(s.input, { [s.inputError]: errors.email })}
               {...register("email", {
                 required: true,
@@ -93,11 +95,11 @@ const SignInForm = () => {
           </label>
 
           <label className={s.signUpLabel}>
-            <span className={s.signUpLabelText}>Password</span>
+            <span className={s.signUpLabelText}>{t("login.password")}</span>
             <div className={s.inputField}>
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
+                placeholder={t("login.passwordPlaceholder")}
                 className={clsx(s.input, {
                   [s.inputError]: errors.password,
                 })}
@@ -124,20 +126,20 @@ const SignInForm = () => {
               className={s.forgotButton}
               onClick={handleOpenModal}
             >
-              I forgot my password
+             {t("login.forgotPassword")}
             </button>
             <p className={s.errorMessage}>{errors.password?.message}</p>
           </label>
 
           <button type="submit" className={s.button}>
-            Sign In
+          {t("button.signIn")}
           </button>
         </form>
         <GoogleButton />
         <div className={s.afterSignUpBox}>
-          <p className={s.afterSignUpText}> Don't have an account?</p>
+          <p className={s.afterSignUpText}>{t("login.noAccount")}</p>
           <Link className={s.link} to="/signup">
-            Sign Up
+          {t("button.signUp")}
           </Link>
         </div>
       </div>

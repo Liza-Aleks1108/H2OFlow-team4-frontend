@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo.jsx";
 import s from "./WelcomeSection.module.css";
-import { useTranslation } from "react-i18next"; //і сюди
+import { useTranslation } from "react-i18next"; 
 
 const WelcomeSection = () => {
-  const { t } = useTranslation();  //добавте цей хук в свій компонент 
+  const { t } = useTranslation(); 
   return (
     <div className={s.welcomeSection}>
       <Logo />
@@ -15,7 +15,7 @@ const WelcomeSection = () => {
         {t("welcomeSection.tryTracker")}
         </Link>
         <Link to="/signin" className={s.btnSignIn}>
-        {t("welcomeSection.signIn")}
+        {t("button.signIn")}
         </Link>
       </nav>
     </div>

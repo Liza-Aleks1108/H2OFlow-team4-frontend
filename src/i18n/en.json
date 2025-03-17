@@ -2,13 +2,14 @@
   "button": {
     "delete": "Delete",
     "cancel": "Cancel",
-    "addWater":"Add water"
+    "addWater": "Add water",
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
   },
   "welcomeSection": {
     "welcomeText": "Record daily water intake and track",
     "welcomeTitle": "Water consumption tracker",
-    "tryTracker": "Try tracker",
-    "signIn": "Sign In"
+    "tryTracker": "Try tracker"
   },
   "advantages": {
     "loading": "Loading...",
@@ -24,10 +25,25 @@
     "deleteWaterTitle": "Delete Water Entry",
     "deleteWaterText": "Are you sure you want to delete this entry?"
   },
-  "waterDailyNorma":{
-    "l":"L",
-    "textDailyNorm":"My daily norma",
-    "textH3":"Today"
+  "waterDailyNorma": {
+    "l": "L",
+    "textDailyNorm": "My daily norma",
+    "textH3": "Today"
+  },
+  "calendar": {
+    "month": "Month"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "forgotPassword": "I forgot my password",
+    "googleButton": "Sign in with Google",
+    "noAccount": "Don't have an account?",
+    "success": "You are successfully logged in!",
+    "unauthorized": "Unauthorized user",
+    "error": "Sorry, login failed. Please try again."
   },
   "userBarPopover": {
     "setting": "Setting",

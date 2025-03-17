@@ -1,7 +1,9 @@
 import React from "react";
 import css from "./CalendarPagination.module.css";
+import { useTranslation } from "react-i18next";
 
 const CalendarPagination = ({ currentDate, onChangeMonth }) => {
+  const { t, i18n } = useTranslation(); 
   const handlePrevMonth = () => {
     const prevMonth = new Date(
       currentDate.getFullYear(),
@@ -23,7 +25,7 @@ const CalendarPagination = ({ currentDate, onChangeMonth }) => {
 
   return (
     <div className={css.pagination}>
-      <h2 className={css.headerMonth}>Month</h2>
+      <h2 className={css.headerMonth}>{t("calendar.month")}</h2>
       <div className={css.paginationBox}>
         <button className={css.arrow} onClick={handlePrevMonth}>
           <svg className={css.icon}>
@@ -31,7 +33,7 @@ const CalendarPagination = ({ currentDate, onChangeMonth }) => {
           </svg>
         </button>
         <span className={css.currentMonth}>
-          {`${new Intl.DateTimeFormat("en-US", { month: "long" }).format(
+          {`${new Intl.DateTimeFormat(i18n.language, { month: "long" }).format(
             currentDate
           )}, ${currentDate.getFullYear()}`}
         </span>
