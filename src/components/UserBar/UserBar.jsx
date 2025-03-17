@@ -15,7 +15,7 @@ const UserBar = () => {
         <p className={css.userName}>{user.name ? user.name : "User"}</p>
         <div className={css.userImageCont}>
           <img
-            src={user.avatarUrl}
+            src={user.avatarUrl || "/img/avatar.png"}
             alt="user-image"
             className={css.userImage}
           />
