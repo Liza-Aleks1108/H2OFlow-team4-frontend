@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { requestForResetPassword } from "../../redux/user/operations.js";
 import toast from "react-hot-toast";
 import { FiX } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 const ForgotPasswordForm = ({ onClose }) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
 
@@ -15,11 +17,11 @@ const ForgotPasswordForm = ({ onClose }) => {
     dispatch(requestForResetPassword(email))
       .unwrap()
       .then(() => {
-        toast.success("Reset link was successfully send. CHECK YOUR EMAIL");
+        toast.success(t("forgotPassword.success"));
         onClose();
       })
       .catch(() => {
-        toast.error("Ooopsss... troubles, try again");
+        toast.error(t("forgotPassword.error"));
       });
   };
   return (
@@ -27,21 +29,21 @@ const ForgotPasswordForm = ({ onClose }) => {
       <button className={s.closeButton} onClick={onClose}>
         <FiX className={s.icon} />
       </button>
-      <h2 className={s.title}>Reset your password</h2>
+      <h2 className={s.title}>{t("forgotPassword.title")}</h2>
 
       <form className={s.form} onSubmit={handleSubmit}>
         <label className={s.label}>
           <input
             className={s.input}
             type="email"
-            placeholder="Enter your email address"
+            placeholder={t("forgotPassword.placeholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
         <button type="submit" className={s.button}>
-          Send reset link
+          {t("forgotPassword.btnToReset")}
         </button>
       </form>
     </div>

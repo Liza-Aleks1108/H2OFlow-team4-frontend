@@ -5,8 +5,10 @@ import { FcGoogle } from "react-icons/fc";
 import GoogleButtonForAuth from "../GoogleButtonForAuth/GoogleButtonForAuth.jsx";
 import s from "./GoogleButton.module.css";
 import { fetchAPI } from "../../redux/api.js";
+import { useTranslation } from "react-i18next";
 
 const GoogleButton = () => {
+  const { t } = useTranslation(); 
   const handleGoogleLogin = async () => {
     try {
       const response = await fetchAPI.get("/auth/get-oauth-url");
@@ -19,7 +21,7 @@ const GoogleButton = () => {
   return (
     <div>
       <GoogleButtonForAuth className={s.button} onClick={handleGoogleLogin}>
-        Sign Up with Google
+      {t("login.googleButton")}
         <FcGoogle className={s.icon} />
       </GoogleButtonForAuth>
     </div>

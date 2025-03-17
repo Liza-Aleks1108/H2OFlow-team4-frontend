@@ -18,7 +18,7 @@ const GoogleAuthConfirm = () => {
       }
     };
     handleGoogleAuth();
-  }, [location, navigate]);
+  }, [location, navigate, dispatch]);
   return <div>Auth with Google...</div>;
 };
 
