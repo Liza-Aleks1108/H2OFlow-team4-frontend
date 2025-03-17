@@ -26,8 +26,11 @@
 
 .logOutBut,
 .closeBut {
+  box-sizing: border-box;
   border-radius: 30px;
-  padding: 14px 126px;
+  width: 304px;
+  height: 46px;
+  padding: 14px 125px;
   font-family: var(--font-family);
   font-weight: var(--font-weight-bold);
   font-size: 14px;
@@ -73,8 +76,10 @@
 
   .logOutBut,
   .closeBut {
+    width: 173px;
+    height: 60px;
     font-size: 16px;
     line-height: 150%;
-    padding: 18px 57px;
+    padding: 18px 56px;
   }
 }
