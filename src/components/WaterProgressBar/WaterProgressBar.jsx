@@ -1,10 +1,22 @@
 import React from "react";
 import style from "./WaterProgressBar.module.css";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { selectDay } from "../../redux/water/selectors.js";
+import { selectUser } from "../../redux/user/selectors.js";
 
-const WaterProgressBar = ({ consumed, dailyNorm }) => {
-  const { t } = useTranslation(); 
-  const progress = (consumed / dailyNorm) * 100;
+const WaterProgressBar = () => {
+  const { t } = useTranslation();
+  const currentMoment = useSelector(selectDay);
+  const dailyAmount = useSelector(selectUser);
+
+  const amountPerDay = currentMoment.reduce(
+    (sum, item) => sum + Number(item.volume),
+    0
+  );
+
+  let progress = (amountPerDay * 100) / dailyAmount.dailyNorm;
+  progress = Math.min(progress, 100);
 
   return (
     <div className={style.container}>
