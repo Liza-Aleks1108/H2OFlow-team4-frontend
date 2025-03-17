@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import AddWaterLink from "./AddWaterLink/AddWaterLink";
 import { getWaterPerDay } from "../../redux/water/operations.js";
 import { selectDay } from "../../redux/water/selectors.js";
-import { useTranslation } from "react-i18next";
 
 const formatDate = (date) => {
   const year = date.getFullYear();
@@ -17,7 +16,6 @@ const formatDate = (date) => {
 };
 
 const DailyInfo = ({ dateForTitle }) => {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const todayWater = useSelector(selectDay);
   console.log("todayWater", todayWater);
@@ -43,7 +41,7 @@ const DailyInfo = ({ dateForTitle }) => {
         ) : (
           <div className={styles.text}>
             <p className={styles.waterEmpty}>
-              {t("dailyInfo.noWater")}
+              You haven't drunk water yet, maybe it's time to drink?
             </p>
           </div>
         )}
