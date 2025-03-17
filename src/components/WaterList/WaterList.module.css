@@ -7,6 +7,7 @@
   padding-bottom: 10px; /* Додаємо відступ, щоб скролбар не перекривав елементи */
   scrollbar-width: thin; /* Робимо скролбар тоншим у Firefox */
   scrollbar-color: rgba(0, 0, 0, 0.4) transparent; /* Колір скролбара у Firefox */
+  min-width: 100%;
 }
 
 /* Оформлення скролбара для WebKit (Chrome, Safari) */
