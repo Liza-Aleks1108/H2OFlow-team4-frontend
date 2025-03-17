@@ -2,15 +2,22 @@ import React, { useState } from "react";
 import WaterModal from "../WaterModal/WaterModal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import styles from "./WaterItem.module.css";
+import { useDispatch } from "react-redux";
+import { deleteWater, getWaterPerDay } from "../../redux/water/operations.js";
 
-const WaterItem = ({ data, onDelete }) => {
+const WaterItem = ({ data, formattedDate }) => {
+  const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
-  const handleDelete = () => {
-    console.log(`Видаляємо запис води з id: ${data.id}`);
-    onDelete(data.id); // Видаляємо елемент без анімації "зникнення"
-    setIsDeleteOpen(false); // Закриваємо модалку після видалення
+  const handleDelete = async (id) => {
+    try {
+      await dispatch(deleteWater(id)).unwrap();
+      dispatch(getWaterPerDay(formattedDate));
+      setIsDeleteOpen(false);
+    } catch (error) {
+      console.error("Ошибка удаления:", error);
+    }
   };
 
   return (
@@ -21,7 +28,7 @@ const WaterItem = ({ data, onDelete }) => {
         </svg>
       </div>
       <div className={styles.info}>
-        <p className={styles.amount}>{data.amount} ml</p>
+        <p className={styles.amount}>{data.volume} ml</p>
         <p className={styles.time}>{data.time}</p>
       </div>
       <div className={styles.actions}>
@@ -36,11 +43,15 @@ const WaterItem = ({ data, onDelete }) => {
           </svg>
         </button>
       </div>
-      <WaterModal isOpen={isEditOpen} onClose={() => setIsEditOpen(false)} />
+      <WaterModal
+        isOpen={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
+        initialData={data}
+      />
       <DeleteWaterModal
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}
-        handleDelete={handleDelete}
+        onClick={() => handleDelete(data._id)} // Используем handleDelete здесь
       />
     </div>
   );

@@ -1,23 +1,23 @@
 import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { getWaterMonth } from "../../redux/month/operations";
-import {
-  selectMonthWater,
-  selectIsLoadingMonth,
-  selectError,
-} from "../../redux/month/selectors";
 import Calendar from "../Calendar/Calendar";
 import CalendarPagination from "../CalendarPagination/CalendarPagination";
+import {
+  selectError,
+  selectLoading,
+  selectMonth,
+} from "../../redux/water/selectors.js";
+import { getWaterMonth } from "../../redux/water/operations.js";
 
 const MonthInfo = () => {
-// import css from "./MonthInfo.module.css";
+  // import css from "./MonthInfo.module.css";
   const [currentDate, setCurrentDate] = useState(new Date());
   const dispatch = useDispatch();
-  const loading = useSelector(selectIsLoadingMonth);
+  const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
 
   // Використовуємо shallowEqual, щоб запобігти зайвим ререндерам
-  const monthWater = useSelector(selectMonthWater, shallowEqual);
+  const monthWater = useSelector(selectMonth, shallowEqual);
 
   const totalWater = 1500; // ✅ Отримуємо норму води (можна з Redux)
 

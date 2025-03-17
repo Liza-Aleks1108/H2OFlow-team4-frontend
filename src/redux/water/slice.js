@@ -1,63 +1,97 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { initialState } from "../initialState";
-import { addWater, editWaterAmount } from "./operations";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
+import {
+  addWater,
+  deleteWater,
+  editWaterAmount,
+  getWaterMonth,
+  getWaterPerDay,
+} from "./operations";
 
-const handlePending = (state) => {
-  state.loading = true;
-  state.error = null;
-};
-
-const handleRejected = (state, action) => {
-  state.loading = false;
-  state.error = null;
+const initialState = {
+  waterDate: {
+    _id: "",
+    volume: "",
+    day: "",
+    time: "",
+  },
+  day: [],
+  month: [],
+  activeDate: null,
+  totalVolume: 0,
+  loading: false,
+  error: false,
 };
 
 const waterSlice = createSlice({
   name: "water",
-  initialState: initialState.water,
+  initialState,
   reducers: {
-    setDate(state, action) {
-      state.selectedDate = action.payload;
+    updateActiveDate: (state, action) => {
+      state.activeDate = action.payload;
+    },
+    resetActiveDate: (state) => {
+      state.activeDate = null;
     },
   },
-  extraReducers: (builder) =>
+  extraReducers: (builder) => {
     builder
-      .addCase(addWater.pending, handlePending)
-      .addCase(addWater.fulfilled, (state) => {
-        state.loading = false;
-        state.error = null;
-        state.entries = [...state.entries];
+      .addCase(getWaterMonth.fulfilled, (state, { payload }) => {
+        state.month = payload;
       })
-      .addCase(addWater.rejected, handleRejected)
-      .addCase(editWaterAmount.pending, handlePending)
+      .addCase(getWaterPerDay.fulfilled, (state, action) => {
+        state.day = action.payload;
+        // state.day = [...state.day, action.payload];
+      })
+      .addCase(addWater.fulfilled, (state, action) => {
+        state.waterDate = action.payload;
+        state.day = [...state.day, action.payload];
+      })
       .addCase(editWaterAmount.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
-        const updatedEntry = action.payload;
-        const index = state.entries.findIndex(
-          (entry) => entry.id === updatedEntry.id
-        );
-        if (index !== -1) {
-          state.entries[index] = updatedEntry;
-        }
+        state.waterDate = { ...state.waterDate, ...action.payload };
       })
-      .addCase(editWaterAmount.rejected, handleRejected),
+      .addCase(deleteWater.fulfilled, (state, action) => {
+        state.day = state.day.filter((item) => item._id !== action.payload.id);
+      })
+      .addMatcher(
+        isAnyOf(
+          getWaterMonth.pending,
+          addWater.pending,
+          editWaterAmount.pending,
+          getWaterPerDay.pending,
+          deleteWater.pending
+        ),
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          getWaterMonth.fulfilled,
+          addWater.fulfilled,
+          editWaterAmount.fulfilled,
+          getWaterPerDay.fulfilled,
+          deleteWater.fulfilled
+        ),
+        (state) => {
+          state.loading = false;
+          state.error = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          getWaterMonth.rejected,
+          addWater.rejected,
+          editWaterAmount.rejected,
+          getWaterPerDay.rejected,
+          deleteWater.rejected
+        ),
+        (state) => {
+          state.loading = false;
+          state.error = action.payload;
+        }
+      );
+  },
 });
 
-export const { setDate } = waterSlice.actions;
-export const waterReducer = waterSlice.reducer;
-
-// const waterReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case "SET_WATER_DATA":
-//       return { ...state, waterData: action.payload };
-//     case "SET_ERROR":
-//       return { ...state, error: action.payload };
-//     case "SET_LOADING":
-//       return { ...state, isLoading: action.payload };
-//     default:
-//       return state;
-//   }
-// };
-
-// export default waterReducer;
+export default waterSlice.reducer;
