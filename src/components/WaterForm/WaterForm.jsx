@@ -10,7 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 // } from "../../redux/water/operations.js";
 import css from "./WaterForm.module.css";
 import { selectLoading, selectWaterDate } from "../../redux/water/selectors.js";
-import { addWater, editWaterAmount } from "../../redux/water/operations.js";
+import {
+  addWater,
+  editWaterAmount,
+  getWaterPerDay,
+} from "../../redux/water/operations.js";
 
 // const schema = yup.object().shape({
 //   amount: yup
@@ -79,6 +83,7 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
         console.log("Дані, що відправляються на редактування:", waterEntry);
         await dispatch(editWaterAmount(waterEntry)).unwrap();
       }
+      dispatch(getWaterPerDay(waterEntry.day));
       onClose();
     } catch (err) {
       console.error("Помилка при збереженні данних", err.message);
