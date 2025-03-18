@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import s from "./SignInForm.module.css";
 import clsx from "clsx";
-// import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/user/operations.js";
 import toast from "react-hot-toast";
 import { AuthFormContainer } from "../SignUpForm/SignUpForm.jsx";
 import { Link, useNavigate } from "react-router-dom";
-// import { signInValidationSchema } from "../../validationSchemas/authValidation.js";
+import { signInValidationSchema } from "../../validationSchemas/authValidation.js";
 import GoogleButton from "../GoogleButton/GoogleButton.jsx";
 import ForgotPasswordForm from "../ForgotPasswordForm/ForgotPasswordForm.jsx";
 import ResetModal from "../ResetModal/ResetModal.jsx";
@@ -39,7 +39,7 @@ const SignInForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    // resolver: yupResolver(signInValidationSchema),
+    resolver: yupResolver(signInValidationSchema),
     mode: "onSubmit",
     defaultValues: {
       email: "",
@@ -126,20 +126,20 @@ const SignInForm = () => {
               className={s.forgotButton}
               onClick={handleOpenModal}
             >
-             {t("login.forgotPassword")}
+              {t("login.forgotPassword")}
             </button>
             <p className={s.errorMessage}>{errors.password?.message}</p>
           </label>
 
           <button type="submit" className={s.button}>
-          {t("button.signIn")}
+            {t("button.signIn")}
           </button>
         </form>
         <GoogleButton />
         <div className={s.afterSignUpBox}>
           <p className={s.afterSignUpText}>{t("login.noAccount")}</p>
           <Link className={s.link} to="/signup">
-          {t("button.signUp")}
+            {t("button.signUp")}
           </Link>
         </div>
       </div>

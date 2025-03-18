@@ -1,7 +1,8 @@
-// import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthFormContainer, spritePath } from "../SignUpForm/SignUpForm.jsx";
+import { resetPasswordValidationSchema } from "../../validationSchemas/authValidation.js";
 import s from "./PasswordResetForm.module.css";
 import clsx from "clsx";
 import { useTranslation } from "react-i18next";
@@ -23,7 +24,7 @@ const PasswordResetForm = ({ onSubmit }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    // resolver: yupResolver(resetPasswordValidationSchema),
+    resolver: yupResolver(resetPasswordValidationSchema),
     mode: "onChange",
     defaultValues: { password: "", repeatPassword: "" },
   });
