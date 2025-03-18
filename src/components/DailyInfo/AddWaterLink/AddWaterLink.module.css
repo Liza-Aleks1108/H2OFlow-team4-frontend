@@ -7,7 +7,10 @@
   line-height: 24px;
   letter-spacing: -1%;
   text-align: center;
-  color: #323F47;
+  color: #323f47;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 .wrapper {
@@ -16,14 +19,22 @@
   gap: 10px;
 }
 
-.icon {
-  fill: #9be1a0;
-  stroke: #323f47;
+.icon-container {
+  width: 30px;
+  height: 30px;
+  background: #9be1a0;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: 250ms;
 }
 
-.icon:hover {
+.icon {
   fill: #323f47;
-  stroke: rgb(253, 253, 253);
   transition: 250ms;
+}
+
+.icon-container:hover .icon {
+  fill: #ffffff;
 }
