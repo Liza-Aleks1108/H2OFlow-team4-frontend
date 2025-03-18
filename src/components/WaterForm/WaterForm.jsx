@@ -113,8 +113,8 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
         time: `${hours}:${minutes}`,
       };
     };
-    console.log("activeDate");
-    console.log(activeDate);
+    // console.log("activeDate");
+    // console.log(activeDate);
     // console.log(data.time);
 
     const { date, time } = formatDateTime(activeDate);
