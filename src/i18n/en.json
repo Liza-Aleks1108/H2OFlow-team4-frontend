@@ -26,6 +26,7 @@
     "deleteWaterText": "Are you sure you want to delete this entry?"
   },
   "waterDailyNorma": {
+    "ml":"ml",
     "l": "L",
     "textDailyNorm": "My daily norma",
     "textH3": "Today"
@@ -112,5 +113,16 @@
     "avatarUpdateError": "Failed to update avatar",
     "profileUpdatedSuccess": "Profile updated successfully!",
     "profileUpdateError": "Failed to update profile"
+  },
+  "waterForm": {
+    "chooseValue": "Choose a value",
+    "amount": "Amount of water:",
+    "recordingTime": "Recording time:",
+    "enterValue": "Enter the value of the water used:",
+    "saving": "Saving...",
+    "save": "Save"
+  },
+   "waterModal": {
+    "editWaterAmount": "Edit the entered amount of water"
   }
 }

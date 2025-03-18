@@ -2,8 +2,10 @@ import { useState } from "react";
 import WaterModal from "../../WaterModal/WaterModal";
 import css from "./AddWaterLink.module.css";
 import sprite from "../../../../public/sprite.svg";
+import { useTranslation } from "react-i18next";
 
 const AddWaterLink = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -21,7 +23,7 @@ const AddWaterLink = () => {
           <svg width="30" height="30" className={css.icon}>
             <use href={`${sprite}#icon-plus-bl`} />
           </svg>
-          <p>Add water</p>
+          <p>{t("button.addWater")}</p>
         </div>
       </button>
 
