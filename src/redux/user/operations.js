@@ -32,6 +32,8 @@ fetchAPI.interceptors.response.use(
       } catch (refreshError) {
         console.error("Token refresh failed, logging out");
         store.dispatch(logoutToken());
+        localStorage.removeItem("persist:user");
+        clearAuthHeder();
         return Promise.reject(refreshError);
       }
     }
@@ -80,6 +82,8 @@ export const logOut = createAsyncThunk("user/logout", async (_, thunkAPI) => {
   try {
     await fetchAPI.post("/users/logout", {}, { withCredentials: true });
     clearAuthHeder();
+    localStorage.removeItem("persist:user");
+    thunkAPI.dispatch(logoutToken());
   } catch (e) {
     return thunkAPI.rejectWithValue(e.response.status);
   }
