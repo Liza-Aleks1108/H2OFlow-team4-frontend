@@ -20,9 +20,11 @@ const AddWaterLink = () => {
     <div className={css.container}>
       <button onClick={handleOpenModal} className={css.btn}>
         <div className={css.wrapper}>
-          <svg width="30" height="30" className={css.icon}>
-            <use href={`${sprite}#icon-plus-bl`} />
-          </svg>
+          <div className={css["icon-container"]}>
+            <svg width="20" height="20" className={css.icon}>
+              <use href={`${sprite}#icon-plus-bl`} />
+            </svg>
+          </div>
           <p>{t("button.addWater")}</p>
         </div>
       </button>
