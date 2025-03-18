@@ -44,7 +44,7 @@ export const getWaterPerDay = createAsyncThunk(
         },
         withCredentials: true,
       });
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
       return response.data.oneDay || [];
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

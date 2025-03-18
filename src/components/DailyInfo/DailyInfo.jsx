@@ -20,7 +20,7 @@ const DailyInfo = ({ dateForTitle }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const todayWater = useSelector(selectDay);
-  console.log("todayWater", todayWater);
+  // console.log("todayWater", todayWater);
 
   const formattedDate = useMemo(
     () => formatDate(dateForTitle || new Date()),
@@ -42,9 +42,7 @@ const DailyInfo = ({ dateForTitle }) => {
           <WaterList waterData={todayWater} formattedDate={formattedDate} />
         ) : (
           <div className={styles.text}>
-            <p className={styles.waterEmpty}>
-              {t("dailyInfo.noWater")}
-            </p>
+            <p className={styles.waterEmpty}>{t("dailyInfo.noWater")}</p>
           </div>
         )}
       </div>

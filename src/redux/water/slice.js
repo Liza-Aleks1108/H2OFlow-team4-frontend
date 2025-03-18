@@ -16,7 +16,7 @@ const initialState = {
   },
   day: [],
   month: [],
-  activeDate: new Date(),
+  activeDate: new Date().toISOString(),
   totalVolume: 0,
   loading: false,
   error: false,
