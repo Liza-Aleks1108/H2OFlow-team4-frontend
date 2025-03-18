@@ -80,59 +80,32 @@ export const logOut = createAsyncThunk("user/logout", async (_, thunkAPI) => {
   try {
     await fetchAPI.post("/users/logout", {}, { withCredentials: true });
     clearAuthHeder();
-    localStorage.removeItem("accessToken"); // убрал значение ключа accessToken из локального хранилища, это должно очищать localStorage, нужно проверить
   } catch (e) {
     return thunkAPI.rejectWithValue(e.response.status);
   }
 });
 
-// export const refreshUser = createAsyncThunk(
-//   "user/refresh",
-//   async (_, thunkAPI) => {
-//     try {
-//       const refreshToken = localStorage.getItem('token'); // добавил эту строку, получаем токен из локального хранилища
-//       const response = await axios.post('https://h2oflow-team4-backend.onrender.com/auth/refresh', {
-//       refreshToken,});
-//       // const { data } = await userAPI.post(
-//       //   "users/refresh", token
-//       //   {},
-//       //   { withCredentials: true }
-//       // );
-//       const {accessToken, refreshToken: newRefreshToken }=response.data //Получаем токены с бекенда
-
-//       if (!data.accessToken) throw new Error("No access token returned");
-//       // const newAccessToken = data.accessToken;
-//      localStorage.setItem('accessToken', accessToken); // добавил
-//      localStorage.setItem('refreshToken', newRefreshToken);// добавил
-//      setAuthHeader(accessToken); // добавил
-//      return { token: accessToken }; // добавил
-//       // thunkAPI.dispatch(resetToken({ token: newAccessToken }));
-//       // await new Promise((resolve) => setTimeout(resolve, 0));
-//       // setAuthHeader(newAccessToken);
-//       // const userProfile = await thunkAPI.dispatch(fetchUserProfile()).unwrap();
-//       // return { token: newAccessToken, user: userProfile };
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.response.message);
-//     }
-//   }
-// );
 export const refreshUser = createAsyncThunk(
   "user/refresh",
   async (_, thunkAPI) => {
     try {
-      const refreshToken = localStorage.getItem('refreshToken'); // Получаем refreshToken из локального хранилища
-      const response = await axios.post('https://h2oflow-team4-backend.onrender.com/auth/refresh', {
-        refreshToken,
-      });
-      const { accessToken, refreshToken: newRefreshToken } = response.data; // Получаем токены с бекенда
+      const { data } = await fetchAPI.post(
+        "users/refresh",
+        {},
+        { withCredentials: true }
+      );
+      if (!data.accessToken) throw new Error("No access token returned");
+      const newAccessToken = data.accessToken;
 
-      if (!accessToken) throw new Error("No access token returned"); // Проверяем наличие accessToken
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', newRefreshToken);
-      setAuthHeader(accessToken);
-      return { token: accessToken };
+      thunkAPI.dispatch(resetToken({ token: newAccessToken }));
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      setAuthHeader(newAccessToken);
+      const userProfile = await thunkAPI.dispatch(fetchUserProfile()).unwrap();
+      return { token: newAccessToken, user: userProfile };
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.response.message);
+      return thunkAPI.rejectWithValue(
+        e.response.data.message || "Problem with refresh token"
+      );
     }
   }
 );
@@ -152,7 +125,9 @@ export const updateUserProfile = createAsyncThunk(
       });
       return data.user;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.response.message);
+      return thunkAPI.rejectWithValue(
+        e.response.data.message || "Unknown error for avatar update"
+      );
     }
   }
 );
@@ -177,7 +152,9 @@ export const updateUserAvatar = createAsyncThunk(
       });
       return data.avatarUrl;
     } catch (e) {
-      return thunkAPI.rejectWithValue(e.response.message);
+      return thunkAPI.rejectWithValue(
+        e.response.data.message || "Unknown error for profile update"
+      );
     }
   }
 );

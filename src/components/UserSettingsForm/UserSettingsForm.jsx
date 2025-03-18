@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from "./UserSettingsForm.module.css";
-import { selectUser } from "../../redux/user/selectors.js";
+import { selectLoading, selectUser } from "../../redux/user/selectors.js";
 // import { userSettingsValidationSchema } from "../../validationSchemas/userSettingsValidation.js";
 // import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
@@ -14,11 +14,14 @@ import {
 import { useEffect, useState } from "react";
 import { PiExclamationMarkBold } from "react-icons/pi";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBottleWater } from "@fortawesome/free-solid-svg-icons";
 
 const UserSettingsForm = ({ onClose }) => {
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const isLoading = useSelector(selectLoading);
   const [preview, setPreview] = useState(user.avatarUrl);
 
   const {
@@ -62,10 +65,13 @@ const UserSettingsForm = ({ onClose }) => {
   const dailySportTime = watch("dailySportTime");
 
   const countDailyNorma = () => {
-    if (weight === 0 && dailySportTime === 0) return `1.5 ${t("waterDailyNorma.l")}`;
+    if (weight === 0 && dailySportTime === 0)
+      return `1.5 ${t("waterDailyNorma.l")}`;
     return gender === "woman"
-      ? (weight * 0.03 + dailySportTime * 0.4).toFixed(1) + `${t("waterDailyNorma.l")}`
-      : (weight * 0.04 + dailySportTime * 0.6).toFixed(1) + `${t("waterDailyNorma.l")}`;
+      ? (weight * 0.03 + dailySportTime * 0.4).toFixed(1) +
+          `${t("waterDailyNorma.l")}`
+      : (weight * 0.04 + dailySportTime * 0.6).toFixed(1) +
+          `${t("waterDailyNorma.l")}`;
   };
 
   const handleAvatarUpload = async (event) => {
@@ -91,7 +97,6 @@ const UserSettingsForm = ({ onClose }) => {
         dailySportTime: data.dailySportTime || 0,
         dailyNorm: data.dailyNorm * 1000 || 1500,
       };
-      console.log(userData);
 
       await dispatch(updateUserProfile(userData)).unwrap();
       dispatch(fetchUserProfile());
@@ -105,15 +110,23 @@ const UserSettingsForm = ({ onClose }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={s.formIconWrap}>
-        <label htmlFor="avatar">
-          <img src={preview} alt="Avatar" />
-          <div className={s.uploadBtn}>
-            <svg className={s.uploadIcon} width="18" height="18">
-              <use href="/sprite.svg#icon-upload" />
-            </svg>
-            <p>{t("userSettings.uploadPhoto")}</p>
-          </div>
-        </label>
+        {isLoading ? (
+          <FontAwesomeIcon
+            icon={faBottleWater}
+            className={s.loaderFormSet}
+            size="3x"
+          />
+        ) : (
+          <label htmlFor="avatar">
+            <img src={preview} alt="Avatar" />
+            <div className={s.uploadBtn}>
+              <svg className={s.uploadIcon} width="18" height="18">
+                <use href="/sprite.svg#icon-upload" />
+              </svg>
+              <p>{t("userSettings.uploadPhoto")}</p>
+            </div>
+          </label>
+        )}
         <input
           type="file"
           id="avatar"
@@ -127,7 +140,9 @@ const UserSettingsForm = ({ onClose }) => {
       <div className={s.wrapForDesktopOne}>
         <div className={s.partOne}>
           <fieldset>
-            <legend className={s.inputName}>{t("userSettings.yourGenderIdentity")}</legend>
+            <legend className={s.inputName}>
+              {t("userSettings.yourGenderIdentity")}
+            </legend>
 
             <Controller
               name="gender"
@@ -164,7 +179,7 @@ const UserSettingsForm = ({ onClose }) => {
 
           <div className={s.wrapCredentials}>
             <label htmlFor="name" className={s.inputName}>
-            {t("userSettings.yourName")}
+              {t("userSettings.yourName")}
             </label>
             <input
               id="name"
@@ -205,7 +220,8 @@ const UserSettingsForm = ({ onClose }) => {
 
             <div className={s.wrapRule}>
               <p>
-                <span>*</span>{t("userSettings.formulaExplanation")}
+                <span>*</span>
+                {t("userSettings.formulaExplanation")}
               </p>
             </div>
             <div className={s.wrapExclamation}>
@@ -230,7 +246,7 @@ const UserSettingsForm = ({ onClose }) => {
             </div>
             <div>
               <label htmlFor="dailySportTime">
-              {t("userSettings.activeSportTime")}
+                {t("userSettings.activeSportTime")}
               </label>
 
               <input
@@ -250,7 +266,7 @@ const UserSettingsForm = ({ onClose }) => {
             <span>{countDailyNorma()}</span>
           </div>
           <label htmlFor="dailyNorm" className={s.inputName}>
-          {t("userSettings.writeWaterAmount")}
+            {t("userSettings.writeWaterAmount")}
           </label>
           <input
             id="dailyNorm"
@@ -265,7 +281,7 @@ const UserSettingsForm = ({ onClose }) => {
         </div>
       </div>
       <button type="submit" className={s.formBtn}>
-      {t("userSettings.save")}
+        {t("userSettings.save")}
       </button>
     </form>
   );
