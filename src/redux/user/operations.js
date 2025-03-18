@@ -14,32 +14,32 @@ export const fetchUserProfile = createAsyncThunk(
   }
 );
 
-// fetchAPI.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     if (error.response?.status === 401) {
-//       console.warn("401 detected, attempting to refresh token");
-//       try {
-//         const { token: newAccessToken } = await store
-//           .dispatch(refreshUser())
-//           .unwrap();
-//         if (!newAccessToken) throw new Error("Token refresh failed");
-//         setAuthHeader(newAccessToken);
-//         error.config.headers["Authorization"] = `Bearer ${newAccessToken}`;
-//         return new Promise((resolve) => {
-//           setTimeout(() => resolve(fetchAPI.request(error.config)), 0);
-//         });
-//       } catch (refreshError) {
-//         console.error("Token refresh failed, logging out");
-//         store.dispatch(logoutToken());
-//         localStorage.removeItem("persist:user");
-//         clearAuthHeder();
-//         return Promise.reject(refreshError);
-//       }
-//     }
-//     return Promise.reject(error);
-//   }
-// );
+fetchAPI.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401) {
+      console.warn("401 detected, attempting to refresh token");
+      try {
+        const { token: newAccessToken } = await store
+          .dispatch(refreshUser())
+          .unwrap();
+        if (!newAccessToken) throw new Error("Token refresh failed");
+        setAuthHeader(newAccessToken);
+        error.config.headers["Authorization"] = `Bearer ${newAccessToken}`;
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(fetchAPI.request(error.config)), 0);
+        });
+      } catch (refreshError) {
+        console.error("Token refresh failed, logging out");
+        store.dispatch(logoutToken());
+        localStorage.removeItem("persist:user");
+        clearAuthHeder();
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 export const setAuthHeader = (token) => {
   fetchAPI.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -200,7 +200,7 @@ export const authWithGoogle = createAsyncThunk(
 export const requestForResetPassword = createAsyncThunk(
   "user/requestForResetPassword",
   async (email, thunkAPI) => {
-    const token = getToken(thunkAPI);
+    const token = thunkAPI.getState().user.token;
     if (!token) {
       return thunkAPI.rejectWithValue("No token found");
     }
