@@ -188,10 +188,11 @@ export const authWithGoogle = createAsyncThunk(
         }
       );
       const { accessToken } = response.data.data;
+      console.log(accessToken);
       setAuthHeader(accessToken);
       // localStorage.setItem("accessToken", accessToken);
       // localStorage.setItem("userData", JSON.stringify(user));
-      // thunkAPI.dispatch(resetToken({ accessToken }));
+      thunkAPI.dispatch(logoutToken());
       const userProfile = await thunkAPI.dispatch(fetchUserProfile()).unwrap();
       return { token: accessToken, user: userProfile };
     } catch (error) {
