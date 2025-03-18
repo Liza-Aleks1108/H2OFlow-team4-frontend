@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import s from "./SignUpForm.module.css";
 import clsx from "clsx";
-// import { yupResolver } from "@hookform/resolvers/yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { register as authUser } from "../../redux/user/operations.js";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-// import { signUpValidationSchema } from "../../validationSchemas/authValidation.js";
+import { signUpValidationSchema } from "../../validationSchemas/authValidation.js";
 import GoogleButton from "../GoogleButton/GoogleButton.jsx";
 import { useTranslation } from "react-i18next";
 
@@ -37,7 +37,7 @@ const SignUpForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    // resolver: yupResolver(signUpValidationSchema),
+    resolver: yupResolver(signUpValidationSchema),
     mode: "onChange",
   });
 
@@ -119,14 +119,16 @@ const SignUpForm = () => {
           </label>
 
           <label className={s.signUpLabel}>
-            <span className={s.signUpLabelText}>{t("signup.repeatPassword")}</span>
+            <span className={s.signUpLabelText}>
+              {t("signup.repeatPassword")}
+            </span>
             <div className={s.inputField}>
               <input
                 className={clsx(s.input, {
                   [s.inputError]: errors.repeatPassword,
                 })}
                 type={showRepeatPassword ? "text" : "password"}
-                placeholder={t("signup.repeatPasswordPlaceholder")} 
+                placeholder={t("signup.repeatPasswordPlaceholder")}
                 {...register("repeatPassword", { required: true })}
               />
               <button
@@ -148,7 +150,8 @@ const SignUpForm = () => {
             <p className={s.errorMessage}>{errors.repeatPassword?.message}</p>
           </label>
 
-          <button type="submit" className={s.button}>{t("button.signUp")}
+          <button type="submit" className={s.button}>
+            {t("button.signUp")}
           </button>
         </form>
         <GoogleButton />
