@@ -14,7 +14,7 @@
 
 .container {
   width: 198px;
-  height: 70px;
+  height: 80px;
   box-sizing: border-box;
   background-color: white;
   border-radius: 15px;
@@ -23,7 +23,7 @@
   margin-bottom: 42px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 18px;
 }
 
 .textH3 {
@@ -71,13 +71,22 @@
   top: 16px;
 }
 
+.scaleMoveText {
+  font-family: "Poppins", sans-serif;
+  font-size: 8px;
+  color: rgba(47, 47, 47, 0.6);
+  font-weight: normal;
+  position: absolute;
+  top: -14px;
+}
+
 @media (min-width: 768px) {
   .container {
     width: 295px;
     height: 106px;
     padding: 20px;
     margin-bottom: 26px;
-    gap: 14px;
+    gap: 20px;
   }
 
   .textH3 {
@@ -86,6 +95,9 @@
   .scaleText {
     font-size: 12px;
     top: 24px;
+  }
+  .scaleMoveText {
+    font-size: 9px;
   }
 
   .emptyScale {

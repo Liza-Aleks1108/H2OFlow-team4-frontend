@@ -60,7 +60,7 @@ const WaterProgressBar = () => {
           ></div>
 
           <div
-            className={style.scaleText}
+            className={style.scaleMoveText}
             style={{
               left: `${progress}%`,
               transform: "translateX(-50%)",
@@ -68,26 +68,32 @@ const WaterProgressBar = () => {
           >
             {Math.round(progress)}%
           </div>
-          {progress >= 10 && (
-            <div
-              className={style.scaleText}
-              style={{
-                left: "0",
-              }}
-            >
-              0%
-            </div>
-          )}
-          {progress <= 90 && (
-            <div
-              className={style.scaleText}
-              style={{
-                right: "0",
-              }}
-            >
-              100%
-            </div>
-          )}
+
+          <div
+            className={style.scaleText}
+            style={{
+              left: "0",
+            }}
+          >
+            0%
+          </div>
+          <div
+            className={style.scaleText}
+            style={{
+              left: "50%",
+              transform: "translateX(-50%)",
+            }}
+          >
+            50%
+          </div>
+          <div
+            className={style.scaleText}
+            style={{
+              right: "0",
+            }}
+          >
+            100%
+          </div>
         </div>
       </div>
     </div>
