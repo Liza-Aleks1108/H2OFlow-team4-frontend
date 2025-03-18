@@ -63,7 +63,7 @@ const userSlice = createSlice({
       state.token = action.payload.token;
     },
     logoutToken: (state) => {
-      state.userData = initialState.user.userData;
+      state.userData = {};
       state.token = null;
       state.isLoggedIn = false;
     },
@@ -88,7 +88,7 @@ const userSlice = createSlice({
       )
 
       .addCase(logOut.fulfilled, (state) => {
-        state.userData = initialState.user.userData;
+        state.userData = {};
         state.token = null;
         state.isLoggedIn = false;
       })
@@ -166,7 +166,8 @@ const userSlice = createSlice({
           refreshUser.fulfilled,
           fetchUserProfile.fulfilled,
           updateUserProfile.fulfilled,
-          getUsersAmount.fulfilled
+          getUsersAmount.fulfilled,
+          updateUserAvatar.fulfilled
         ),
         (state) => {
           state.loading = false;

@@ -198,6 +198,21 @@
   margin-top: 10px;
 }
 
+.loaderFormSet {
+  color: var(--accent-color);
+  animation: scaleUp 1.5s infinite alternate ease-in-out;
+  margin-bottom: 40px;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.3);
+  }
+}
+
 @media (min-width: 768px) {
   .formIconWrap img {
     width: 100px;
