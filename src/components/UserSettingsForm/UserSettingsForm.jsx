@@ -101,7 +101,9 @@ const UserSettingsForm = ({ onClose }) => {
       await dispatch(updateUserProfile(userData)).unwrap();
       dispatch(fetchUserProfile());
       toast.success(t("userSettings.profileUpdatedSuccess"));
-      onClose();
+      setTimeout(() => {
+        onClose();
+      }, 2000);
     } catch (error) {
       toast.error(error.message || t("userSettings.profileUpdateError"));
     }
