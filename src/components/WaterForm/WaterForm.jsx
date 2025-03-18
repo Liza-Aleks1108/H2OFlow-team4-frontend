@@ -15,6 +15,7 @@ import {
   editWaterAmount,
   getWaterPerDay,
 } from "../../redux/water/operations.js";
+import { useTranslation } from "react-i18next";
 
 // const schema = yup.object().shape({
 //   amount: yup
@@ -28,6 +29,7 @@ import {
 // });
 
 const WaterForm = ({ operationType, initialData, onClose }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   //   const { waterData, error, isLoading } = useSelector(
   //     (state) => state.user.userData
@@ -93,8 +95,8 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
       <div className={css.field}>
-        <h3 className={css.subTitle}>Choose a value</h3>
-        <label className={css.labelText}>Amount of water:</label>
+        <h3 className={css.subTitle}>{t("waterForm.chooseValue")}</h3>
+        <label className={css.labelText}>{t("waterForm.amount")}</label>
         <div className={css.counter}>
           <button
             type="button"
@@ -116,7 +118,7 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
                 {...field}
                 type="text"
                 className={css.blackInput}
-                value={`${field.value} ml`}
+                value={`${field.value} ${t("waterDailyNorma.ml")}`}
                 onChange={(e) => {
                   const value = e.target.value.replace(/\D/g, "");
                   setValue("amount", value ? Number(value) : 0);
@@ -138,7 +140,7 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
         </div>
       </div>
       <div className={css.field}>
-        <label className={css.labelText}>Recording time:</label>
+        <label className={css.labelText}>{t("waterForm.recordingTime")}</label>
         <Controller
           name="time"
           control={control}
@@ -149,7 +151,7 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
       </div>
       <div className={css.field}>
         <label className={css.secondSubTitle}>
-          Enter the value of the water used:
+        {t("waterForm.enterValue")}
         </label>
         <Controller
           name="amount"
@@ -161,7 +163,7 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
       </div>
       {/* {error && <p className={css.error}>{error}</p>} */}
       <button type="submit" disabled={isLoading} className={css.submitButton}>
-        {isLoading ? "Saving..." : "Save"}
+        {isLoading ? t("waterForm.saving") : t("waterForm.save")}
       </button>
     </form>
   );

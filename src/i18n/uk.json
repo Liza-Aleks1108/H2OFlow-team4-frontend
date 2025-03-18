@@ -26,6 +26,7 @@
     "deleteWaterText": "Ви впевнені, що хочете видалити цей запис?"
   },
   "waterDailyNorma": {
+    "ml":"мл",
     "l": "л",
     "textDailyNorm": "Денна норма",
     "textH3": "Сьогодні"
@@ -111,5 +112,16 @@
     "avatarUpdateError": "Не вдалося оновити аватар",
     "profileUpdatedSuccess": "Профіль успішно оновлено!",
     "profileUpdateError": "Не вдалося оновити профіль"
+  },
+  "waterForm": {
+    "chooseValue": "Оберіть значення",
+    "amount": "Кількість води:",
+    "recordingTime": "Час запису:",
+    "enterValue": "Введіть значення використаної води:",
+    "saving": "Збереження...",
+    "save": "Зберегти"
+  },
+  "waterModal": {
+    "editWaterAmount": "Редагувати введену кількість води"
   }
 }
