@@ -9,8 +9,8 @@
   width: 100%;
   border-radius: 30px;
   background-color: var(--background-color);
-  padding: 16px;
-  padding-top: 24px;
+  padding: 32px;
+  padding-top: 32px;
 }
 .advantagesSection {
   display: none;
