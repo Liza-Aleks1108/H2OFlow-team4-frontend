@@ -102,17 +102,24 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
       const day = String(dateObj.getDate()).padStart(2, "0");
 
       // Отримуємо години і хвилини у форматі ЧЧ:ММ
-      const hours = String(dateObj.getHours()).padStart(2, "0");
-      const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+      let hours = String(dateObj.getHours()).padStart(2, "0");
+      let minutes = String(dateObj.getMinutes()).padStart(2, "0");
+      if ((hours === "00") & (minutes === "00")) {
+        [hours, minutes] = data.time ? data.time.split(":") : ["00", "00"];
+      }
 
       return {
         date: `${year}-${month}-${day}`,
         time: `${hours}:${minutes}`,
       };
     };
+    console.log("activeDate");
+    console.log(activeDate);
+    // console.log(data.time);
+
     const { date, time } = formatDateTime(activeDate);
     const waterEntry = {
-      // _id: initialData?._id,
+      _id: initialData?._id,
       volume: String(data.amount),
       day: date,
       time: time,
@@ -121,10 +128,10 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
 
     try {
       if (operationType === "add") {
-        // console.log("Дані, що відправляються на добавлення:", waterEntry);
+        console.log("Дані, що відправляються на добавлення:", waterEntry);
         await dispatch(addWater(waterEntry)).unwrap();
       } else {
-        // console.log("Дані, що відправляються на редактування:", waterEntry);
+        console.log("Дані, що відправляються на редактування:", waterEntry);
         await dispatch(editWaterAmount(waterEntry)).unwrap();
       }
       dispatch(getWaterPerDay(waterEntry.day));

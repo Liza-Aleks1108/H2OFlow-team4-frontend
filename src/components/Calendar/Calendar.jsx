@@ -8,14 +8,30 @@ import css from "./Calendar.module.css";
 const Calendar = ({ currentDate, waterData, dailyNorm, setDateForTitle }) => {
   const dispatch = useDispatch();
   const [days, setDays] = useState([]);
-  const selectDay = useSelector(selectActiveDate);
+  const selectDay = new Date(useSelector(selectActiveDate) || new Date());
   const [selectedDate, setSelectedDate] = useState(selectDay || new Date());
 
   useEffect(() => {
     if (!selectedDate) {
-      setSelectedDate(new Date()); // Встановлюємо поточну дату при відкритті сторінки
+      const today = new Date();
+      console.log("🚀 Встановлюємо поточну дату:", today);
+      setSelectedDate(today);
     }
-  }, [selectedDate]);
+  }, [selectedDate, setSelectedDate]);
+
+  // useEffect(() => {
+  //   if (!selectedDate) {
+  //     setSelectedDate(new Date()); // Встановлюємо поточну дату при відкритті сторінки
+  //   }
+  // }, [selectedDate]);
+
+  // useEffect(() => {
+  //   if (!selectedDate) {
+  //     const today = new Date();
+  //     console.log("🚀 Встановлюємо поточну дату:", today);
+  //     setSelectedDate(today);
+  //   }
+  // }, [selectedDate, setSelectedDate]);
 
   // Вычисление процентов воды
   const arrPercent = waterData.map((item) => ({
