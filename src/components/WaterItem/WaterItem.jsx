@@ -1,22 +1,37 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import WaterModal from "../WaterModal/WaterModal";
 import DeleteWaterModal from "../DeleteWaterModal/DeleteWaterModal";
 import styles from "./WaterItem.module.css";
 import { useDispatch } from "react-redux";
-import { deleteWater, getWaterPerDay } from "../../redux/water/operations.js";
+import {
+  deleteWater,
+  getWaterPerDay,
+  getWaterMonth,
+} from "../../redux/water/operations.js";
 import { useTranslation } from "react-i18next";
+import { selectActiveDate } from "../../redux/water/selectors.js";
 
 const WaterItem = ({ data, formattedDate }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const activeDate = useSelector(selectActiveDate) || new Date().toISOString(); //SV
 
   const handleDelete = async (id) => {
     try {
       await dispatch(deleteWater(id)).unwrap();
       dispatch(getWaterPerDay(formattedDate));
       setIsDeleteOpen(false);
+
+      //SV
+      const parsedDate = new Date(activeDate);
+      const yearMonth = `${parsedDate.getFullYear()}-${String(
+        parsedDate.getMonth() + 1
+      ).padStart(2, "0")}`;
+      await dispatch(getWaterMonth(yearMonth)).unwrap(); // Перезапит місячних даних
+      //SV
     } catch (error) {
       console.error("Ошибка удаления:", error);
     }
@@ -30,7 +45,9 @@ const WaterItem = ({ data, formattedDate }) => {
         </svg>
       </div>
       <div className={styles.info}>
-        <p className={styles.amount}>{data.volume} {t("waterDailyNorma.ml")}</p>
+        <p className={styles.amount}>
+          {data.volume} {t("waterDailyNorma.ml")}
+        </p>
         <p className={styles.time}>{data.time}</p>
       </div>
       <div className={styles.actions}>
