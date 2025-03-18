@@ -55,7 +55,7 @@ const MonthInfo = ({ dailyNorma, setDateForTitle }) => {
       ),
     [waterMonth] // Виконуватиметься тільки якщо waterMonth зміниться
   );
-  console.log(groupedData);
+  // console.log(groupedData);
 
   const handleMonthChange = (newDate) => {
     setCurrentDate((prevDate) => {
@@ -78,7 +78,7 @@ const MonthInfo = ({ dailyNorma, setDateForTitle }) => {
       currentDate.getMonth() + 1
     ).padStart(2, "0")}`;
     dispatch(getWaterMonth(yearMonth));
-  }, [dispatch, currentDate, dailyNorma]);
+  }, [dispatch, currentDate, dailyNorma, , waterMonth.length]);
 
   return (
     <div>

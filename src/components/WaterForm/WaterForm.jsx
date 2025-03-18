@@ -9,10 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 //   setLoading,
 // } from "../../redux/water/operations.js";
 import css from "./WaterForm.module.css";
-import { selectLoading, selectWaterDate } from "../../redux/water/selectors.js";
+import {
+  selectLoading,
+  selectWaterDate,
+  selectActiveDate,
+} from "../../redux/water/selectors.js";
 import {
   addWater,
   editWaterAmount,
+  getWaterMonth,
   getWaterPerDay,
 } from "../../redux/water/operations.js";
 
@@ -34,6 +39,10 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
   //   );
   const isLoading = useSelector(selectLoading);
   const waterDate = useSelector(selectWaterDate);
+  const activeDate = useSelector(selectActiveDate) || new Date().toISOString(); //SV
+
+  // console.log("activeDate");
+  // console.log(activeDate);
 
   const { control, handleSubmit, setValue, watch } = useForm({
     // resolver: yupResolver(schema),
@@ -68,23 +77,67 @@ const WaterForm = ({ operationType, initialData, onClose }) => {
   const handleDecrement = () => setValue("amount", Math.max(amount - 50, 0));
 
   const onSubmit = async (data) => {
-    const waterEntry = {
-      _id: initialData?._id,
-      volume: String(data.amount),
-      day: initialData?.day || new Date().toISOString().split("T")[0],
-      time: initialData?.time || data.time,
+    // const waterEntry = {
+    //   _id: initialData?._id,
+    //   volume: String(data.amount),
+    //   day: initialData?.day || new Date().toISOString().split("T")[0],
+    //   time: initialData?.time || data.time,
+    // };
+    // const waterEntry = {
+    //   _id: initialData?._id,
+    //   volume: String(data.amount),
+    //   day: initialData?.day || new Date().toISOString().split("T")[0],
+    //   time: initialData?.time || data.time,
+    // };
+    //SV
+    const formatDateTime = (isoString) => {
+      if (!isoString) return { date: "", time: "" };
+
+      // Створюємо об'єкт дати в локальному часовому поясі
+      const dateObj = new Date(isoString);
+
+      // Отримуємо рік, місяць і день у форматі ГГГГ-ММ-ДД
+      const year = dateObj.getFullYear();
+      const month = String(dateObj.getMonth() + 1).padStart(2, "0"); // getMonth() повертає від 0 до 11
+      const day = String(dateObj.getDate()).padStart(2, "0");
+
+      // Отримуємо години і хвилини у форматі ЧЧ:ММ
+      const hours = String(dateObj.getHours()).padStart(2, "0");
+      const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+
+      return {
+        date: `${year}-${month}-${day}`,
+        time: `${hours}:${minutes}`,
+      };
     };
+    const { date, time } = formatDateTime(activeDate);
+    const waterEntry = {
+      // _id: initialData?._id,
+      volume: String(data.amount),
+      day: date,
+      time: time,
+    };
+    //SV/
 
     try {
       if (operationType === "add") {
-        console.log("Дані, що відправляються на добавлення:", waterEntry);
+        // console.log("Дані, що відправляються на добавлення:", waterEntry);
         await dispatch(addWater(waterEntry)).unwrap();
       } else {
-        console.log("Дані, що відправляються на редактування:", waterEntry);
+        // console.log("Дані, що відправляються на редактування:", waterEntry);
         await dispatch(editWaterAmount(waterEntry)).unwrap();
       }
       dispatch(getWaterPerDay(waterEntry.day));
+
       onClose();
+
+      //SV
+      const parsedDate = new Date(activeDate);
+      const yearMonth = `${parsedDate.getFullYear()}-${String(
+        parsedDate.getMonth() + 1
+      ).padStart(2, "0")}`;
+      await dispatch(getWaterMonth(yearMonth)).unwrap(); // Перезапит місячних даних
+      //SV
     } catch (err) {
       console.error("Помилка при збереженні данних", err.message);
     }
