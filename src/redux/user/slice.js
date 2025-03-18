@@ -125,7 +125,12 @@ const userSlice = createSlice({
         handleAuthState(state, "pending");
       })
       .addCase(authWithGoogle.fulfilled, (state, action) => {
-        handleAuthState(state, "fulfilled", action);
+        // handleAuthState(state, "fulfilled", action);
+        state.userData = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+        state.loading = false;
+        state.error = null;
       })
       .addCase(authWithGoogle.rejected, (state, action) => {
         handleAuthState(state, "rejected", action);

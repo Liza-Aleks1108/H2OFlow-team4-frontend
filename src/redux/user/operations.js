@@ -187,14 +187,14 @@ export const authWithGoogle = createAsyncThunk(
           withCredentials: true,
         }
       );
-      const { accessToken } = response.data.data;
-      console.log(accessToken);
+      const { accessToken, user } = response.data.data;
+      console.log(response.data.data.user);
+      localStorage.removeItem("persist:user");
       setAuthHeader(accessToken);
-      // localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("accessToken", accessToken);
       // localStorage.setItem("userData", JSON.stringify(user));
-      thunkAPI.dispatch(logoutToken());
-      const userProfile = await thunkAPI.dispatch(fetchUserProfile()).unwrap();
-      return { token: accessToken, user: userProfile };
+      // const userProfile = await thunkAPI.dispatch(fetchUserProfile()).unwrap();
+      return { token: accessToken, user };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
